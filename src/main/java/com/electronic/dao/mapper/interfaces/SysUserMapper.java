@@ -3,8 +3,10 @@ package com.electronic.dao.mapper.interfaces;
 import com.electronic.dao.mapper.bo.SysUser;
 import com.electronic.dao.mapper.bo.SysUserExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface SysUserMapper {
     long countByExample(SysUserExample example);
 
