@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 /**
  * 资源服务器配置
@@ -20,10 +20,10 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  */
 @Configuration
 @EnableResourceServer
-public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
-	
+public class MyResourceServerConfig extends ResourceServerConfigurerAdapter {
+
 	@Autowired
-	protected AuthenticationSuccessHandler imoocAuthenticationSuccessHandler;
+	private LogoutSuccessHandler logoutSuccessHandler;
 
 	@Autowired
 	private FormAuthenticationConfig formAuthenticationConfig;
@@ -34,16 +34,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		formAuthenticationConfig.configure(http);
 		
 		http
+				.logout()
+				.logoutSuccessHandler(logoutSuccessHandler)
+				.deleteCookies("JSESSIONID").and()
 				.authorizeRequests()
-				.antMatchers(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
-						SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE,
-						"/oauth/token"
+				.antMatchers(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL
 				).permitAll().anyRequest().authenticated().and()
-							.logout()   //退出登录相关配置
-		                    //.logoutUrl("logout")   //自定义退出登录页面
-		                  	//.logoutSuccessHandler() //退出成功后要做的操作（如记录日志），和logoutSuccessUrl互斥
-		                   	//.logoutSuccessUrl("/index") //退出成功后跳转的页面
-		                    .deleteCookies("JSESSIONID").and()
 				.csrf().disable();
 		
 

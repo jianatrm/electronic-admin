@@ -1,6 +1,11 @@
 package com.electronic.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.electronic.base.modle.BaseResponse;
+import com.electronic.base.modle.SessionUser;
+import com.electronic.contants.BusinessConstants;
 import com.electronic.dao.mapper.bo.SysUser;
+import com.electronic.utils.SessionUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,24 +18,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class LoginController {
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/userInfo", method = RequestMethod.POST)
     @ResponseBody
-    public String login() {
-        return "login";
+    public BaseResponse userInfo() {
+        SessionUser sessionUser = SessionUtils.getSessionUser();
+        BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
+        baseResponse.setResult(sessionUser);
+        return baseResponse;
+
     }
 
-    @RequestMapping("/")
-    public String root() {
-        return "index";
-    }
 
-    public SysUser getUser() { //为了session从获取用户信息,可以配置如下
-        SysUser user = new SysUser();
-        SecurityContext ctx = SecurityContextHolder.getContext();
-        Authentication auth = ctx.getAuthentication();
-        if (auth.getPrincipal() instanceof UserDetails) user = (SysUser) auth.getPrincipal();
-        return user;
-    }
 
 
 }

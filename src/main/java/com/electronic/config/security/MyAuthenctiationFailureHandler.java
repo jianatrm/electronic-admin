@@ -3,6 +3,9 @@
  */
 package com.electronic.config.security;
 
+import com.alibaba.fastjson.JSON;
+import com.electronic.base.modle.BaseResponse;
+import com.electronic.contants.BusinessConstants;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +27,7 @@ import java.io.IOException;
  *
  */
 @Component("AuthenctiationFailureHandler")
-public class AuthenctiationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+public class MyAuthenctiationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -39,10 +42,10 @@ public class AuthenctiationFailureHandler extends SimpleUrlAuthenticationFailure
 			AuthenticationException exception) throws IOException, ServletException {
 		
 		logger.info("登录失败");
-		
-		response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+
 		response.setContentType("application/json;charset=UTF-8");
-		response.getWriter().write(exception.getMessage());
+		BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_FAILURE,BusinessConstants.BUSI_FAILURE_CODE,BusinessConstants.BUSI_FAILURE_MESSAGE);
+		response.getWriter().write(JSON.toJSONString(baseResponse));
 		
 	}
 

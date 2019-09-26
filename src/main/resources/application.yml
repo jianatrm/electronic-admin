@@ -33,5 +33,5 @@ mybatis:
   # 指定全局配置文件位置E:\electronic-work\electronic-admin\src\main\resources\mybatis\mybatis-config.xml
   config-location: classpath:mybatis/mybatis-config.xml
   # 指定sql映射文件位置
-  mapper-locations: classpath:mybatis/mapper/*.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml,classpath*:mybatis/smapper/*.xml
   type-aliases-super-type:
