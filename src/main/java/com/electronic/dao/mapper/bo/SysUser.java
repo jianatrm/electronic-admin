@@ -17,6 +17,8 @@ public class SysUser {
 
     private Integer deptId;
 
+    private String level;
+
     private Integer status;
 
     private String remark;
@@ -81,6 +83,14 @@ public class SysUser {
 
     public void setDeptId(Integer deptId) {
         this.deptId = deptId;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level == null ? null : level.trim();
     }
 
     public Integer getStatus() {
