@@ -2,16 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.electronic.dao.mapper.interfaces.SysUserMapper">
   <resultMap id="BaseResultMap" type="com.electronic.dao.mapper.bo.SysUser">
-    <id column="userId" jdbcType="INTEGER" property="userid" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
     <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
-    <result column="user_sex" jdbcType="INTEGER" property="userSex" />
-    <result column="user_status" jdbcType="INTEGER" property="userStatus" />
-    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
-    <result column="modifytime" jdbcType="TIMESTAMP" property="modifytime" />
-    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="operate_ip" jdbcType="VARCHAR" property="operateIp" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,15 +74,14 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    userId, username, password, user_phone, user_email, user_sex, user_status, createtime, 
-    modifytime, last_login_time
+    user_id, user_name, user_phone, user_email, password, sex, dept_id, status, remark, 
+    operator, operate_time, operate_ip
   </sql>
   <select id="selectByExample" parameterType="com.electronic.dao.mapper.bo.SysUserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
-    'false' as QUERYID,
     <include refid="Base_Column_List" />
     from sys_user
     <if test="_parameter != null">
@@ -94,11 +95,11 @@
     select 
     <include refid="Base_Column_List" />
     from sys_user
-    where userId = #{userid,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_user
-    where userId = #{userid,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.electronic.dao.mapper.bo.SysUserExample">
     delete from sys_user
@@ -107,26 +108,25 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.electronic.dao.mapper.bo.SysUser">
-    insert into sys_user (userId, username, password, 
-      user_phone, user_email, user_sex, 
-      user_status, createtime, modifytime, 
-      last_login_time)
-    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{userPhone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{userSex,jdbcType=INTEGER}, 
-      #{userStatus,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{modifytime,jdbcType=TIMESTAMP}, 
-      #{lastLoginTime,jdbcType=TIMESTAMP})
+    insert into sys_user (user_id, user_name, user_phone, 
+      user_email, password, sex, 
+      dept_id, status, remark, 
+      operator, operate_time, operate_ip
+      )
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{userEmail,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{deptId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.SysUser">
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userid != null">
-        userId,
+      <if test="userId != null">
+        user_id,
       </if>
-      <if test="username != null">
-        username,
-      </if>
-      <if test="password != null">
-        password,
+      <if test="userName != null">
+        user_name,
       </if>
       <if test="userPhone != null">
         user_phone,
@@ -134,31 +134,37 @@
       <if test="userEmail != null">
         user_email,
       </if>
-      <if test="userSex != null">
-        user_sex,
+      <if test="password != null">
+        password,
       </if>
-      <if test="userStatus != null">
-        user_status,
+      <if test="sex != null">
+        sex,
       </if>
-      <if test="createtime != null">
-        createtime,
+      <if test="deptId != null">
+        dept_id,
       </if>
-      <if test="modifytime != null">
-        modifytime,
+      <if test="status != null">
+        status,
       </if>
-      <if test="lastLoginTime != null">
-        last_login_time,
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="operateTime != null">
+        operate_time,
+      </if>
+      <if test="operateIp != null">
+        operate_ip,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userid != null">
-        #{userid,jdbcType=INTEGER},
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
       </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
       </if>
       <if test="userPhone != null">
         #{userPhone,jdbcType=VARCHAR},
@@ -166,24 +172,33 @@
       <if test="userEmail != null">
         #{userEmail,jdbcType=VARCHAR},
       </if>
-      <if test="userSex != null">
-        #{userSex,jdbcType=INTEGER},
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
       </if>
-      <if test="userStatus != null">
-        #{userStatus,jdbcType=INTEGER},
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
+      <if test="deptId != null">
+        #{deptId,jdbcType=INTEGER},
       </if>
-      <if test="modifytime != null">
-        #{modifytime,jdbcType=TIMESTAMP},
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
-      <if test="lastLoginTime != null">
-        #{lastLoginTime,jdbcType=TIMESTAMP},
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null">
+        #{operateIp,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.electronic.dao.mapper.bo.SysUserExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.electronic.dao.mapper.bo.SysUserExample" resultType="java.lang.Integer">
     select count(*) from sys_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -192,14 +207,11 @@
   <update id="updateByExampleSelective" parameterType="map">
     update sys_user
     <set>
-      <if test="record.userid != null">
-        userId = #{record.userid,jdbcType=INTEGER},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.username != null">
-        username = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.password != null">
-        password = #{record.password,jdbcType=VARCHAR},
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
       </if>
       <if test="record.userPhone != null">
         user_phone = #{record.userPhone,jdbcType=VARCHAR},
@@ -207,20 +219,29 @@
       <if test="record.userEmail != null">
         user_email = #{record.userEmail,jdbcType=VARCHAR},
       </if>
-      <if test="record.userSex != null">
-        user_sex = #{record.userSex,jdbcType=INTEGER},
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.userStatus != null">
-        user_status = #{record.userStatus,jdbcType=INTEGER},
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
       </if>
-      <if test="record.createtime != null">
-        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      <if test="record.deptId != null">
+        dept_id = #{record.deptId,jdbcType=INTEGER},
       </if>
-      <if test="record.modifytime != null">
-        modifytime = #{record.modifytime,jdbcType=TIMESTAMP},
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
       </if>
-      <if test="record.lastLoginTime != null">
-        last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null">
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateTime != null">
+        operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operateIp != null">
+        operate_ip = #{record.operateIp,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -229,16 +250,18 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update sys_user
-    set userId = #{record.userid,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
       user_phone = #{record.userPhone,jdbcType=VARCHAR},
       user_email = #{record.userEmail,jdbcType=VARCHAR},
-      user_sex = #{record.userSex,jdbcType=INTEGER},
-      user_status = #{record.userStatus,jdbcType=INTEGER},
-      createtime = #{record.createtime,jdbcType=TIMESTAMP},
-      modifytime = #{record.modifytime,jdbcType=TIMESTAMP},
-      last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP}
+      password = #{record.password,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      dept_id = #{record.deptId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{record.operateIp,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -246,11 +269,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.electronic.dao.mapper.bo.SysUser">
     update sys_user
     <set>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
       </if>
       <if test="userPhone != null">
         user_phone = #{userPhone,jdbcType=VARCHAR},
@@ -258,35 +278,365 @@
       <if test="userEmail != null">
         user_email = #{userEmail,jdbcType=VARCHAR},
       </if>
-      <if test="userSex != null">
-        user_sex = #{userSex,jdbcType=INTEGER},
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="userStatus != null">
-        user_status = #{userStatus,jdbcType=INTEGER},
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null">
-        createtime = #{createtime,jdbcType=TIMESTAMP},
+      <if test="deptId != null">
+        dept_id = #{deptId,jdbcType=INTEGER},
       </if>
-      <if test="modifytime != null">
-        modifytime = #{modifytime,jdbcType=TIMESTAMP},
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
       </if>
-      <if test="lastLoginTime != null">
-        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null">
+        operate_ip = #{operateIp,jdbcType=VARCHAR},
       </if>
     </set>
-    where userId = #{userid,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.electronic.dao.mapper.bo.SysUser">
     update sys_user
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
+    set user_name = #{userName,jdbcType=VARCHAR},
       user_phone = #{userPhone,jdbcType=VARCHAR},
       user_email = #{userEmail,jdbcType=VARCHAR},
-      user_sex = #{userSex,jdbcType=INTEGER},
-      user_status = #{userStatus,jdbcType=INTEGER},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      modifytime = #{modifytime,jdbcType=TIMESTAMP},
-      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
-    where userId = #{userid,jdbcType=INTEGER}
+      password = #{password,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      dept_id = #{deptId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{operateIp,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.electronic.dao.mapper.bo.SysUser">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="operate_ip" jdbcType="VARCHAR" property="operateIp" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, user_name, user_phone, user_email, password, sex, dept_id, status, remark, 
+    operator, operate_time, operate_ip
+  </sql>
+  <select id="selectByExample" parameterType="com.electronic.dao.mapper.bo.SysUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.electronic.dao.mapper.bo.SysUserExample">
+    delete from sys_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.electronic.dao.mapper.bo.SysUser">
+    insert into sys_user (user_id, user_name, user_phone, 
+      user_email, password, sex, 
+      dept_id, status, remark, 
+      operator, operate_time, operate_ip
+      )
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{userEmail,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{deptId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.SysUser">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="deptId != null">
+        dept_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="operateTime != null">
+        operate_time,
+      </if>
+      <if test="operateIp != null">
+        operate_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null">
+        #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.electronic.dao.mapper.bo.SysUserExample" resultType="java.lang.Integer">
+    select count(*) from sys_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_user
+    <set>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhone != null">
+        user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEmail != null">
+        user_email = #{record.userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null">
+        dept_id = #{record.deptId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null">
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateTime != null">
+        operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operateIp != null">
+        operate_ip = #{record.operateIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      user_email = #{record.userEmail,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      dept_id = #{record.deptId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{record.operateIp,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.electronic.dao.mapper.bo.SysUser">
+    update sys_user
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        dept_id = #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null">
+        operate_ip = #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.electronic.dao.mapper.bo.SysUser">
+    update sys_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      dept_id = #{deptId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{operateIp,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

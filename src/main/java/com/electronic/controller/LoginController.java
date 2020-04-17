@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class LoginController {
 
-    @RequestMapping(value = "/userInfo", method = RequestMethod.POST)
+    @RequestMapping("/userInfo")
     @ResponseBody
     public BaseResponse userInfo() {
         SessionUser sessionUser = SessionUtils.getSessionUser();

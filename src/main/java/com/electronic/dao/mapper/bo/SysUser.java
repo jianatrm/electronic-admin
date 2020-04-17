@@ -3,48 +3,44 @@ package com.electronic.dao.mapper.bo;
 import java.util.Date;
 
 public class SysUser {
-    private Integer userid;
+    private Integer userId;
 
-    private String username;
-
-    private String password;
+    private String userName;
 
     private String userPhone;
 
     private String userEmail;
 
-    private Integer userSex;
+    private String password;
 
-    private Integer userStatus;
+    private String sex;
 
-    private Date createtime;
+    private Integer deptId;
 
-    private Date modifytime;
+    private Integer status;
 
-    private Date lastLoginTime;
+    private String remark;
 
-    public Integer getUserid() {
-        return userid;
+    private String operator;
+
+    private Date operateTime;
+
+    private String operateIp;
+
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getUserPhone() {
@@ -52,7 +48,7 @@ public class SysUser {
     }
 
     public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+        this.userPhone = userPhone == null ? null : userPhone.trim();
     }
 
     public String getUserEmail() {
@@ -60,46 +56,70 @@ public class SysUser {
     }
 
     public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+        this.userEmail = userEmail == null ? null : userEmail.trim();
     }
 
-    public Integer getUserSex() {
-        return userSex;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserSex(Integer userSex) {
-        this.userSex = userSex;
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
-    public Integer getUserStatus() {
-        return userStatus;
+    public String getSex() {
+        return sex;
     }
 
-    public void setUserStatus(Integer userStatus) {
-        this.userStatus = userStatus;
+    public void setSex(String sex) {
+        this.sex = sex == null ? null : sex.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Integer getDeptId() {
+        return deptId;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
     }
 
-    public Date getModifytime() {
-        return modifytime;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setModifytime(Date modifytime) {
-        this.modifytime = modifytime;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
-    public Date getLastLoginTime() {
-        return lastLoginTime;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator == null ? null : operator.trim();
+    }
+
+    public Date getOperateTime() {
+        return operateTime;
+    }
+
+    public void setOperateTime(Date operateTime) {
+        this.operateTime = operateTime;
+    }
+
+    public String getOperateIp() {
+        return operateIp;
+    }
+
+    public void setOperateIp(String operateIp) {
+        this.operateIp = operateIp == null ? null : operateIp.trim();
     }
 }

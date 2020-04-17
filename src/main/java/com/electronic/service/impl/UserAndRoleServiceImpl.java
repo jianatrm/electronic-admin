@@ -28,7 +28,7 @@ public class UserAndRoleServiceImpl implements UserAndRoleService {
         List<SysUserRoles> sysUserRoles = sysUserRolesMapper.selectByExample(sysUserRolesExample);
         List<Integer> list = new ArrayList<>();
         for(SysUserRoles sysUserRole : sysUserRoles){
-            list.add(sysUserRole.getId());
+            list.add(sysUserRole.getRoleId());
         }
         SysRolesExample sysRolesExample = new SysRolesExample();
         SysRolesExample.Criteria sysRolesExampleCriteria = sysRolesExample.createCriteria();
