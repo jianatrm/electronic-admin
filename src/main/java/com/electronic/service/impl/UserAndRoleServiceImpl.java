@@ -2,8 +2,8 @@ package com.electronic.service.impl;
 
 import com.electronic.contants.UserConstants;
 import com.electronic.dao.mapper.bo.*;
-import com.electronic.dao.mapper.interfaces.SysRolesMapper;
-import com.electronic.dao.mapper.interfaces.SysUserRolesMapper;
+import com.electronic.dao.mapper.interfaces.SysRoleMapper;
+import com.electronic.dao.mapper.interfaces.SysRoleUserMapper;
 import com.electronic.service.UserAndRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,26 +14,25 @@ import java.util.List;
 public class UserAndRoleServiceImpl implements UserAndRoleService {
 
     @Autowired
-    private SysUserRolesMapper sysUserRolesMapper;
+    private SysRoleUserMapper sysRoleUserMapper;
 
     @Autowired
-    private SysRolesMapper sysRolesMapper;
+    private SysRoleMapper sysRoleMapper;
 
     @Override
-    public List<SysRoles> queryRolesByUser(SysUser sysUser) {
-        SysUserRolesExample sysUserRolesExample = new SysUserRolesExample();
-        SysUserRolesExample.Criteria criteria = sysUserRolesExample.createCriteria();
-        criteria.andUserIdEqualTo(sysUser.getUserid());
-        criteria.andStatusEqualTo(UserConstants.VALID_STATUS);
-        List<SysUserRoles> sysUserRoles = sysUserRolesMapper.selectByExample(sysUserRolesExample);
+    public List<SysRole> queryRolesByUser(SysUser sysUser) {
+        SysRoleUserExample SysRoleUserExample = new SysRoleUserExample();
+        SysRoleUserExample.Criteria criteria = SysRoleUserExample.createCriteria();
+        criteria.andUserIdEqualTo(sysUser.getUserId());
+        List<SysRoleUser> sysUserRoles = sysRoleUserMapper.selectByExample(SysRoleUserExample);
         List<Integer> list = new ArrayList<>();
-        for(SysUserRoles sysUserRole : sysUserRoles){
+        for(SysRoleUser sysUserRole : sysUserRoles){
             list.add(sysUserRole.getRoleId());
         }
-        SysRolesExample sysRolesExample = new SysRolesExample();
-        SysRolesExample.Criteria sysRolesExampleCriteria = sysRolesExample.createCriteria();
-        sysRolesExampleCriteria.andRoleIdIn(list);
-        sysRolesExampleCriteria.andRoleStatusEqualTo(UserConstants.VALID_STATUS);
-        return sysRolesMapper.selectByExample(sysRolesExample);
+        SysRoleExample sysRolesExample = new SysRoleExample();
+        SysRoleExample.Criteria sysRolesExampleCriteria = sysRolesExample.createCriteria();
+        sysRolesExampleCriteria.andRoleidIn(list);
+        sysRolesExampleCriteria.andStatusEqualTo(UserConstants.VALID_STATUS);
+        return sysRoleMapper.selectByExample(sysRolesExample);
     }
 }

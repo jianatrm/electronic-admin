@@ -7,9 +7,9 @@ import com.electronic.base.modle.request.RolesRequest;
 import com.electronic.base.modle.response.RolesResponse;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.contants.UserConstants;
-import com.electronic.dao.mapper.bo.SysRoles;
-import com.electronic.dao.mapper.bo.SysRolesExample;
-import com.electronic.dao.mapper.interfaces.SysRolesMapper;
+import com.electronic.dao.mapper.bo.SysRole;
+import com.electronic.dao.mapper.bo.SysRoleExample;
+import com.electronic.dao.mapper.interfaces.SysRoleMapper;
 import com.electronic.service.SysRolesService;
 import com.github.pagehelper.PageHelper;
 import org.apache.commons.lang3.StringUtils;
@@ -30,7 +30,7 @@ public class SysRolesServiceImpl implements SysRolesService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SysRolesServiceImpl.class);
     @Autowired
-    private SysRolesMapper sysRolesMapper;
+    private SysRoleMapper sysRoleMapper;
 
     @Override
     public BaseResponse addRoles(RolesRequest rolesRequest) throws Exception {
@@ -39,11 +39,11 @@ public class SysRolesServiceImpl implements SysRolesService {
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("新增请求参数 {} ", JSON.toJSONString(rolesRequest));
         }
-        SysRoles sysRoles = new SysRoles();
-        BeanUtils.copyProperties(rolesRequest,sysRoles);
-        sysRoles.setCreateTime(new Date());
-        sysRoles.setRoleStatus(UserConstants.VALID_STATUS);
-        int i = sysRolesMapper.insertSelective(sysRoles);
+        SysRole sysRole = new SysRole();
+        BeanUtils.copyProperties(rolesRequest,sysRole);
+        sysRole.setOperateTime(new Date());
+        sysRole.setStatus(UserConstants.VALID_STATUS);
+        int i = sysRoleMapper.insertSelective(sysRole);
         if (i>0){
             baseResponse.setSuccess(BusinessConstants.BUSI_SUCCESS);
             baseResponse.setResultCode(BusinessConstants.BUSI_SUCCESS_CODE);
@@ -62,19 +62,19 @@ public class SysRolesServiceImpl implements SysRolesService {
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("查询请求参数 {} ", JSON.toJSONString(rolesRequest));
         }
-        SysRolesExample sysRolesExample = new SysRolesExample();
-        SysRolesExample.Criteria criteria = sysRolesExample.createCriteria();
+        SysRoleExample SysRoleExample = new SysRoleExample();
+        SysRoleExample.Criteria criteria = SysRoleExample.createCriteria();
         if (rolesRequest.getRoleId()!=0&&rolesRequest.getRoleId()!=null){
-            criteria.andRoleIdEqualTo(rolesRequest.getRoleId());
+            criteria.andRoleidEqualTo(rolesRequest.getRoleId());
         }
         if (!StringUtils.isBlank(rolesRequest.getRoleName())){
             criteria.andRoleNameEqualTo(rolesRequest.getRoleName());
         }
-        long count = sysRolesMapper.countByExample(sysRolesExample);
+        long count = sysRoleMapper.countByExample(SysRoleExample);
         if (!StringUtils.isBlank(rolesRequest.getPageNo())&&!StringUtils.isBlank(rolesRequest.getPageSize())){
             PageHelper.startPage(Integer.valueOf(rolesRequest.getPageNo()),Integer.valueOf(rolesRequest.getPageSize()));
         }
-        List<SysRoles> sysRoles = sysRolesMapper.selectByExample(sysRolesExample);
+        List<SysRole> sysRoles = sysRoleMapper.selectByExample(SysRoleExample);
         pageResult.setResult(sysRoles);
         pageResult.setCount(count);
         baseResponse.setResult(pageResult);

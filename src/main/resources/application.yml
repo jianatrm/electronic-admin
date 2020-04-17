@@ -1,7 +1,7 @@
 spring:
   datasource:
     #url: jdbc:oracle:thin:@39.106.213.8:1521:orcl
-    url: jdbc:mysql://rm-2zeulwf19jd8451e9vo.mysql.rds.aliyuncs.com/electronic-mysql?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://rm-2ze5f9v56c119p8522o.mysql.rds.aliyuncs.com:3306/electroinc?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: TIANrm104895
     username: root

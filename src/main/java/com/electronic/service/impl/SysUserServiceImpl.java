@@ -21,8 +21,8 @@ public class SysUserServiceImpl implements SysUserService {
     public SysUser selectSysUser(SysUser user) throws Exception {
         SysUserExample sysUserExample = new SysUserExample();
         SysUserExample.Criteria criteria = sysUserExample.createCriteria();
-        if (!StringUtils.isBlank(user.getUsername())){
-            criteria.andUsernameEqualTo(user.getUsername());
+        if (!StringUtils.isBlank(user.getUserName())){
+            criteria.andUserNameEqualTo(user.getUserName());
         }
         List<SysUser> sysUsers = sysUserMapper.selectByExample(sysUserExample);
         return CollectionUtils.isEmpty(sysUsers)? null:sysUsers.get(0);

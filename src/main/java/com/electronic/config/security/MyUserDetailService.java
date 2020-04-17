@@ -1,6 +1,6 @@
 package com.electronic.config.security;
 
-import com.electronic.dao.mapper.bo.SysRoles;
+import com.electronic.dao.mapper.bo.SysRole;
 import com.electronic.dao.mapper.bo.SysUser;
 import com.electronic.service.SysUserService;
 import com.electronic.service.UserAndRoleService;
@@ -31,7 +31,7 @@ public class MyUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SysUser user = new SysUser();
-        user.setUsername(username);
+        user.setUserName(username);
         SysUser sysUser = null;
         try {
             sysUser = sysUserService.selectSysUser(user);
@@ -40,14 +40,14 @@ public class MyUserDetailService implements UserDetailsService {
             LOGGER.error("获取用户失败 {} {}", e.getMessage());
         }
         if (sysUser == null) throw new UsernameNotFoundException("Username " + username + " not found");
-        return new User(sysUser.getUsername(),sysUser.getPassword(), getAuthority(sysUser));
+        return new User(sysUser.getUserName(),sysUser.getPassword(), getAuthority(sysUser));
 
     }
 
     public List<SimpleGrantedAuthority> getAuthority(SysUser sysUser) {
-        List<SysRoles> SysRoles = userAndRoleService.queryRolesByUser(sysUser);
+        List<SysRole> SysRoles = userAndRoleService.queryRolesByUser(sysUser);
         List<SimpleGrantedAuthority> list = new ArrayList<SimpleGrantedAuthority>();
-        for (SysRoles role : SysRoles) {
+        for (SysRole role : SysRoles) {
             list.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
         }
         return list;
