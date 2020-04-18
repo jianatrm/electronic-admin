@@ -7,6 +7,8 @@ public class SysDept {
 
     private String deptName;
 
+    private String deptCode;
+
     private Integer parentId;
 
     private String level;
@@ -35,6 +37,14 @@ public class SysDept {
 
     public void setDeptName(String deptName) {
         this.deptName = deptName == null ? null : deptName.trim();
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode == null ? null : deptCode.trim();
     }
 
     public Integer getParentId() {
