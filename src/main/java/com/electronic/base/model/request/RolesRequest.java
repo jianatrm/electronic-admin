@@ -1,4 +1,4 @@
-package com.electronic.base.modle.request;
+package com.electronic.base.model.request;
 
 import java.util.Date;
 

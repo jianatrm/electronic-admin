@@ -1,4 +1,4 @@
-package com.electronic.base.modle;
+package com.electronic.base.model;
 
 import java.io.Serializable;
 

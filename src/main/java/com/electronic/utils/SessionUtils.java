@@ -1,6 +1,6 @@
 package com.electronic.utils;
 
-import com.electronic.base.modle.SessionUser;
+import com.electronic.base.model.SessionUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;

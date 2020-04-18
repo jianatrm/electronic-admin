@@ -1,6 +1,6 @@
 package com.electronic.controller;
 
-import com.electronic.base.modle.BaseResponse;
+import com.electronic.base.model.BaseResponse;
 import com.electronic.service.SysMenuService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,6 +1,5 @@
-package com.electronic.base.modle;
+package com.electronic.base.model;
 
-import java.util.List;
 import java.util.Set;
 
 public class SessionUser {

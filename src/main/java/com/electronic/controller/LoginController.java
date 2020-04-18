@@ -1,21 +1,16 @@
 package com.electronic.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.electronic.base.modle.BaseResponse;
-import com.electronic.base.modle.SessionUser;
+import com.electronic.base.model.BaseResponse;
+import com.electronic.base.model.SessionUser;
 import com.electronic.contants.BusinessConstants;
-import com.electronic.dao.mapper.bo.SysUser;
 import com.electronic.utils.SessionUtils;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequestMapping("user")
 public class LoginController {
 
     @RequestMapping("/userInfo")

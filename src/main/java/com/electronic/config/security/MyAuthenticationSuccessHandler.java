@@ -4,7 +4,7 @@
 package com.electronic.config.security;
 
 import com.alibaba.fastjson.JSON;
-import com.electronic.base.modle.BaseResponse;
+import com.electronic.base.model.BaseResponse;
 import com.electronic.contants.BusinessConstants;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.collections.MapUtils;
@@ -72,13 +72,13 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
 		} else if (!StringUtils.equals(clientDetails.getClientSecret(), clientSecret)) {
 			throw new UnapprovedClientAuthenticationException("clientSecret不匹配:" + clientId);
 		}
-		
+
 		TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_MAP, clientId, clientDetails.getScope(), "custom");
-		
+
 		OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
-		
+
 		OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request, authentication);
-		
+
 		OAuth2AccessToken token = authorizationServerTokenServices.createAccessToken(oAuth2Authentication);
 
 		response.setContentType("application/json;charset=UTF-8");

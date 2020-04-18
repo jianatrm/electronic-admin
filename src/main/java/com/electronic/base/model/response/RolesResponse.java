@@ -1,4 +1,4 @@
-package com.electronic.base.modle.response;
+package com.electronic.base.model.response;
 
 import java.util.Date;
 

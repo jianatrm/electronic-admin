@@ -1,9 +1,9 @@
 package com.electronic.service;
 
-import com.electronic.base.modle.BaseResponse;
-import com.electronic.base.modle.PageResult;
-import com.electronic.base.modle.request.RolesRequest;
-import com.electronic.base.modle.response.RolesResponse;
+import com.electronic.base.model.BaseResponse;
+import com.electronic.base.model.PageResult;
+import com.electronic.base.model.request.RolesRequest;
+import com.electronic.base.model.response.RolesResponse;
 
 public interface SysRolesService {
 

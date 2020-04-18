@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -27,12 +28,17 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Autowired
     private UserAndRoleService userAndRoleService;
+    
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SysUser user = new SysUser();
         user.setUserName(username);
         SysUser sysUser = null;
+        String encode = passwordEncoder.encode("123456");
+        System.out.println(encode);
         try {
             sysUser = sysUserService.selectSysUser(user);
         } catch (Exception e) {
@@ -40,7 +46,7 @@ public class MyUserDetailService implements UserDetailsService {
             LOGGER.error("获取用户失败 {} {}", e.getMessage());
         }
         if (sysUser == null) throw new UsernameNotFoundException("Username " + username + " not found");
-        return new User(sysUser.getUserName(),sysUser.getPassword(), getAuthority(sysUser));
+        return new User(sysUser.getUserName(),passwordEncoder.encode("123456"), getAuthority(sysUser));
 
     }
 
@@ -52,6 +58,5 @@ public class MyUserDetailService implements UserDetailsService {
         }
         return list;
     }
-
-
+    
 }

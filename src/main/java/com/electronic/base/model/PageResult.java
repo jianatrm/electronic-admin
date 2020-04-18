@@ -1,11 +1,11 @@
-package com.electronic.base.modle;
+package com.electronic.base.model;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class PageResult<T> implements Serializable {
     private static final long serialVersionUID = 1L;
-    private boolean success;
+    private boolean success = true;
     private int pageNum = 1;
     private int pageSize = 10;
     private List<T> result;

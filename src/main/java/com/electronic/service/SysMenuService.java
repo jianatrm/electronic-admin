@@ -1,6 +1,6 @@
 package com.electronic.service;
 
-import com.electronic.base.modle.BaseResponse;
+import com.electronic.base.model.BaseResponse;
 
 public interface SysMenuService {
 
