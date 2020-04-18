@@ -17,6 +17,8 @@ public class SysDept {
 
     private String remark;
 
+    private String status;
+
     private String operator;
 
     private Date operateTime;
@@ -77,6 +79,14 @@ public class SysDept {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 
     public String getOperator() {

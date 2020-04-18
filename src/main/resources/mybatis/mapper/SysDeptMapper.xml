@@ -9,6 +9,7 @@
     <result column="level" property="level" jdbcType="VARCHAR" />
     <result column="seq" property="seq" jdbcType="INTEGER" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="operator" property="operator" jdbcType="VARCHAR" />
     <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
     <result column="operate_ip" property="operateIp" jdbcType="VARCHAR" />
@@ -72,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    dept_id, dept_name, dept_code, parent_id, level, seq, remark, operator, operate_time, 
+    dept_id, dept_name, dept_code, parent_id, level, seq, remark, status, operator, operate_time, 
     operate_ip
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.electronic.dao.mapper.bo.SysDeptExample" >
@@ -108,12 +109,12 @@
   <insert id="insert" parameterType="com.electronic.dao.mapper.bo.SysDept" >
     insert into sys_dept (dept_id, dept_name, dept_code, 
       parent_id, level, seq, 
-      remark, operator, operate_time, 
-      operate_ip)
+      remark, status, operator, 
+      operate_time, operate_ip)
     values (#{deptId,jdbcType=INTEGER}, #{deptName,jdbcType=VARCHAR}, #{deptCode,jdbcType=VARCHAR}, 
       #{parentId,jdbcType=INTEGER}, #{level,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, 
-      #{operateIp,jdbcType=VARCHAR})
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
+      #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.SysDept" >
     insert into sys_dept
@@ -138,6 +139,9 @@
       </if>
       <if test="remark != null" >
         remark,
+      </if>
+      <if test="status != null" >
+        status,
       </if>
       <if test="operator != null" >
         operator,
@@ -170,6 +174,9 @@
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
       </if>
       <if test="operator != null" >
         #{operator,jdbcType=VARCHAR},
@@ -212,6 +219,9 @@
       <if test="record.remark != null" >
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
       <if test="record.operator != null" >
         operator = #{record.operator,jdbcType=VARCHAR},
       </if>
@@ -235,6 +245,7 @@
       level = #{record.level,jdbcType=VARCHAR},
       seq = #{record.seq,jdbcType=INTEGER},
       remark = #{record.remark,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
       operator = #{record.operator,jdbcType=VARCHAR},
       operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
       operate_ip = #{record.operateIp,jdbcType=VARCHAR}
@@ -263,6 +274,9 @@
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
       <if test="operator != null" >
         operator = #{operator,jdbcType=VARCHAR},
       </if>
@@ -283,6 +297,7 @@
       level = #{level,jdbcType=VARCHAR},
       seq = #{seq,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
       operator = #{operator,jdbcType=VARCHAR},
       operate_time = #{operateTime,jdbcType=TIMESTAMP},
       operate_ip = #{operateIp,jdbcType=VARCHAR}
