@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.electronic.dao.mapper.interfaces.WorkOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.electronic.dao.mapper.bo.WorkOrder" >
+    <id column="work_order_id" property="workOrderId" jdbcType="INTEGER" />
+    <result column="work_order_code" property="workOrderCode" jdbcType="VARCHAR" />
+    <result column="work_order_name" property="workOrderName" jdbcType="VARCHAR" />
+    <result column="organizer" property="organizer" jdbcType="VARCHAR" />
+    <result column="current_node" property="currentNode" jdbcType="VARCHAR" />
+    <result column="node_count" property="nodeCount" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+    <result column="work_order_status" property="workOrderStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.electronic.dao.mapper.bo.WorkOrder" extends="BaseResultMap" >
+    <result column="work_info" property="workInfo" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    work_order_id, work_order_code, work_order_name, organizer, current_node, node_count, 
+    create_time, operate_time, work_order_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    work_info
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.electronic.dao.mapper.bo.WorkOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from work_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.electronic.dao.mapper.bo.WorkOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from work_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from work_order
+    where work_order_id = #{workOrderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from work_order
+    where work_order_id = #{workOrderId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.electronic.dao.mapper.bo.WorkOrderExample" >
+    delete from work_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.electronic.dao.mapper.bo.WorkOrder" >
+    insert into work_order (work_order_id, work_order_code, work_order_name, 
+      organizer, current_node, node_count, 
+      create_time, operate_time, work_order_status, 
+      work_info)
+    values (#{workOrderId,jdbcType=INTEGER}, #{workOrderCode,jdbcType=VARCHAR}, #{workOrderName,jdbcType=VARCHAR}, 
+      #{organizer,jdbcType=VARCHAR}, #{currentNode,jdbcType=VARCHAR}, #{nodeCount,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{operateTime,jdbcType=TIMESTAMP}, #{workOrderStatus,jdbcType=INTEGER}, 
+      #{workInfo,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.WorkOrder" >
+    insert into work_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workOrderId != null" >
+        work_order_id,
+      </if>
+      <if test="workOrderCode != null" >
+        work_order_code,
+      </if>
+      <if test="workOrderName != null" >
+        work_order_name,
+      </if>
+      <if test="organizer != null" >
+        organizer,
+      </if>
+      <if test="currentNode != null" >
+        current_node,
+      </if>
+      <if test="nodeCount != null" >
+        node_count,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+      <if test="workOrderStatus != null" >
+        work_order_status,
+      </if>
+      <if test="workInfo != null" >
+        work_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workOrderId != null" >
+        #{workOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="workOrderCode != null" >
+        #{workOrderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="workOrderName != null" >
+        #{workOrderName,jdbcType=VARCHAR},
+      </if>
+      <if test="organizer != null" >
+        #{organizer,jdbcType=VARCHAR},
+      </if>
+      <if test="currentNode != null" >
+        #{currentNode,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeCount != null" >
+        #{nodeCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workOrderStatus != null" >
+        #{workOrderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="workInfo != null" >
+        #{workInfo,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.electronic.dao.mapper.bo.WorkOrderExample" resultType="java.lang.Integer" >
+    select count(*) from work_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update work_order
+    <set >
+      <if test="record.workOrderId != null" >
+        work_order_id = #{record.workOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.workOrderCode != null" >
+        work_order_code = #{record.workOrderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workOrderName != null" >
+        work_order_name = #{record.workOrderName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizer != null" >
+        organizer = #{record.organizer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentNode != null" >
+        current_node = #{record.currentNode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nodeCount != null" >
+        node_count = #{record.nodeCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operateTime != null" >
+        operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.workOrderStatus != null" >
+        work_order_status = #{record.workOrderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.workInfo != null" >
+        work_info = #{record.workInfo,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update work_order
+    set work_order_id = #{record.workOrderId,jdbcType=INTEGER},
+      work_order_code = #{record.workOrderCode,jdbcType=VARCHAR},
+      work_order_name = #{record.workOrderName,jdbcType=VARCHAR},
+      organizer = #{record.organizer,jdbcType=VARCHAR},
+      current_node = #{record.currentNode,jdbcType=VARCHAR},
+      node_count = #{record.nodeCount,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      work_order_status = #{record.workOrderStatus,jdbcType=INTEGER},
+      work_info = #{record.workInfo,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update work_order
+    set work_order_id = #{record.workOrderId,jdbcType=INTEGER},
+      work_order_code = #{record.workOrderCode,jdbcType=VARCHAR},
+      work_order_name = #{record.workOrderName,jdbcType=VARCHAR},
+      organizer = #{record.organizer,jdbcType=VARCHAR},
+      current_node = #{record.currentNode,jdbcType=VARCHAR},
+      node_count = #{record.nodeCount,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      work_order_status = #{record.workOrderStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.electronic.dao.mapper.bo.WorkOrder" >
+    update work_order
+    <set >
+      <if test="workOrderCode != null" >
+        work_order_code = #{workOrderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="workOrderName != null" >
+        work_order_name = #{workOrderName,jdbcType=VARCHAR},
+      </if>
+      <if test="organizer != null" >
+        organizer = #{organizer,jdbcType=VARCHAR},
+      </if>
+      <if test="currentNode != null" >
+        current_node = #{currentNode,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeCount != null" >
+        node_count = #{nodeCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workOrderStatus != null" >
+        work_order_status = #{workOrderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="workInfo != null" >
+        work_info = #{workInfo,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where work_order_id = #{workOrderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.electronic.dao.mapper.bo.WorkOrder" >
+    update work_order
+    set work_order_code = #{workOrderCode,jdbcType=VARCHAR},
+      work_order_name = #{workOrderName,jdbcType=VARCHAR},
+      organizer = #{organizer,jdbcType=VARCHAR},
+      current_node = #{currentNode,jdbcType=VARCHAR},
+      node_count = #{nodeCount,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      work_order_status = #{workOrderStatus,jdbcType=INTEGER},
+      work_info = #{workInfo,jdbcType=LONGVARBINARY}
+    where work_order_id = #{workOrderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.electronic.dao.mapper.bo.WorkOrder" >
+    update work_order
+    set work_order_code = #{workOrderCode,jdbcType=VARCHAR},
+      work_order_name = #{workOrderName,jdbcType=VARCHAR},
+      organizer = #{organizer,jdbcType=VARCHAR},
+      current_node = #{currentNode,jdbcType=VARCHAR},
+      node_count = #{nodeCount,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      work_order_status = #{workOrderStatus,jdbcType=INTEGER}
+    where work_order_id = #{workOrderId,jdbcType=INTEGER}
+  </update>
+</mapper>
