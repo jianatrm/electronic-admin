@@ -5,6 +5,7 @@
     <id column="work_order_id" property="workOrderId" jdbcType="INTEGER" />
     <result column="work_order_code" property="workOrderCode" jdbcType="VARCHAR" />
     <result column="work_order_name" property="workOrderName" jdbcType="VARCHAR" />
+    <result column="work_type" property="workType" jdbcType="VARCHAR" />
     <result column="organizer" property="organizer" jdbcType="VARCHAR" />
     <result column="current_node" property="currentNode" jdbcType="VARCHAR" />
     <result column="node_count" property="nodeCount" jdbcType="INTEGER" />
@@ -74,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    work_order_id, work_order_code, work_order_name, organizer, current_node, node_count, 
-    create_time, operate_time, work_order_status
+    work_order_id, work_order_code, work_order_name, work_type, organizer, current_node, 
+    node_count, create_time, operate_time, work_order_status
   </sql>
   <sql id="Blob_Column_List" >
     work_info
@@ -130,13 +131,13 @@
   </delete>
   <insert id="insert" parameterType="com.electronic.dao.mapper.bo.WorkOrder" >
     insert into work_order (work_order_id, work_order_code, work_order_name, 
-      organizer, current_node, node_count, 
-      create_time, operate_time, work_order_status, 
-      work_info)
+      work_type, organizer, current_node, 
+      node_count, create_time, operate_time, 
+      work_order_status, work_info)
     values (#{workOrderId,jdbcType=INTEGER}, #{workOrderCode,jdbcType=VARCHAR}, #{workOrderName,jdbcType=VARCHAR}, 
-      #{organizer,jdbcType=VARCHAR}, #{currentNode,jdbcType=VARCHAR}, #{nodeCount,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{operateTime,jdbcType=TIMESTAMP}, #{workOrderStatus,jdbcType=INTEGER}, 
-      #{workInfo,jdbcType=LONGVARBINARY})
+      #{workType,jdbcType=VARCHAR}, #{organizer,jdbcType=VARCHAR}, #{currentNode,jdbcType=VARCHAR}, 
+      #{nodeCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{operateTime,jdbcType=TIMESTAMP}, 
+      #{workOrderStatus,jdbcType=INTEGER}, #{workInfo,jdbcType=LONGVARBINARY})
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.WorkOrder" >
     insert into work_order
@@ -149,6 +150,9 @@
       </if>
       <if test="workOrderName != null" >
         work_order_name,
+      </if>
+      <if test="workType != null" >
+        work_type,
       </if>
       <if test="organizer != null" >
         organizer,
@@ -181,6 +185,9 @@
       </if>
       <if test="workOrderName != null" >
         #{workOrderName,jdbcType=VARCHAR},
+      </if>
+      <if test="workType != null" >
+        #{workType,jdbcType=VARCHAR},
       </if>
       <if test="organizer != null" >
         #{organizer,jdbcType=VARCHAR},
@@ -223,6 +230,9 @@
       <if test="record.workOrderName != null" >
         work_order_name = #{record.workOrderName,jdbcType=VARCHAR},
       </if>
+      <if test="record.workType != null" >
+        work_type = #{record.workType,jdbcType=VARCHAR},
+      </if>
       <if test="record.organizer != null" >
         organizer = #{record.organizer,jdbcType=VARCHAR},
       </if>
@@ -254,6 +264,7 @@
     set work_order_id = #{record.workOrderId,jdbcType=INTEGER},
       work_order_code = #{record.workOrderCode,jdbcType=VARCHAR},
       work_order_name = #{record.workOrderName,jdbcType=VARCHAR},
+      work_type = #{record.workType,jdbcType=VARCHAR},
       organizer = #{record.organizer,jdbcType=VARCHAR},
       current_node = #{record.currentNode,jdbcType=VARCHAR},
       node_count = #{record.nodeCount,jdbcType=INTEGER},
@@ -270,6 +281,7 @@
     set work_order_id = #{record.workOrderId,jdbcType=INTEGER},
       work_order_code = #{record.workOrderCode,jdbcType=VARCHAR},
       work_order_name = #{record.workOrderName,jdbcType=VARCHAR},
+      work_type = #{record.workType,jdbcType=VARCHAR},
       organizer = #{record.organizer,jdbcType=VARCHAR},
       current_node = #{record.currentNode,jdbcType=VARCHAR},
       node_count = #{record.nodeCount,jdbcType=INTEGER},
@@ -288,6 +300,9 @@
       </if>
       <if test="workOrderName != null" >
         work_order_name = #{workOrderName,jdbcType=VARCHAR},
+      </if>
+      <if test="workType != null" >
+        work_type = #{workType,jdbcType=VARCHAR},
       </if>
       <if test="organizer != null" >
         organizer = #{organizer,jdbcType=VARCHAR},
@@ -317,6 +332,7 @@
     update work_order
     set work_order_code = #{workOrderCode,jdbcType=VARCHAR},
       work_order_name = #{workOrderName,jdbcType=VARCHAR},
+      work_type = #{workType,jdbcType=VARCHAR},
       organizer = #{organizer,jdbcType=VARCHAR},
       current_node = #{currentNode,jdbcType=VARCHAR},
       node_count = #{nodeCount,jdbcType=INTEGER},
@@ -330,6 +346,7 @@
     update work_order
     set work_order_code = #{workOrderCode,jdbcType=VARCHAR},
       work_order_name = #{workOrderName,jdbcType=VARCHAR},
+      work_type = #{workType,jdbcType=VARCHAR},
       organizer = #{organizer,jdbcType=VARCHAR},
       current_node = #{currentNode,jdbcType=VARCHAR},
       node_count = #{nodeCount,jdbcType=INTEGER},

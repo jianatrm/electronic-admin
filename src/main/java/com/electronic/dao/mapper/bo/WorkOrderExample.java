@@ -305,6 +305,76 @@ public class WorkOrderExample {
             return (Criteria) this;
         }
 
+        public Criteria andWorkTypeIsNull() {
+            addCriterion("work_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTypeIsNotNull() {
+            addCriterion("work_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTypeEqualTo(String value) {
+            addCriterion("work_type =", value, "workType");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTypeNotEqualTo(String value) {
+            addCriterion("work_type <>", value, "workType");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTypeGreaterThan(String value) {
+            addCriterion("work_type >", value, "workType");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("work_type >=", value, "workType");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTypeLessThan(String value) {
+            addCriterion("work_type <", value, "workType");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTypeLessThanOrEqualTo(String value) {
+            addCriterion("work_type <=", value, "workType");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTypeLike(String value) {
+            addCriterion("work_type like", value, "workType");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTypeNotLike(String value) {
+            addCriterion("work_type not like", value, "workType");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTypeIn(List<String> values) {
+            addCriterion("work_type in", values, "workType");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTypeNotIn(List<String> values) {
+            addCriterion("work_type not in", values, "workType");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTypeBetween(String value1, String value2) {
+            addCriterion("work_type between", value1, value2, "workType");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkTypeNotBetween(String value1, String value2) {
+            addCriterion("work_type not between", value1, value2, "workType");
+            return (Criteria) this;
+        }
+
         public Criteria andOrganizerIsNull() {
             addCriterion("organizer is null");
             return (Criteria) this;

@@ -9,6 +9,8 @@ public class WorkOrder {
 
     private String workOrderName;
 
+    private String workType;
+
     private String organizer;
 
     private String currentNode;
@@ -45,6 +47,14 @@ public class WorkOrder {
 
     public void setWorkOrderName(String workOrderName) {
         this.workOrderName = workOrderName == null ? null : workOrderName.trim();
+    }
+
+    public String getWorkType() {
+        return workType;
+    }
+
+    public void setWorkType(String workType) {
+        this.workType = workType == null ? null : workType.trim();
     }
 
     public String getOrganizer() {
