@@ -2,7 +2,7 @@ package com.electronic.service;
 
 import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.PageResult;
-import com.electronic.base.model.request.UserRequest;
+import com.electronic.base.model.VO.UserRequest;
 import com.electronic.dao.mapper.bo.SysUser;
 
 public interface SysUserService {

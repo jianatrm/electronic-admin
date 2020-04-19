@@ -11,4 +11,13 @@ public class WorkOrderConstants {
     public static  final Integer APPROVE_SUCCESS = 90;
 
 
+    public static String getStatus(Integer status){
+        if (status == APPROVAL){
+            return "审批中";
+        }else if (status == APPROVE_FIALE){
+            return "审批拒绝";
+        }else {
+            return "审批通过";
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package com.electronic.base.model.request;
+package com.electronic.base.model.VO;
 
 import java.util.Date;
 
@@ -22,8 +22,8 @@ public class DeptRequest {
     private Date operateTime;
 
     private String operateIp;
-    private Integer pageNum;
-    private Integer pageSize;
+    private Integer pageNum = 1;
+    private Integer pageSize =10;
 
     public Integer getPageNum() {
         return pageNum;

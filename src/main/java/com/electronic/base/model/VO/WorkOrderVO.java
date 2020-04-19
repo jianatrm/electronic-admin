@@ -1,12 +1,9 @@
-package com.electronic.base.model.request;
-
-import com.electronic.dao.mapper.bo.Doc;
-import com.electronic.dao.mapper.bo.Node;
+package com.electronic.base.model.VO;
 
 import java.util.Date;
-import java.util.List;
 
-public class WorkOrderRequest {
+public class WorkOrderVO {
+
     private Integer workOrderId;
 
     private String workOrderCode;
@@ -26,28 +23,68 @@ public class WorkOrderRequest {
     private Date operateTime;
 
     private Integer workOrderStatus;
+    private String workOrderStatusDesc;
 
     private String workInfo;
 
-    private List<Node> nodeList;
+    private String nodeList;
 
-    private List<Doc> doc;
+    private String docList;
 
-    public List<Doc> getDoc() {
-        return doc;
+    private Integer pageNum = 1;
+    private Integer pageSize =10;
+
+    public Integer getPageNum() {
+        return pageNum;
     }
 
-    public void setDoc(List<Doc> doc) {
-        this.doc = doc;
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
     }
 
-    public List<Node> getNodeList() {
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public String getWorkOrderStatusDesc() {
+        return workOrderStatusDesc;
+    }
+
+    public void setWorkOrderStatusDesc(String workOrderStatusDesc) {
+        this.workOrderStatusDesc = workOrderStatusDesc;
+    }
+
+    public String getNodeList() {
         return nodeList;
     }
 
-    public void setNodeList(List<Node> nodeList) {
+    public void setNodeList(String nodeList) {
         this.nodeList = nodeList;
     }
+
+    public String getDocList() {
+        return docList;
+    }
+
+    public void setDocList(String docList) {
+        this.docList = docList;
+    }
+
+    private String workOrderDesc;
+
+    public String getWorkOrderDesc() {
+        return workOrderDesc;
+    }
+
+    public void setWorkOrderDesc(String workOrderDesc) {
+        this.workOrderDesc = workOrderDesc;
+    }
+
+
 
     public Integer getWorkOrderId() {
         return workOrderId;

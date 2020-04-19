@@ -1,4 +1,4 @@
-package com.electronic.base.model.request;
+package com.electronic.base.model.VO;
 
 import java.util.Date;
 

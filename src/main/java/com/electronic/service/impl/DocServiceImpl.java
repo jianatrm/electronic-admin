@@ -2,28 +2,36 @@ package com.electronic.service.impl;
 
 import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.PageResult;
-import com.electronic.base.model.request.DocRequest;
+import com.electronic.base.model.VO.DocRequest;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.dao.mapper.bo.Doc;
 import com.electronic.dao.mapper.bo.DocExample;
+import com.electronic.dao.mapper.bo.UserDoc;
 import com.electronic.dao.mapper.interfaces.DocMapper;
+import com.electronic.dao.mapper.interfaces.UserDocMapper;
 import com.electronic.dao.smapper.bo.SUserDoc;
 import com.electronic.dao.smapper.interfaces.SUserDocMapper;
 import com.electronic.service.DocService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 public class DocServiceImpl implements DocService {
 
     @Autowired
     DocMapper docMapper;
+
+    @Autowired
+    private UserDocMapper userDocMapper;
 
     @Autowired
     SUserDocMapper sUserDocMapper;
@@ -40,10 +48,18 @@ public class DocServiceImpl implements DocService {
     }
 
     @Override
-    public Integer addDoc(Doc doc) throws Exception {
-        doc.setOperateTime(new Date());
-        int insertSelective = docMapper.insertSelective(doc);
-        return insertSelective;
+    public BaseResponse addDoc( List<Doc> docList) throws Exception {
+        BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
+        for (Doc doc:docList){
+            doc.setOperateTime(new Date());
+            docMapper.insertSelective(doc);
+            UserDoc userDoc = new UserDoc();
+            userDoc.setDocId(doc.getDocId());
+            userDoc.setUserId(1);
+            userDoc.setOperateTime(new Date());
+            userDocMapper.insert(userDoc);
+        }
+        return baseResponse;
     }
 
     @Override

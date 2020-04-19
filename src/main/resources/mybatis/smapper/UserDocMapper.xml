@@ -15,7 +15,7 @@
 
 
     <select id="selectByUserId" resultMap="BaseResultMap"  parameterType="java.lang.Integer">
-        select t1.user_id,t2.* from user_doc t1 left join doc  t2 on  t1.doc_id = t2.doc_id and t1.user_id = #{userId,jdbcType=INTEGER}
+        select t1.user_id,t2.* from user_doc t1 left join doc  t2 on  t1.doc_id = t2.doc_id and t1.user_id = #{userId,jdbcType=INTEGER} order by t1.operate_time desc
     </select>
 
 
