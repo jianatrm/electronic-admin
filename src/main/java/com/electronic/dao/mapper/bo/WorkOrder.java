@@ -23,7 +23,7 @@ public class WorkOrder {
 
     private Integer workOrderStatus;
 
-    private byte[] workInfo;
+    private String workInfo;
 
     public Integer getWorkOrderId() {
         return workOrderId;
@@ -105,11 +105,11 @@ public class WorkOrder {
         this.workOrderStatus = workOrderStatus;
     }
 
-    public byte[] getWorkInfo() {
+    public String getWorkInfo() {
         return workInfo;
     }
 
-    public void setWorkInfo(byte[] workInfo) {
-        this.workInfo = workInfo;
+    public void setWorkInfo(String workInfo) {
+        this.workInfo = workInfo == null ? null : workInfo.trim();
     }
 }

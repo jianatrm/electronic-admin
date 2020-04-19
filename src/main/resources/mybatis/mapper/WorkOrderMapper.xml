@@ -14,7 +14,7 @@
     <result column="work_order_status" property="workOrderStatus" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.electronic.dao.mapper.bo.WorkOrder" extends="BaseResultMap" >
-    <result column="work_info" property="workInfo" jdbcType="LONGVARBINARY" />
+    <result column="work_info" property="workInfo" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -137,7 +137,7 @@
     values (#{workOrderId,jdbcType=INTEGER}, #{workOrderCode,jdbcType=VARCHAR}, #{workOrderName,jdbcType=VARCHAR}, 
       #{workType,jdbcType=VARCHAR}, #{organizer,jdbcType=VARCHAR}, #{currentNode,jdbcType=VARCHAR}, 
       #{nodeCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{operateTime,jdbcType=TIMESTAMP}, 
-      #{workOrderStatus,jdbcType=INTEGER}, #{workInfo,jdbcType=LONGVARBINARY})
+      #{workOrderStatus,jdbcType=INTEGER}, #{workInfo,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.WorkOrder" >
     insert into work_order
@@ -208,7 +208,7 @@
         #{workOrderStatus,jdbcType=INTEGER},
       </if>
       <if test="workInfo != null" >
-        #{workInfo,jdbcType=LONGVARBINARY},
+        #{workInfo,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -252,7 +252,7 @@
         work_order_status = #{record.workOrderStatus,jdbcType=INTEGER},
       </if>
       <if test="record.workInfo != null" >
-        work_info = #{record.workInfo,jdbcType=LONGVARBINARY},
+        work_info = #{record.workInfo,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -271,7 +271,7 @@
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
       work_order_status = #{record.workOrderStatus,jdbcType=INTEGER},
-      work_info = #{record.workInfo,jdbcType=LONGVARBINARY}
+      work_info = #{record.workInfo,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -323,7 +323,7 @@
         work_order_status = #{workOrderStatus,jdbcType=INTEGER},
       </if>
       <if test="workInfo != null" >
-        work_info = #{workInfo,jdbcType=LONGVARBINARY},
+        work_info = #{workInfo,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where work_order_id = #{workOrderId,jdbcType=INTEGER}
@@ -339,7 +339,7 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       operate_time = #{operateTime,jdbcType=TIMESTAMP},
       work_order_status = #{workOrderStatus,jdbcType=INTEGER},
-      work_info = #{workInfo,jdbcType=LONGVARBINARY}
+      work_info = #{workInfo,jdbcType=LONGVARCHAR}
     where work_order_id = #{workOrderId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.electronic.dao.mapper.bo.WorkOrder" >
