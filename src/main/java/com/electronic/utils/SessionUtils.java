@@ -19,12 +19,14 @@ public class SessionUtils {
     public static SessionUser getSessionUser(){
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        SessionUser sessionUser = new SessionUser();
+        SessionUser sessionUser = null;
         if (authentication != null) {
             if (authentication instanceof AnonymousAuthenticationToken) {
                 return null;
             }
-
+            Object details = authentication.getDetails();
+            Object principal = authentication.getPrincipal();
+            sessionUser = (SessionUser) authentication.getPrincipal();
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
             Set<String> roles = new HashSet<>();
@@ -32,8 +34,8 @@ public class SessionUtils {
                 String authority = iterator.next().getAuthority();
                 roles.add(authority);
             }
-            sessionUser.setUsername(authentication.getPrincipal()+"");
-            sessionUser.setRoles(roles);
+//            sessionUser.setUsername(authentication.getPrincipal()+"");
+//            sessionUser.setRoles(roles);
            /*
             if (authentication instanceof UsernamePasswordAuthenticationToken) {
                 Object principal = authentication.getPrincipal();
@@ -41,7 +43,8 @@ public class SessionUtils {
             }*/
         }
 
-       return sessionUser;
+
+        return sessionUser;
     }
 
 }

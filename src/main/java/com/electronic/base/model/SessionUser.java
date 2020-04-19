@@ -1,76 +1,52 @@
 package com.electronic.base.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
-public class SessionUser {
+public class SessionUser extends User {
 
-    private Integer userid;
+    private final Integer userId;
 
-    private String username;
+    private final String userPhone;
 
-    private String password;
+    private final String userEmail;
 
-    private String userPhone;
+    private final String userSex;
 
-    private String userEmail;
 
-    private Integer userSex;
 
-    private Set<String> roles;
+
+    public SessionUser(Integer userId,String userPhone,String userEmail,String userSex,String username, String password, Collection<? extends GrantedAuthority> authorities) {
+        super(username, password, authorities);
+        this.userId = userId;
+        this.userPhone = userPhone;
+        this.userEmail = userEmail;
+        this.userSex = userSex;
+
+    }
 
     public Integer getUserid() {
-        return userid;
+        return userId;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getUserPhone() {
         return userPhone;
     }
 
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
-    }
 
     public String getUserEmail() {
         return userEmail;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
 
-    public Integer getUserSex() {
+    public String getUserSex() {
         return userSex;
     }
 
-    public void setUserSex(Integer userSex) {
-        this.userSex = userSex;
-    }
-
-    public Set<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<String> roles) {
-        this.roles = roles;
-    }
 }
