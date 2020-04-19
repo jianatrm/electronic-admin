@@ -3,7 +3,7 @@ package com.electronic.dao.mapper.bo;
 import java.util.Date;
 
 public class SysRole {
-    private Integer roleid;
+    private Integer roleId;
 
     private String roleName;
 
@@ -19,12 +19,12 @@ public class SysRole {
 
     private String operateIp;
 
-    public Integer getRoleid() {
-        return roleid;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setRoleid(Integer roleid) {
-        this.roleid = roleid;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public String getRoleName() {

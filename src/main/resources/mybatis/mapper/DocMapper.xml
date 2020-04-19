@@ -102,19 +102,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.electronic.dao.mapper.bo.Doc" >
-    insert into doc (doc_id, doc_name, doc_url, 
-      status, remark, operate_id, 
-      operate_time)
-    values (#{docId,jdbcType=INTEGER}, #{docName,jdbcType=VARCHAR}, #{docUrl,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{operateId,jdbcType=INTEGER}, 
-      #{operateTime,jdbcType=TIMESTAMP})
+    <selectKey resultType="java.lang.Integer" keyProperty="docId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into doc (doc_name, doc_url, status, 
+      remark, operate_id, operate_time
+      )
+    values (#{docName,jdbcType=VARCHAR}, #{docUrl,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{operateId,jdbcType=INTEGER}, #{operateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.Doc" >
+    <selectKey resultType="java.lang.Integer" keyProperty="docId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into doc
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="docId != null" >
-        doc_id,
-      </if>
       <if test="docName != null" >
         doc_name,
       </if>
@@ -135,9 +138,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="docId != null" >
-        #{docId,jdbcType=INTEGER},
-      </if>
       <if test="docName != null" >
         #{docName,jdbcType=VARCHAR},
       </if>

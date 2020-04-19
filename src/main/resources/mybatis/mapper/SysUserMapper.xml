@@ -109,23 +109,26 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.electronic.dao.mapper.bo.SysUser" >
-    insert into sys_user (user_id, user_name, user_phone, 
-      user_email, password, sex, 
-      dept_id, level, status, 
-      remark, operator, operate_time, 
-      operate_ip)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
-      #{userEmail,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
-      #{deptId,jdbcType=INTEGER}, #{level,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, 
-      #{operateIp,jdbcType=VARCHAR})
+    <selectKey resultType="java.lang.Integer" keyProperty="userId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_user (user_name, user_phone, user_email, 
+      password, sex, dept_id, 
+      level, status, remark, 
+      operator, operate_time, operate_ip
+      )
+    values (#{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{deptId,jdbcType=INTEGER}, 
+      #{level,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.SysUser" >
+    <selectKey resultType="java.lang.Integer" keyProperty="userId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        user_id,
-      </if>
       <if test="userName != null" >
         user_name,
       </if>
@@ -164,9 +167,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
-      </if>
       <if test="userName != null" >
         #{userName,jdbcType=VARCHAR},
       </if>

@@ -100,17 +100,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.electronic.dao.mapper.bo.Node" >
-    insert into node (node_id, work_order_id, user_id, 
-      node_order, node_status)
-    values (#{nodeId,jdbcType=INTEGER}, #{workOrderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{nodeOrder,jdbcType=INTEGER}, #{nodeStatus,jdbcType=INTEGER})
+    <selectKey resultType="java.lang.Integer" keyProperty="nodeId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into node (work_order_id, user_id, node_order, 
+      node_status)
+    values (#{workOrderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{nodeOrder,jdbcType=INTEGER}, 
+      #{nodeStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.Node" >
+    <selectKey resultType="java.lang.Integer" keyProperty="nodeId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into node
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="nodeId != null" >
-        node_id,
-      </if>
       <if test="workOrderId != null" >
         work_order_id,
       </if>
@@ -125,9 +128,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="nodeId != null" >
-        #{nodeId,jdbcType=INTEGER},
-      </if>
       <if test="workOrderId != null" >
         #{workOrderId,jdbcType=INTEGER},
       </if>

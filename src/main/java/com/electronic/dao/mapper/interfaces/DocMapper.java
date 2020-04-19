@@ -1,7 +1,5 @@
 package com.electronic.dao.mapper.interfaces;
 
-import com.electronic.dao.mapper.bo.Doc;
-import com.electronic.dao.mapper.bo.DocExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -4,18 +4,12 @@ import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.PageResult;
 import com.electronic.base.model.request.DocRequest;
 import com.electronic.contants.BusinessConstants;
-import com.electronic.contants.UserConstants;
-import com.electronic.dao.mapper.bo.Doc;
-import com.electronic.dao.mapper.bo.DocExample;
-import com.electronic.dao.mapper.interfaces.DocMapper;
 import com.electronic.dao.smapper.bo.SUserDoc;
 import com.electronic.dao.smapper.interfaces.SUserDocMapper;
-import com.electronic.service.DocService;
 import com.electronic.service.DocService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -3,9 +3,6 @@ package com.electronic.service;
 import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.PageResult;
 import com.electronic.base.model.request.UserRequest;
-import com.electronic.dao.mapper.bo.SysUser;
-
-import java.util.List;
 
 public interface SysUserService {
 

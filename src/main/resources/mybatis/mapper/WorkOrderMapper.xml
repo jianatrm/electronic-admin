@@ -130,21 +130,24 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.electronic.dao.mapper.bo.WorkOrder" >
-    insert into work_order (work_order_id, work_order_code, work_order_name, 
-      work_type, organizer, current_node, 
-      node_count, create_time, operate_time, 
-      work_order_status, work_info)
-    values (#{workOrderId,jdbcType=INTEGER}, #{workOrderCode,jdbcType=VARCHAR}, #{workOrderName,jdbcType=VARCHAR}, 
-      #{workType,jdbcType=VARCHAR}, #{organizer,jdbcType=VARCHAR}, #{currentNode,jdbcType=VARCHAR}, 
-      #{nodeCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{operateTime,jdbcType=TIMESTAMP}, 
-      #{workOrderStatus,jdbcType=INTEGER}, #{workInfo,jdbcType=LONGVARCHAR})
+    <selectKey resultType="java.lang.Integer" keyProperty="workOrderId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into work_order (work_order_code, work_order_name, work_type, 
+      organizer, current_node, node_count, 
+      create_time, operate_time, work_order_status, 
+      work_info)
+    values (#{workOrderCode,jdbcType=VARCHAR}, #{workOrderName,jdbcType=VARCHAR}, #{workType,jdbcType=VARCHAR}, 
+      #{organizer,jdbcType=VARCHAR}, #{currentNode,jdbcType=VARCHAR}, #{nodeCount,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{operateTime,jdbcType=TIMESTAMP}, #{workOrderStatus,jdbcType=INTEGER}, 
+      #{workInfo,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.WorkOrder" >
+    <selectKey resultType="java.lang.Integer" keyProperty="workOrderId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into work_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="workOrderId != null" >
-        work_order_id,
-      </if>
       <if test="workOrderCode != null" >
         work_order_code,
       </if>
@@ -177,9 +180,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="workOrderId != null" >
-        #{workOrderId,jdbcType=INTEGER},
-      </if>
       <if test="workOrderCode != null" >
         #{workOrderCode,jdbcType=VARCHAR},
       </if>

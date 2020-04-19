@@ -11,7 +11,7 @@ public interface SysRoleMapper {
 
     int deleteByExample(SysRoleExample example);
 
-    int deleteByPrimaryKey(Integer roleid);
+    int deleteByPrimaryKey(Integer roleId);
 
     int insert(SysRole record);
 
@@ -19,7 +19,7 @@ public interface SysRoleMapper {
 
     List<SysRole> selectByExample(SysRoleExample example);
 
-    SysRole selectByPrimaryKey(Integer roleid);
+    SysRole selectByPrimaryKey(Integer roleId);
 
     int updateByExampleSelective(@Param("record") SysRole record, @Param("example") SysRoleExample example);
 

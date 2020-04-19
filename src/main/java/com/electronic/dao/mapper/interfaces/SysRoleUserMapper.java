@@ -1,7 +1,5 @@
 package com.electronic.dao.mapper.interfaces;
 
-import com.electronic.dao.mapper.bo.SysRoleUser;
-import com.electronic.dao.mapper.bo.SysRoleUserExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

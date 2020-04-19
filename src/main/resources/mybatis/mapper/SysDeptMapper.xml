@@ -107,21 +107,24 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.electronic.dao.mapper.bo.SysDept" >
-    insert into sys_dept (dept_id, dept_name, dept_code, 
-      parent_id, level, seq, 
-      remark, status, operator, 
-      operate_time, operate_ip)
-    values (#{deptId,jdbcType=INTEGER}, #{deptName,jdbcType=VARCHAR}, #{deptCode,jdbcType=VARCHAR}, 
-      #{parentId,jdbcType=INTEGER}, #{level,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
-      #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR})
+    <selectKey resultType="java.lang.Integer" keyProperty="deptId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_dept (dept_name, dept_code, parent_id, 
+      level, seq, remark, 
+      status, operator, operate_time, 
+      operate_ip)
+    values (#{deptName,jdbcType=VARCHAR}, #{deptCode,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
+      #{level,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, 
+      #{operateIp,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.SysDept" >
+    <selectKey resultType="java.lang.Integer" keyProperty="deptId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into sys_dept
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="deptId != null" >
-        dept_id,
-      </if>
       <if test="deptName != null" >
         dept_name,
       </if>
@@ -154,9 +157,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="deptId != null" >
-        #{deptId,jdbcType=INTEGER},
-      </if>
       <if test="deptName != null" >
         #{deptName,jdbcType=VARCHAR},
       </if>

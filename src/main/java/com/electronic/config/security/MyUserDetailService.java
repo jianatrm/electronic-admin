@@ -1,17 +1,12 @@
 package com.electronic.config.security;
 
 import com.electronic.base.model.SessionUser;
-import com.electronic.dao.mapper.bo.SysRole;
-import com.electronic.dao.mapper.bo.SysUser;
 import com.electronic.service.SysUserService;
 import com.electronic.service.UserAndRoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,7 +25,7 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Autowired
     private UserAndRoleService userAndRoleService;
-    
+
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -67,5 +62,5 @@ public class MyUserDetailService implements UserDetailsService {
 
         return list;
     }
-    
+
 }

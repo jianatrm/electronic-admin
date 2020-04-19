@@ -101,19 +101,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.electronic.dao.mapper.bo.UserDoc" >
-    insert into user_doc (id, user_id, doc_id, 
-      operate_id, operate_time, operate_ip
-      )
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{docId,jdbcType=INTEGER}, 
-      #{operateId,jdbcType=INTEGER}, #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR}
-      )
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_doc (user_id, doc_id, operate_id, 
+      operate_time, operate_ip)
+    values (#{userId,jdbcType=INTEGER}, #{docId,jdbcType=INTEGER}, #{operateId,jdbcType=INTEGER}, 
+      #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.UserDoc" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into user_doc
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="userId != null" >
         user_id,
       </if>
@@ -131,9 +132,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
