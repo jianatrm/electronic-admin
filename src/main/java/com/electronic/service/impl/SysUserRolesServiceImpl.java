@@ -1,5 +1,9 @@
 package com.electronic.service.impl;
 
+import com.electronic.dao.mapper.bo.SysRoleUser;
+import com.electronic.dao.mapper.bo.SysRoleUserExample;
+import com.electronic.dao.mapper.bo.SysUser;
+import com.electronic.dao.mapper.interfaces.SysRoleUserMapper;
 import com.electronic.service.SysUserRolesService;
 import org.springframework.beans.factory.annotation.Autowired;
 

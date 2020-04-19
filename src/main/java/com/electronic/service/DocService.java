@@ -3,6 +3,7 @@ package com.electronic.service;
 import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.PageResult;
 import com.electronic.base.model.request.DocRequest;
+import com.electronic.dao.mapper.bo.Doc;
 import com.electronic.dao.smapper.bo.SUserDoc;
 
 public interface DocService {

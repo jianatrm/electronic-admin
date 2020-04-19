@@ -2,6 +2,8 @@ package com.electronic.service.impl;
 
 import com.electronic.contants.UserConstants;
 import com.electronic.dao.mapper.bo.*;
+import com.electronic.dao.mapper.interfaces.SysRoleMapper;
+import com.electronic.dao.mapper.interfaces.SysRoleUserMapper;
 import com.electronic.service.UserAndRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +31,7 @@ public class UserAndRoleServiceImpl implements UserAndRoleService {
         }
         SysRoleExample sysRolesExample = new SysRoleExample();
         SysRoleExample.Criteria sysRolesExampleCriteria = sysRolesExample.createCriteria();
-        sysRolesExampleCriteria.andRoleidIn(list);
+        sysRolesExampleCriteria.andRoleIdIn(list);
         sysRolesExampleCriteria.andStatusEqualTo(UserConstants.VALID_STATUS);
         return sysRoleMapper.selectByExample(sysRolesExample);
     }

@@ -4,6 +4,7 @@ import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.PageResult;
 import com.electronic.base.model.request.DocRequest;
 import com.electronic.contants.BusinessConstants;
+import com.electronic.dao.mapper.bo.Doc;
 import com.electronic.dao.smapper.bo.SUserDoc;
 import com.electronic.service.DocService;
 import org.slf4j.Logger;

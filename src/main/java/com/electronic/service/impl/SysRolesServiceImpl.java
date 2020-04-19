@@ -7,6 +7,9 @@ import com.electronic.base.model.request.RolesRequest;
 import com.electronic.base.model.response.RolesResponse;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.contants.UserConstants;
+import com.electronic.dao.mapper.bo.SysRole;
+import com.electronic.dao.mapper.bo.SysRoleExample;
+import com.electronic.dao.mapper.interfaces.SysRoleMapper;
 import com.electronic.service.SysRolesService;
 import com.github.pagehelper.PageHelper;
 import org.apache.commons.lang3.StringUtils;
@@ -62,7 +65,7 @@ public class SysRolesServiceImpl implements SysRolesService {
         SysRoleExample SysRoleExample = new SysRoleExample();
         SysRoleExample.Criteria criteria = SysRoleExample.createCriteria();
         if (rolesRequest.getRoleId()!=0&&rolesRequest.getRoleId()!=null){
-            criteria.andRoleidEqualTo(rolesRequest.getRoleId());
+            criteria.andRoleIdEqualTo(rolesRequest.getRoleId());
         }
         if (!StringUtils.isBlank(rolesRequest.getRoleName())){
             criteria.andRoleNameEqualTo(rolesRequest.getRoleName());

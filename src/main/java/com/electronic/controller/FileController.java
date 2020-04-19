@@ -1,6 +1,8 @@
 package com.electronic.controller;
 
 import com.electronic.base.model.BaseResponse;
+import com.electronic.base.model.UploadFileResponse;
+import com.electronic.contants.BusinessConstants;
 import com.electronic.service.FileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +32,7 @@ public class FileController {
 
     @RequestMapping("/uploadFile")
     public BaseResponse uploadFile(@RequestParam("file") MultipartFile file){
+        BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
         String fileName = fileService.storeFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -37,8 +40,8 @@ public class FileController {
                 .path(fileName)
                 .toUriString();
 
-        return new BaseResponse(fileName, fileDownloadUri,
-                file.getContentType(), file.getSize());
+        baseResponse.setResult(new UploadFileResponse(fileName,fileDownloadUri,"",0));
+        return baseResponse;
     }
 
 

@@ -24,6 +24,11 @@ spring:
     # useGlobalDataSourceStat: true
     # connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
+#  activiti:
+#    history-level: full
+#    db-history-used: true
+#    database-schema-update: true
+    #database-schema: activiti
 server:
   port: 8088
   servlet:

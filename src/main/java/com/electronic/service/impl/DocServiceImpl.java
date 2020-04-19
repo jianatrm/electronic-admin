@@ -4,6 +4,9 @@ import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.PageResult;
 import com.electronic.base.model.request.DocRequest;
 import com.electronic.contants.BusinessConstants;
+import com.electronic.dao.mapper.bo.Doc;
+import com.electronic.dao.mapper.bo.DocExample;
+import com.electronic.dao.mapper.interfaces.DocMapper;
 import com.electronic.dao.smapper.bo.SUserDoc;
 import com.electronic.dao.smapper.interfaces.SUserDocMapper;
 import com.electronic.service.DocService;
@@ -20,7 +23,7 @@ import java.util.List;
 public class DocServiceImpl implements DocService {
 
     @Autowired
-    DocMapper DocMapper;
+    DocMapper docMapper;
 
     @Autowired
     SUserDocMapper sUserDocMapper;
@@ -32,21 +35,21 @@ public class DocServiceImpl implements DocService {
 //        if (!StringUtils.isBlank(Dept.getDeptName())){
 //            criteria.andDeptNameEqualTo(Dept.getDeptName());
 //        }
-        List<Doc> Docs = DocMapper.selectByExample(DocExample);
+        List<Doc> Docs = docMapper.selectByExample(DocExample);
         return CollectionUtils.isEmpty(Docs)? null:Docs.get(0);
     }
 
     @Override
     public Integer addDoc(Doc doc) throws Exception {
         doc.setOperateTime(new Date());
-        int insertSelective = DocMapper.insertSelective(doc);
+        int insertSelective = docMapper.insertSelective(doc);
         return insertSelective;
     }
 
     @Override
     public Integer updateDoc(Doc doc) throws Exception {
         doc.setOperateTime(new Date());
-        int updateByPrimaryKeySelective = DocMapper.updateByPrimaryKeySelective(doc);
+        int updateByPrimaryKeySelective = docMapper.updateByPrimaryKeySelective(doc);
         return updateByPrimaryKeySelective;
     }
 
