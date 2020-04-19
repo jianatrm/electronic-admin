@@ -23,6 +23,8 @@ public class WorkOrder {
 
     private Integer workOrderStatus;
 
+    private String workOrderDesc;
+
     private String workInfo;
 
     public Integer getWorkOrderId() {
@@ -103,6 +105,14 @@ public class WorkOrder {
 
     public void setWorkOrderStatus(Integer workOrderStatus) {
         this.workOrderStatus = workOrderStatus;
+    }
+
+    public String getWorkOrderDesc() {
+        return workOrderDesc;
+    }
+
+    public void setWorkOrderDesc(String workOrderDesc) {
+        this.workOrderDesc = workOrderDesc == null ? null : workOrderDesc.trim();
     }
 
     public String getWorkInfo() {

@@ -754,6 +754,76 @@ public class WorkOrderExample {
             addCriterion("work_order_status not between", value1, value2, "workOrderStatus");
             return (Criteria) this;
         }
+
+        public Criteria andWorkOrderDescIsNull() {
+            addCriterion("work_order_desc is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderDescIsNotNull() {
+            addCriterion("work_order_desc is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderDescEqualTo(String value) {
+            addCriterion("work_order_desc =", value, "workOrderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderDescNotEqualTo(String value) {
+            addCriterion("work_order_desc <>", value, "workOrderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderDescGreaterThan(String value) {
+            addCriterion("work_order_desc >", value, "workOrderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderDescGreaterThanOrEqualTo(String value) {
+            addCriterion("work_order_desc >=", value, "workOrderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderDescLessThan(String value) {
+            addCriterion("work_order_desc <", value, "workOrderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderDescLessThanOrEqualTo(String value) {
+            addCriterion("work_order_desc <=", value, "workOrderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderDescLike(String value) {
+            addCriterion("work_order_desc like", value, "workOrderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderDescNotLike(String value) {
+            addCriterion("work_order_desc not like", value, "workOrderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderDescIn(List<String> values) {
+            addCriterion("work_order_desc in", values, "workOrderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderDescNotIn(List<String> values) {
+            addCriterion("work_order_desc not in", values, "workOrderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderDescBetween(String value1, String value2) {
+            addCriterion("work_order_desc between", value1, value2, "workOrderDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderDescNotBetween(String value1, String value2) {
+            addCriterion("work_order_desc not between", value1, value2, "workOrderDesc");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

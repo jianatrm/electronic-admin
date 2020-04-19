@@ -12,6 +12,7 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
     <result column="work_order_status" property="workOrderStatus" jdbcType="INTEGER" />
+    <result column="work_order_desc" property="workOrderDesc" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.electronic.dao.mapper.bo.WorkOrder" extends="BaseResultMap" >
     <result column="work_info" property="workInfo" jdbcType="LONGVARCHAR" />
@@ -76,7 +77,7 @@
   </sql>
   <sql id="Base_Column_List" >
     work_order_id, work_order_code, work_order_name, work_type, organizer, current_node, 
-    node_count, create_time, operate_time, work_order_status
+    node_count, create_time, operate_time, work_order_status, work_order_desc
   </sql>
   <sql id="Blob_Column_List" >
     work_info
@@ -136,11 +137,11 @@
     insert into work_order (work_order_code, work_order_name, work_type, 
       organizer, current_node, node_count, 
       create_time, operate_time, work_order_status, 
-      work_info)
+      work_order_desc, work_info)
     values (#{workOrderCode,jdbcType=VARCHAR}, #{workOrderName,jdbcType=VARCHAR}, #{workType,jdbcType=VARCHAR}, 
       #{organizer,jdbcType=VARCHAR}, #{currentNode,jdbcType=VARCHAR}, #{nodeCount,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{operateTime,jdbcType=TIMESTAMP}, #{workOrderStatus,jdbcType=INTEGER}, 
-      #{workInfo,jdbcType=LONGVARCHAR})
+      #{workOrderDesc,jdbcType=VARCHAR}, #{workInfo,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.WorkOrder" >
     <selectKey resultType="java.lang.Integer" keyProperty="workOrderId" order="AFTER" >
@@ -175,6 +176,9 @@
       <if test="workOrderStatus != null" >
         work_order_status,
       </if>
+      <if test="workOrderDesc != null" >
+        work_order_desc,
+      </if>
       <if test="workInfo != null" >
         work_info,
       </if>
@@ -206,6 +210,9 @@
       </if>
       <if test="workOrderStatus != null" >
         #{workOrderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="workOrderDesc != null" >
+        #{workOrderDesc,jdbcType=VARCHAR},
       </if>
       <if test="workInfo != null" >
         #{workInfo,jdbcType=LONGVARCHAR},
@@ -251,6 +258,9 @@
       <if test="record.workOrderStatus != null" >
         work_order_status = #{record.workOrderStatus,jdbcType=INTEGER},
       </if>
+      <if test="record.workOrderDesc != null" >
+        work_order_desc = #{record.workOrderDesc,jdbcType=VARCHAR},
+      </if>
       <if test="record.workInfo != null" >
         work_info = #{record.workInfo,jdbcType=LONGVARCHAR},
       </if>
@@ -271,6 +281,7 @@
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
       work_order_status = #{record.workOrderStatus,jdbcType=INTEGER},
+      work_order_desc = #{record.workOrderDesc,jdbcType=VARCHAR},
       work_info = #{record.workInfo,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -287,7 +298,8 @@
       node_count = #{record.nodeCount,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
-      work_order_status = #{record.workOrderStatus,jdbcType=INTEGER}
+      work_order_status = #{record.workOrderStatus,jdbcType=INTEGER},
+      work_order_desc = #{record.workOrderDesc,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -322,6 +334,9 @@
       <if test="workOrderStatus != null" >
         work_order_status = #{workOrderStatus,jdbcType=INTEGER},
       </if>
+      <if test="workOrderDesc != null" >
+        work_order_desc = #{workOrderDesc,jdbcType=VARCHAR},
+      </if>
       <if test="workInfo != null" >
         work_info = #{workInfo,jdbcType=LONGVARCHAR},
       </if>
@@ -339,6 +354,7 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       operate_time = #{operateTime,jdbcType=TIMESTAMP},
       work_order_status = #{workOrderStatus,jdbcType=INTEGER},
+      work_order_desc = #{workOrderDesc,jdbcType=VARCHAR},
       work_info = #{workInfo,jdbcType=LONGVARCHAR}
     where work_order_id = #{workOrderId,jdbcType=INTEGER}
   </update>
@@ -352,7 +368,8 @@
       node_count = #{nodeCount,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       operate_time = #{operateTime,jdbcType=TIMESTAMP},
-      work_order_status = #{workOrderStatus,jdbcType=INTEGER}
+      work_order_status = #{workOrderStatus,jdbcType=INTEGER},
+      work_order_desc = #{workOrderDesc,jdbcType=VARCHAR}
     where work_order_id = #{workOrderId,jdbcType=INTEGER}
   </update>
 </mapper>
