@@ -1,46 +1,32 @@
 package com.electronic.utils;
 
 import com.electronic.base.model.SessionUser;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.io.UnsupportedEncodingException;
+
 
 public class SessionUtils {
     public static final Logger LOGGER = LoggerFactory.getLogger(SessionUtils.class);
 
-    public static SessionUser getSessionUser(){
-
+    public static SessionUser getSessionUser() throws UnsupportedEncodingException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         SessionUser sessionUser = null;
         if (authentication != null) {
             if (authentication instanceof AnonymousAuthenticationToken) {
                 return null;
             }
-            Object details = authentication.getDetails();
-            Object principal = authentication.getPrincipal();
-            sessionUser = (SessionUser) authentication.getPrincipal();
-            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-            Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
-            Set<String> roles = new HashSet<>();
-            while (iterator.hasNext()){
-                String authority = iterator.next().getAuthority();
-                roles.add(authority);
-            }
-//            sessionUser.setUsername(authentication.getPrincipal()+"");
-//            sessionUser.setRoles(roles);
-           /*
-            if (authentication instanceof UsernamePasswordAuthenticationToken) {
-                Object principal = authentication.getPrincipal();
-                return (SessionUser) authentication.getPrincipal();
-            }*/
+            OAuth2AuthenticationDetails oAuth2AuthenticationDetails = (OAuth2AuthenticationDetails) authentication.getDetails();
+            String tokenValue = oAuth2AuthenticationDetails.getTokenValue().replace("[", "");
+              Claims claims = Jwts.parser().setSigningKey("jiana".getBytes("utf-8")).parseClaimsJws(tokenValue).getBody();
+            System.out.println();
         }
 
 
