@@ -6,10 +6,10 @@ import com.electronic.base.model.PageResult;
 import com.electronic.base.model.VO.WorkOrderVO;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.contants.WorkOrderConstants;
-import com.electronic.dao.mapper.bo.Node;
+import com.electronic.dao.mapper.bo.WorkNode;
 import com.electronic.dao.mapper.bo.WorkOrder;
 import com.electronic.dao.mapper.bo.WorkOrderExample;
-import com.electronic.dao.mapper.interfaces.NodeMapper;
+import com.electronic.dao.mapper.interfaces.WorkNodeMapper;
 import com.electronic.dao.mapper.interfaces.WorkOrderMapper;
 import com.electronic.service.WorkOrderService;
 import com.github.pagehelper.PageHelper;
@@ -33,7 +33,7 @@ public class WorkOrderServiceImpl implements WorkOrderService {
     private WorkOrderMapper workOrderMapper;
 
     @Autowired
-    private NodeMapper nodeMapper;
+    private WorkNodeMapper nodeMapper;
 
     @Override
     public WorkOrder selectWorkOrder(WorkOrderVO workOrderVO) throws Exception {
@@ -48,7 +48,7 @@ public class WorkOrderServiceImpl implements WorkOrderService {
 
     @Override
     public Integer addWorkOrder(WorkOrderVO workOrderVO) throws Exception {
-        List<Node> nodeList = JSONObject.parseArray(workOrderVO.getNodeList(),Node.class);
+        List<WorkNode> nodeList = JSONObject.parseArray(workOrderVO.getNodeList(),WorkNode.class);
         WorkOrder workOrder = new WorkOrder();
         BeanUtils.copyProperties(workOrderVO,workOrder);
         workOrder.setWorkOrderStatus(WorkOrderConstants.APPROVAL);
@@ -63,7 +63,7 @@ public class WorkOrderServiceImpl implements WorkOrderService {
 
 
         for (int i = 0; i <nodeList.size() ; i++) {
-            Node node = new Node();
+            WorkNode node = new WorkNode();
             BeanUtils.copyProperties(nodeList.get(i),node);
             node.setNodeStatus(WorkOrderConstants.APPROVAL);
             node.setWorkOrderId(workOrder.getWorkOrderId());
@@ -76,7 +76,7 @@ public class WorkOrderServiceImpl implements WorkOrderService {
     @Override
     public Integer updateWorkOrder(WorkOrderVO workOrderVO) throws Exception {
         WorkOrder workOrder = workOrderMapper.selectByPrimaryKey(workOrderVO.getWorkOrderId());
-//        workOrder.setCurrentNode();
+//        workOrder.setCurrentWorkNode();
 //        user.setOperateTime(new Date());
         int updateByPrimaryKeySelective = workOrderMapper.updateByPrimaryKeySelective(workOrder);
         return updateByPrimaryKeySelective;

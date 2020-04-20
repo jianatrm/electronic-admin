@@ -2,7 +2,7 @@ package com.electronic.base.model.VO;
 
 import com.electronic.dao.mapper.bo.WorkOrder;
 
-public class NodeVO {
+public class WorkNodeVO {
 
     private Integer nodeId;
 

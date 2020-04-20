@@ -3,7 +3,7 @@ package com.electronic.dao.smapper.bo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class SUserDoc  {
+public class SUserElectronicDoc  {
     private Integer userId;
 
     private Integer docId;

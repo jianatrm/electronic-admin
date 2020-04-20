@@ -1,27 +1,22 @@
 package com.electronic.base.model.VO;
 
-import com.electronic.dao.mapper.bo.Doc;
-
-import java.util.Date;
-import java.util.List;
-
-public class DocRequest {
+public class ElectronicDocRequest {
     private Integer userId;
 
     private Integer docId;
 
     private String docName;
 
-    private String docList;
+    private String electronicDocList;
 
     private Integer pageNum = 1;
     private Integer pageSize =10;
-    public String getDocList() {
-        return docList;
+    public String getElectronicDocList() {
+        return electronicDocList;
     }
 
-    public void setDocList(String docList) {
-        this.docList = docList;
+    public void setElectronicDocList(String electronicDocList) {
+        this.electronicDocList = electronicDocList;
     }
 
     public Integer getUserId() {

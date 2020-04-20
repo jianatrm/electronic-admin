@@ -2,7 +2,7 @@ package com.electronic.dao.mapper.bo;
 
 import java.util.Date;
 
-public class UserDoc {
+public class UserElectronicDoc {
     private Integer id;
 
     private Integer userId;
@@ -13,7 +13,7 @@ public class UserDoc {
 
     private Date operateTime;
 
-    private String operateIp;
+    private Integer status;
 
     public Integer getId() {
         return id;
@@ -55,11 +55,11 @@ public class UserDoc {
         this.operateTime = operateTime;
     }
 
-    public String getOperateIp() {
-        return operateIp;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setOperateIp(String operateIp) {
-        this.operateIp = operateIp == null ? null : operateIp.trim();
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

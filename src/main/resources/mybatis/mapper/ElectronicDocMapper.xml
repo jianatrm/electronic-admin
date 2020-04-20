@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.electronic.dao.mapper.interfaces.UserDocMapper" >
-  <resultMap id="BaseResultMap" type="com.electronic.dao.mapper.bo.UserDoc" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="doc_id" property="docId" jdbcType="INTEGER" />
+<mapper namespace="com.electronic.dao.mapper.interfaces.ElectronicDocMapper" >
+  <resultMap id="BaseResultMap" type="com.electronic.dao.mapper.bo.ElectronicDoc" >
+    <id column="doc_id" property="docId" jdbcType="INTEGER" />
+    <result column="doc_name" property="docName" jdbcType="VARCHAR" />
+    <result column="doc_url" property="docUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="operate_id" property="operateId" jdbcType="INTEGER" />
     <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
-    <result column="operate_ip" property="operateIp" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,15 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_id, doc_id, operate_id, operate_time, operate_ip
+    doc_id, doc_name, doc_url, status, remark, operate_id, operate_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.electronic.dao.mapper.bo.UserDocExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.electronic.dao.mapper.bo.ElectronicDocExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user_doc
+    from electronic_doc
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,39 +88,47 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from user_doc
-    where id = #{id,jdbcType=INTEGER}
+    from electronic_doc
+    where doc_id = #{docId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from user_doc
-    where id = #{id,jdbcType=INTEGER}
+    delete from electronic_doc
+    where doc_id = #{docId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.electronic.dao.mapper.bo.UserDocExample" >
-    delete from user_doc
+  <delete id="deleteByExample" parameterType="com.electronic.dao.mapper.bo.ElectronicDocExample" >
+    delete from electronic_doc
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.electronic.dao.mapper.bo.UserDoc" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+  <insert id="insert" parameterType="com.electronic.dao.mapper.bo.ElectronicDoc" >
+    <selectKey resultType="java.lang.Integer" keyProperty="docId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user_doc (user_id, doc_id, operate_id, 
-      operate_time, operate_ip)
-    values (#{userId,jdbcType=INTEGER}, #{docId,jdbcType=INTEGER}, #{operateId,jdbcType=INTEGER}, 
-      #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR})
+    insert into electronic_doc (doc_name, doc_url, status, 
+      remark, operate_id, operate_time
+      )
+    values (#{docName,jdbcType=VARCHAR}, #{docUrl,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{operateId,jdbcType=INTEGER}, #{operateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.UserDoc" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+  <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.ElectronicDoc" >
+    <selectKey resultType="java.lang.Integer" keyProperty="docId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into user_doc
+    insert into electronic_doc
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        user_id,
+      <if test="docName != null" >
+        doc_name,
       </if>
-      <if test="docId != null" >
-        doc_id,
+      <if test="docUrl != null" >
+        doc_url,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="remark != null" >
+        remark,
       </if>
       <if test="operateId != null" >
         operate_id,
@@ -127,16 +136,19 @@
       <if test="operateTime != null" >
         operate_time,
       </if>
-      <if test="operateIp != null" >
-        operate_ip,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+      <if test="docName != null" >
+        #{docName,jdbcType=VARCHAR},
       </if>
-      <if test="docId != null" >
-        #{docId,jdbcType=INTEGER},
+      <if test="docUrl != null" >
+        #{docUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
       </if>
       <if test="operateId != null" >
         #{operateId,jdbcType=INTEGER},
@@ -144,28 +156,31 @@
       <if test="operateTime != null" >
         #{operateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="operateIp != null" >
-        #{operateIp,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.electronic.dao.mapper.bo.UserDocExample" resultType="java.lang.Integer" >
-    select count(*) from user_doc
+  <select id="countByExample" parameterType="com.electronic.dao.mapper.bo.ElectronicDocExample" resultType="java.lang.Integer" >
+    select count(*) from electronic_doc
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update user_doc
+    update electronic_doc
     <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=INTEGER},
-      </if>
       <if test="record.docId != null" >
         doc_id = #{record.docId,jdbcType=INTEGER},
+      </if>
+      <if test="record.docName != null" >
+        doc_name = #{record.docName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.docUrl != null" >
+        doc_url = #{record.docUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
       </if>
       <if test="record.operateId != null" >
         operate_id = #{record.operateId,jdbcType=INTEGER},
@@ -173,34 +188,38 @@
       <if test="record.operateTime != null" >
         operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.operateIp != null" >
-        operate_ip = #{record.operateIp,jdbcType=VARCHAR},
-      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update user_doc
-    set id = #{record.id,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
-      doc_id = #{record.docId,jdbcType=INTEGER},
+    update electronic_doc
+    set doc_id = #{record.docId,jdbcType=INTEGER},
+      doc_name = #{record.docName,jdbcType=VARCHAR},
+      doc_url = #{record.docUrl,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
       operate_id = #{record.operateId,jdbcType=INTEGER},
-      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
-      operate_ip = #{record.operateIp,jdbcType=VARCHAR}
+      operate_time = #{record.operateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.electronic.dao.mapper.bo.UserDoc" >
-    update user_doc
+  <update id="updateByPrimaryKeySelective" parameterType="com.electronic.dao.mapper.bo.ElectronicDoc" >
+    update electronic_doc
     <set >
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
+      <if test="docName != null" >
+        doc_name = #{docName,jdbcType=VARCHAR},
       </if>
-      <if test="docId != null" >
-        doc_id = #{docId,jdbcType=INTEGER},
+      <if test="docUrl != null" >
+        doc_url = #{docUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="operateId != null" >
         operate_id = #{operateId,jdbcType=INTEGER},
@@ -208,19 +227,17 @@
       <if test="operateTime != null" >
         operate_time = #{operateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="operateIp != null" >
-        operate_ip = #{operateIp,jdbcType=VARCHAR},
-      </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where doc_id = #{docId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.electronic.dao.mapper.bo.UserDoc" >
-    update user_doc
-    set user_id = #{userId,jdbcType=INTEGER},
-      doc_id = #{docId,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.electronic.dao.mapper.bo.ElectronicDoc" >
+    update electronic_doc
+    set doc_name = #{docName,jdbcType=VARCHAR},
+      doc_url = #{docUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
       operate_id = #{operateId,jdbcType=INTEGER},
-      operate_time = #{operateTime,jdbcType=TIMESTAMP},
-      operate_ip = #{operateIp,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+      operate_time = #{operateTime,jdbcType=TIMESTAMP}
+    where doc_id = #{docId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -2,7 +2,7 @@ package com.electronic.dao.mapper.bo;
 
 import java.util.Date;
 
-public class Doc {
+public class ElectronicDoc {
     private Integer docId;
 
     private String docName;

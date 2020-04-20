@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class UserDocExample {
+public class UserElectronicDocExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public UserDocExample() {
+    public UserElectronicDocExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -405,73 +405,63 @@ public class UserDocExample {
             return (Criteria) this;
         }
 
-        public Criteria andOperateIpIsNull() {
-            addCriterion("operate_ip is null");
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
             return (Criteria) this;
         }
 
-        public Criteria andOperateIpIsNotNull() {
-            addCriterion("operate_ip is not null");
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOperateIpEqualTo(String value) {
-            addCriterion("operate_ip =", value, "operateIp");
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("status =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOperateIpNotEqualTo(String value) {
-            addCriterion("operate_ip <>", value, "operateIp");
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("status <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOperateIpGreaterThan(String value) {
-            addCriterion("operate_ip >", value, "operateIp");
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("status >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOperateIpGreaterThanOrEqualTo(String value) {
-            addCriterion("operate_ip >=", value, "operateIp");
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("status >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOperateIpLessThan(String value) {
-            addCriterion("operate_ip <", value, "operateIp");
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("status <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOperateIpLessThanOrEqualTo(String value) {
-            addCriterion("operate_ip <=", value, "operateIp");
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("status <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOperateIpLike(String value) {
-            addCriterion("operate_ip like", value, "operateIp");
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("status in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOperateIpNotLike(String value) {
-            addCriterion("operate_ip not like", value, "operateIp");
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("status not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOperateIpIn(List<String> values) {
-            addCriterion("operate_ip in", values, "operateIp");
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("status between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andOperateIpNotIn(List<String> values) {
-            addCriterion("operate_ip not in", values, "operateIp");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateIpBetween(String value1, String value2) {
-            addCriterion("operate_ip between", value1, value2, "operateIp");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateIpNotBetween(String value1, String value2) {
-            addCriterion("operate_ip not between", value1, value2, "operateIp");
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
     }

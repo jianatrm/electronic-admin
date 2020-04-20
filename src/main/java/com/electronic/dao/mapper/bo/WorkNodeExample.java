@@ -3,14 +3,14 @@ package com.electronic.dao.mapper.bo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NodeExample {
+public class WorkNodeExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public NodeExample() {
+    public WorkNodeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -401,6 +401,136 @@ public class NodeExample {
 
         public Criteria andNodeStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("node_status not between", value1, value2, "nodeStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeResultIsNull() {
+            addCriterion("node_result is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeResultIsNotNull() {
+            addCriterion("node_result is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeResultEqualTo(Integer value) {
+            addCriterion("node_result =", value, "nodeResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeResultNotEqualTo(Integer value) {
+            addCriterion("node_result <>", value, "nodeResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeResultGreaterThan(Integer value) {
+            addCriterion("node_result >", value, "nodeResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeResultGreaterThanOrEqualTo(Integer value) {
+            addCriterion("node_result >=", value, "nodeResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeResultLessThan(Integer value) {
+            addCriterion("node_result <", value, "nodeResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeResultLessThanOrEqualTo(Integer value) {
+            addCriterion("node_result <=", value, "nodeResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeResultIn(List<Integer> values) {
+            addCriterion("node_result in", values, "nodeResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeResultNotIn(List<Integer> values) {
+            addCriterion("node_result not in", values, "nodeResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeResultBetween(Integer value1, Integer value2) {
+            addCriterion("node_result between", value1, value2, "nodeResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeResultNotBetween(Integer value1, Integer value2) {
+            addCriterion("node_result not between", value1, value2, "nodeResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeDescIsNull() {
+            addCriterion("node_desc is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeDescIsNotNull() {
+            addCriterion("node_desc is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeDescEqualTo(String value) {
+            addCriterion("node_desc =", value, "nodeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeDescNotEqualTo(String value) {
+            addCriterion("node_desc <>", value, "nodeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeDescGreaterThan(String value) {
+            addCriterion("node_desc >", value, "nodeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeDescGreaterThanOrEqualTo(String value) {
+            addCriterion("node_desc >=", value, "nodeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeDescLessThan(String value) {
+            addCriterion("node_desc <", value, "nodeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeDescLessThanOrEqualTo(String value) {
+            addCriterion("node_desc <=", value, "nodeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeDescLike(String value) {
+            addCriterion("node_desc like", value, "nodeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeDescNotLike(String value) {
+            addCriterion("node_desc not like", value, "nodeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeDescIn(List<String> values) {
+            addCriterion("node_desc in", values, "nodeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeDescNotIn(List<String> values) {
+            addCriterion("node_desc not in", values, "nodeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeDescBetween(String value1, String value2) {
+            addCriterion("node_desc between", value1, value2, "nodeDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeDescNotBetween(String value1, String value2) {
+            addCriterion("node_desc not between", value1, value2, "nodeDesc");
             return (Criteria) this;
         }
     }

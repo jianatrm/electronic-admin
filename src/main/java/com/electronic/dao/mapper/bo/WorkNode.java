@@ -1,6 +1,6 @@
 package com.electronic.dao.mapper.bo;
 
-public class Node {
+public class WorkNode {
     private Integer nodeId;
 
     private Integer workOrderId;
@@ -10,6 +10,10 @@ public class Node {
     private Integer nodeOrder;
 
     private Integer nodeStatus;
+
+    private Integer nodeResult;
+
+    private String nodeDesc;
 
     public Integer getNodeId() {
         return nodeId;
@@ -49,5 +53,21 @@ public class Node {
 
     public void setNodeStatus(Integer nodeStatus) {
         this.nodeStatus = nodeStatus;
+    }
+
+    public Integer getNodeResult() {
+        return nodeResult;
+    }
+
+    public void setNodeResult(Integer nodeResult) {
+        this.nodeResult = nodeResult;
+    }
+
+    public String getNodeDesc() {
+        return nodeDesc;
+    }
+
+    public void setNodeDesc(String nodeDesc) {
+        this.nodeDesc = nodeDesc == null ? null : nodeDesc.trim();
     }
 }

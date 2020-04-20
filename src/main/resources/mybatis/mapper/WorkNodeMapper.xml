@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.electronic.dao.mapper.interfaces.NodeMapper" >
-  <resultMap id="BaseResultMap" type="com.electronic.dao.mapper.bo.Node" >
+<mapper namespace="com.electronic.dao.mapper.interfaces.WorkNodeMapper" >
+  <resultMap id="BaseResultMap" type="com.electronic.dao.mapper.bo.WorkNode" >
     <id column="node_id" property="nodeId" jdbcType="INTEGER" />
     <result column="work_order_id" property="workOrderId" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="node_order" property="nodeOrder" jdbcType="INTEGER" />
     <result column="node_status" property="nodeStatus" jdbcType="INTEGER" />
+    <result column="node_result" property="nodeResult" jdbcType="INTEGER" />
+    <result column="node_desc" property="nodeDesc" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,15 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    node_id, work_order_id, user_id, node_order, node_status
+    node_id, work_order_id, user_id, node_order, node_status, node_result, node_desc
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.electronic.dao.mapper.bo.NodeExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.electronic.dao.mapper.bo.WorkNodeExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from node
+    from work_node
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,33 +88,35 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from node
+    from work_node
     where node_id = #{nodeId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from node
+    delete from work_node
     where node_id = #{nodeId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.electronic.dao.mapper.bo.NodeExample" >
-    delete from node
+  <delete id="deleteByExample" parameterType="com.electronic.dao.mapper.bo.WorkNodeExample" >
+    delete from work_node
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.electronic.dao.mapper.bo.Node" >
+  <insert id="insert" parameterType="com.electronic.dao.mapper.bo.WorkNode" >
     <selectKey resultType="java.lang.Integer" keyProperty="nodeId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into node (work_order_id, user_id, node_order, 
-      node_status)
+    insert into work_node (work_order_id, user_id, node_order, 
+      node_status, node_result, node_desc
+      )
     values (#{workOrderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{nodeOrder,jdbcType=INTEGER}, 
-      #{nodeStatus,jdbcType=INTEGER})
+      #{nodeStatus,jdbcType=INTEGER}, #{nodeResult,jdbcType=INTEGER}, #{nodeDesc,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.Node" >
+  <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.WorkNode" >
     <selectKey resultType="java.lang.Integer" keyProperty="nodeId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into node
+    insert into work_node
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="workOrderId != null" >
         work_order_id,
@@ -125,6 +129,12 @@
       </if>
       <if test="nodeStatus != null" >
         node_status,
+      </if>
+      <if test="nodeResult != null" >
+        node_result,
+      </if>
+      <if test="nodeDesc != null" >
+        node_desc,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -140,16 +150,22 @@
       <if test="nodeStatus != null" >
         #{nodeStatus,jdbcType=INTEGER},
       </if>
+      <if test="nodeResult != null" >
+        #{nodeResult,jdbcType=INTEGER},
+      </if>
+      <if test="nodeDesc != null" >
+        #{nodeDesc,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.electronic.dao.mapper.bo.NodeExample" resultType="java.lang.Integer" >
-    select count(*) from node
+  <select id="countByExample" parameterType="com.electronic.dao.mapper.bo.WorkNodeExample" resultType="java.lang.Integer" >
+    select count(*) from work_node
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update node
+    update work_node
     <set >
       <if test="record.nodeId != null" >
         node_id = #{record.nodeId,jdbcType=INTEGER},
@@ -166,24 +182,32 @@
       <if test="record.nodeStatus != null" >
         node_status = #{record.nodeStatus,jdbcType=INTEGER},
       </if>
+      <if test="record.nodeResult != null" >
+        node_result = #{record.nodeResult,jdbcType=INTEGER},
+      </if>
+      <if test="record.nodeDesc != null" >
+        node_desc = #{record.nodeDesc,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update node
+    update work_node
     set node_id = #{record.nodeId,jdbcType=INTEGER},
       work_order_id = #{record.workOrderId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       node_order = #{record.nodeOrder,jdbcType=INTEGER},
-      node_status = #{record.nodeStatus,jdbcType=INTEGER}
+      node_status = #{record.nodeStatus,jdbcType=INTEGER},
+      node_result = #{record.nodeResult,jdbcType=INTEGER},
+      node_desc = #{record.nodeDesc,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.electronic.dao.mapper.bo.Node" >
-    update node
+  <update id="updateByPrimaryKeySelective" parameterType="com.electronic.dao.mapper.bo.WorkNode" >
+    update work_node
     <set >
       <if test="workOrderId != null" >
         work_order_id = #{workOrderId,jdbcType=INTEGER},
@@ -197,15 +221,23 @@
       <if test="nodeStatus != null" >
         node_status = #{nodeStatus,jdbcType=INTEGER},
       </if>
+      <if test="nodeResult != null" >
+        node_result = #{nodeResult,jdbcType=INTEGER},
+      </if>
+      <if test="nodeDesc != null" >
+        node_desc = #{nodeDesc,jdbcType=VARCHAR},
+      </if>
     </set>
     where node_id = #{nodeId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.electronic.dao.mapper.bo.Node" >
-    update node
+  <update id="updateByPrimaryKey" parameterType="com.electronic.dao.mapper.bo.WorkNode" >
+    update work_node
     set work_order_id = #{workOrderId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
       node_order = #{nodeOrder,jdbcType=INTEGER},
-      node_status = #{nodeStatus,jdbcType=INTEGER}
+      node_status = #{nodeStatus,jdbcType=INTEGER},
+      node_result = #{nodeResult,jdbcType=INTEGER},
+      node_desc = #{nodeDesc,jdbcType=VARCHAR}
     where node_id = #{nodeId,jdbcType=INTEGER}
   </update>
 </mapper>

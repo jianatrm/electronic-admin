@@ -2,12 +2,10 @@ package com.electronic.controller;
 
 import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.PageResult;
-import com.electronic.base.model.VO.NodeVO;
+import com.electronic.base.model.VO.WorkNodeVO;
 import com.electronic.base.model.VO.WorkOrderVO;
 import com.electronic.contants.BusinessConstants;
-import com.electronic.dao.mapper.bo.WorkOrder;
-import com.electronic.dao.mapper.interfaces.NodeMapper;
-import com.electronic.service.NodeService;
+import com.electronic.service.WorkNodeService;
 import com.electronic.service.WorkOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +21,7 @@ public class WorkOrderController {
     public static  final Logger LOGGER = LoggerFactory.getLogger(WorkOrderController.class);
 
     @Autowired
-    private NodeService nodeService;
+    private WorkNodeService nodeService;
 
     @Autowired
     private WorkOrderService workOrderService;
@@ -49,9 +47,9 @@ public class WorkOrderController {
 
     //    查询待我审批工单
     @RequestMapping("/queryWorkOrderToMe")
-    public BaseResponse queryWorkOrderToMe(@RequestBody NodeVO nodeVO) throws Exception {
+    public BaseResponse queryWorkOrderToMe(@RequestBody WorkNodeVO nodeVO) throws Exception {
         nodeVO.setUserId(1);
-        BaseResponse<PageResult<NodeVO>> pageResultBaseResponse = nodeService.queryNode(nodeVO);
+        BaseResponse<PageResult<WorkNodeVO>> pageResultBaseResponse = nodeService.queryWorkNode(nodeVO);
         return pageResultBaseResponse;
     }
 
