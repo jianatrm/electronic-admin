@@ -1,6 +1,7 @@
 package com.electronic.dao.mapper.bo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class WorkNodeExample {
@@ -344,193 +345,253 @@ public class WorkNodeExample {
             return (Criteria) this;
         }
 
-        public Criteria andNodeStatusIsNull() {
-            addCriterion("node_status is null");
+        public Criteria andNodeOperateStatusIsNull() {
+            addCriterion("node_operate_status is null");
             return (Criteria) this;
         }
 
-        public Criteria andNodeStatusIsNotNull() {
-            addCriterion("node_status is not null");
+        public Criteria andNodeOperateStatusIsNotNull() {
+            addCriterion("node_operate_status is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNodeStatusEqualTo(Integer value) {
-            addCriterion("node_status =", value, "nodeStatus");
+        public Criteria andNodeOperateStatusEqualTo(Integer value) {
+            addCriterion("node_operate_status =", value, "nodeOperateStatus");
             return (Criteria) this;
         }
 
-        public Criteria andNodeStatusNotEqualTo(Integer value) {
-            addCriterion("node_status <>", value, "nodeStatus");
+        public Criteria andNodeOperateStatusNotEqualTo(Integer value) {
+            addCriterion("node_operate_status <>", value, "nodeOperateStatus");
             return (Criteria) this;
         }
 
-        public Criteria andNodeStatusGreaterThan(Integer value) {
-            addCriterion("node_status >", value, "nodeStatus");
+        public Criteria andNodeOperateStatusGreaterThan(Integer value) {
+            addCriterion("node_operate_status >", value, "nodeOperateStatus");
             return (Criteria) this;
         }
 
-        public Criteria andNodeStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("node_status >=", value, "nodeStatus");
+        public Criteria andNodeOperateStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("node_operate_status >=", value, "nodeOperateStatus");
             return (Criteria) this;
         }
 
-        public Criteria andNodeStatusLessThan(Integer value) {
-            addCriterion("node_status <", value, "nodeStatus");
+        public Criteria andNodeOperateStatusLessThan(Integer value) {
+            addCriterion("node_operate_status <", value, "nodeOperateStatus");
             return (Criteria) this;
         }
 
-        public Criteria andNodeStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("node_status <=", value, "nodeStatus");
+        public Criteria andNodeOperateStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("node_operate_status <=", value, "nodeOperateStatus");
             return (Criteria) this;
         }
 
-        public Criteria andNodeStatusIn(List<Integer> values) {
-            addCriterion("node_status in", values, "nodeStatus");
+        public Criteria andNodeOperateStatusIn(List<Integer> values) {
+            addCriterion("node_operate_status in", values, "nodeOperateStatus");
             return (Criteria) this;
         }
 
-        public Criteria andNodeStatusNotIn(List<Integer> values) {
-            addCriterion("node_status not in", values, "nodeStatus");
+        public Criteria andNodeOperateStatusNotIn(List<Integer> values) {
+            addCriterion("node_operate_status not in", values, "nodeOperateStatus");
             return (Criteria) this;
         }
 
-        public Criteria andNodeStatusBetween(Integer value1, Integer value2) {
-            addCriterion("node_status between", value1, value2, "nodeStatus");
+        public Criteria andNodeOperateStatusBetween(Integer value1, Integer value2) {
+            addCriterion("node_operate_status between", value1, value2, "nodeOperateStatus");
             return (Criteria) this;
         }
 
-        public Criteria andNodeStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("node_status not between", value1, value2, "nodeStatus");
+        public Criteria andNodeOperateStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("node_operate_status not between", value1, value2, "nodeOperateStatus");
             return (Criteria) this;
         }
 
-        public Criteria andNodeResultIsNull() {
-            addCriterion("node_result is null");
+        public Criteria andNodeOperateTimeIsNull() {
+            addCriterion("node_operate_time is null");
             return (Criteria) this;
         }
 
-        public Criteria andNodeResultIsNotNull() {
-            addCriterion("node_result is not null");
+        public Criteria andNodeOperateTimeIsNotNull() {
+            addCriterion("node_operate_time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNodeResultEqualTo(Integer value) {
-            addCriterion("node_result =", value, "nodeResult");
+        public Criteria andNodeOperateTimeEqualTo(Date value) {
+            addCriterion("node_operate_time =", value, "nodeOperateTime");
             return (Criteria) this;
         }
 
-        public Criteria andNodeResultNotEqualTo(Integer value) {
-            addCriterion("node_result <>", value, "nodeResult");
+        public Criteria andNodeOperateTimeNotEqualTo(Date value) {
+            addCriterion("node_operate_time <>", value, "nodeOperateTime");
             return (Criteria) this;
         }
 
-        public Criteria andNodeResultGreaterThan(Integer value) {
-            addCriterion("node_result >", value, "nodeResult");
+        public Criteria andNodeOperateTimeGreaterThan(Date value) {
+            addCriterion("node_operate_time >", value, "nodeOperateTime");
             return (Criteria) this;
         }
 
-        public Criteria andNodeResultGreaterThanOrEqualTo(Integer value) {
-            addCriterion("node_result >=", value, "nodeResult");
+        public Criteria andNodeOperateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("node_operate_time >=", value, "nodeOperateTime");
             return (Criteria) this;
         }
 
-        public Criteria andNodeResultLessThan(Integer value) {
-            addCriterion("node_result <", value, "nodeResult");
+        public Criteria andNodeOperateTimeLessThan(Date value) {
+            addCriterion("node_operate_time <", value, "nodeOperateTime");
             return (Criteria) this;
         }
 
-        public Criteria andNodeResultLessThanOrEqualTo(Integer value) {
-            addCriterion("node_result <=", value, "nodeResult");
+        public Criteria andNodeOperateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("node_operate_time <=", value, "nodeOperateTime");
             return (Criteria) this;
         }
 
-        public Criteria andNodeResultIn(List<Integer> values) {
-            addCriterion("node_result in", values, "nodeResult");
+        public Criteria andNodeOperateTimeIn(List<Date> values) {
+            addCriterion("node_operate_time in", values, "nodeOperateTime");
             return (Criteria) this;
         }
 
-        public Criteria andNodeResultNotIn(List<Integer> values) {
-            addCriterion("node_result not in", values, "nodeResult");
+        public Criteria andNodeOperateTimeNotIn(List<Date> values) {
+            addCriterion("node_operate_time not in", values, "nodeOperateTime");
             return (Criteria) this;
         }
 
-        public Criteria andNodeResultBetween(Integer value1, Integer value2) {
-            addCriterion("node_result between", value1, value2, "nodeResult");
+        public Criteria andNodeOperateTimeBetween(Date value1, Date value2) {
+            addCriterion("node_operate_time between", value1, value2, "nodeOperateTime");
             return (Criteria) this;
         }
 
-        public Criteria andNodeResultNotBetween(Integer value1, Integer value2) {
-            addCriterion("node_result not between", value1, value2, "nodeResult");
+        public Criteria andNodeOperateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("node_operate_time not between", value1, value2, "nodeOperateTime");
             return (Criteria) this;
         }
 
-        public Criteria andNodeDescIsNull() {
-            addCriterion("node_desc is null");
+        public Criteria andNodeOperateResultIsNull() {
+            addCriterion("node_operate_result is null");
             return (Criteria) this;
         }
 
-        public Criteria andNodeDescIsNotNull() {
-            addCriterion("node_desc is not null");
+        public Criteria andNodeOperateResultIsNotNull() {
+            addCriterion("node_operate_result is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNodeDescEqualTo(String value) {
-            addCriterion("node_desc =", value, "nodeDesc");
+        public Criteria andNodeOperateResultEqualTo(Integer value) {
+            addCriterion("node_operate_result =", value, "nodeOperateResult");
             return (Criteria) this;
         }
 
-        public Criteria andNodeDescNotEqualTo(String value) {
-            addCriterion("node_desc <>", value, "nodeDesc");
+        public Criteria andNodeOperateResultNotEqualTo(Integer value) {
+            addCriterion("node_operate_result <>", value, "nodeOperateResult");
             return (Criteria) this;
         }
 
-        public Criteria andNodeDescGreaterThan(String value) {
-            addCriterion("node_desc >", value, "nodeDesc");
+        public Criteria andNodeOperateResultGreaterThan(Integer value) {
+            addCriterion("node_operate_result >", value, "nodeOperateResult");
             return (Criteria) this;
         }
 
-        public Criteria andNodeDescGreaterThanOrEqualTo(String value) {
-            addCriterion("node_desc >=", value, "nodeDesc");
+        public Criteria andNodeOperateResultGreaterThanOrEqualTo(Integer value) {
+            addCriterion("node_operate_result >=", value, "nodeOperateResult");
             return (Criteria) this;
         }
 
-        public Criteria andNodeDescLessThan(String value) {
-            addCriterion("node_desc <", value, "nodeDesc");
+        public Criteria andNodeOperateResultLessThan(Integer value) {
+            addCriterion("node_operate_result <", value, "nodeOperateResult");
             return (Criteria) this;
         }
 
-        public Criteria andNodeDescLessThanOrEqualTo(String value) {
-            addCriterion("node_desc <=", value, "nodeDesc");
+        public Criteria andNodeOperateResultLessThanOrEqualTo(Integer value) {
+            addCriterion("node_operate_result <=", value, "nodeOperateResult");
             return (Criteria) this;
         }
 
-        public Criteria andNodeDescLike(String value) {
-            addCriterion("node_desc like", value, "nodeDesc");
+        public Criteria andNodeOperateResultIn(List<Integer> values) {
+            addCriterion("node_operate_result in", values, "nodeOperateResult");
             return (Criteria) this;
         }
 
-        public Criteria andNodeDescNotLike(String value) {
-            addCriterion("node_desc not like", value, "nodeDesc");
+        public Criteria andNodeOperateResultNotIn(List<Integer> values) {
+            addCriterion("node_operate_result not in", values, "nodeOperateResult");
             return (Criteria) this;
         }
 
-        public Criteria andNodeDescIn(List<String> values) {
-            addCriterion("node_desc in", values, "nodeDesc");
+        public Criteria andNodeOperateResultBetween(Integer value1, Integer value2) {
+            addCriterion("node_operate_result between", value1, value2, "nodeOperateResult");
             return (Criteria) this;
         }
 
-        public Criteria andNodeDescNotIn(List<String> values) {
-            addCriterion("node_desc not in", values, "nodeDesc");
+        public Criteria andNodeOperateResultNotBetween(Integer value1, Integer value2) {
+            addCriterion("node_operate_result not between", value1, value2, "nodeOperateResult");
             return (Criteria) this;
         }
 
-        public Criteria andNodeDescBetween(String value1, String value2) {
-            addCriterion("node_desc between", value1, value2, "nodeDesc");
+        public Criteria andNodeOperateDescIsNull() {
+            addCriterion("node_operate_desc is null");
             return (Criteria) this;
         }
 
-        public Criteria andNodeDescNotBetween(String value1, String value2) {
-            addCriterion("node_desc not between", value1, value2, "nodeDesc");
+        public Criteria andNodeOperateDescIsNotNull() {
+            addCriterion("node_operate_desc is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeOperateDescEqualTo(String value) {
+            addCriterion("node_operate_desc =", value, "nodeOperateDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeOperateDescNotEqualTo(String value) {
+            addCriterion("node_operate_desc <>", value, "nodeOperateDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeOperateDescGreaterThan(String value) {
+            addCriterion("node_operate_desc >", value, "nodeOperateDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeOperateDescGreaterThanOrEqualTo(String value) {
+            addCriterion("node_operate_desc >=", value, "nodeOperateDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeOperateDescLessThan(String value) {
+            addCriterion("node_operate_desc <", value, "nodeOperateDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeOperateDescLessThanOrEqualTo(String value) {
+            addCriterion("node_operate_desc <=", value, "nodeOperateDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeOperateDescLike(String value) {
+            addCriterion("node_operate_desc like", value, "nodeOperateDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeOperateDescNotLike(String value) {
+            addCriterion("node_operate_desc not like", value, "nodeOperateDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeOperateDescIn(List<String> values) {
+            addCriterion("node_operate_desc in", values, "nodeOperateDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeOperateDescNotIn(List<String> values) {
+            addCriterion("node_operate_desc not in", values, "nodeOperateDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeOperateDescBetween(String value1, String value2) {
+            addCriterion("node_operate_desc between", value1, value2, "nodeOperateDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andNodeOperateDescNotBetween(String value1, String value2) {
+            addCriterion("node_operate_desc not between", value1, value2, "nodeOperateDesc");
             return (Criteria) this;
         }
     }

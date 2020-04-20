@@ -1,5 +1,7 @@
 package com.electronic.dao.mapper.bo;
 
+import java.util.Date;
+
 public class WorkNode {
     private Integer nodeId;
 
@@ -9,11 +11,13 @@ public class WorkNode {
 
     private Integer nodeOrder;
 
-    private Integer nodeStatus;
+    private Integer nodeOperateStatus;
 
-    private Integer nodeResult;
+    private Date nodeOperateTime;
 
-    private String nodeDesc;
+    private Integer nodeOperateResult;
+
+    private String nodeOperateDesc;
 
     public Integer getNodeId() {
         return nodeId;
@@ -47,27 +51,35 @@ public class WorkNode {
         this.nodeOrder = nodeOrder;
     }
 
-    public Integer getNodeStatus() {
-        return nodeStatus;
+    public Integer getNodeOperateStatus() {
+        return nodeOperateStatus;
     }
 
-    public void setNodeStatus(Integer nodeStatus) {
-        this.nodeStatus = nodeStatus;
+    public void setNodeOperateStatus(Integer nodeOperateStatus) {
+        this.nodeOperateStatus = nodeOperateStatus;
     }
 
-    public Integer getNodeResult() {
-        return nodeResult;
+    public Date getNodeOperateTime() {
+        return nodeOperateTime;
     }
 
-    public void setNodeResult(Integer nodeResult) {
-        this.nodeResult = nodeResult;
+    public void setNodeOperateTime(Date nodeOperateTime) {
+        this.nodeOperateTime = nodeOperateTime;
     }
 
-    public String getNodeDesc() {
-        return nodeDesc;
+    public Integer getNodeOperateResult() {
+        return nodeOperateResult;
     }
 
-    public void setNodeDesc(String nodeDesc) {
-        this.nodeDesc = nodeDesc == null ? null : nodeDesc.trim();
+    public void setNodeOperateResult(Integer nodeOperateResult) {
+        this.nodeOperateResult = nodeOperateResult;
+    }
+
+    public String getNodeOperateDesc() {
+        return nodeOperateDesc;
+    }
+
+    public void setNodeOperateDesc(String nodeOperateDesc) {
+        this.nodeOperateDesc = nodeOperateDesc == null ? null : nodeOperateDesc.trim();
     }
 }

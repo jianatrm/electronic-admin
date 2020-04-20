@@ -6,9 +6,10 @@
     <result column="work_order_id" property="workOrderId" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="node_order" property="nodeOrder" jdbcType="INTEGER" />
-    <result column="node_status" property="nodeStatus" jdbcType="INTEGER" />
-    <result column="node_result" property="nodeResult" jdbcType="INTEGER" />
-    <result column="node_desc" property="nodeDesc" jdbcType="VARCHAR" />
+    <result column="node_operate_status" property="nodeOperateStatus" jdbcType="INTEGER" />
+    <result column="node_operate_time" property="nodeOperateTime" jdbcType="TIMESTAMP" />
+    <result column="node_operate_result" property="nodeOperateResult" jdbcType="INTEGER" />
+    <result column="node_operate_desc" property="nodeOperateDesc" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    node_id, work_order_id, user_id, node_order, node_status, node_result, node_desc
+    node_id, work_order_id, user_id, node_order, node_operate_status, node_operate_time, 
+    node_operate_result, node_operate_desc
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.electronic.dao.mapper.bo.WorkNodeExample" >
     select
@@ -106,11 +108,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into work_node (work_order_id, user_id, node_order, 
-      node_status, node_result, node_desc
-      )
+      node_operate_status, node_operate_time, node_operate_result, 
+      node_operate_desc)
     values (#{workOrderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{nodeOrder,jdbcType=INTEGER}, 
-      #{nodeStatus,jdbcType=INTEGER}, #{nodeResult,jdbcType=INTEGER}, #{nodeDesc,jdbcType=VARCHAR}
-      )
+      #{nodeOperateStatus,jdbcType=INTEGER}, #{nodeOperateTime,jdbcType=TIMESTAMP}, #{nodeOperateResult,jdbcType=INTEGER}, 
+      #{nodeOperateDesc,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.WorkNode" >
     <selectKey resultType="java.lang.Integer" keyProperty="nodeId" order="AFTER" >
@@ -127,14 +129,17 @@
       <if test="nodeOrder != null" >
         node_order,
       </if>
-      <if test="nodeStatus != null" >
-        node_status,
+      <if test="nodeOperateStatus != null" >
+        node_operate_status,
       </if>
-      <if test="nodeResult != null" >
-        node_result,
+      <if test="nodeOperateTime != null" >
+        node_operate_time,
       </if>
-      <if test="nodeDesc != null" >
-        node_desc,
+      <if test="nodeOperateResult != null" >
+        node_operate_result,
+      </if>
+      <if test="nodeOperateDesc != null" >
+        node_operate_desc,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -147,14 +152,17 @@
       <if test="nodeOrder != null" >
         #{nodeOrder,jdbcType=INTEGER},
       </if>
-      <if test="nodeStatus != null" >
-        #{nodeStatus,jdbcType=INTEGER},
+      <if test="nodeOperateStatus != null" >
+        #{nodeOperateStatus,jdbcType=INTEGER},
       </if>
-      <if test="nodeResult != null" >
-        #{nodeResult,jdbcType=INTEGER},
+      <if test="nodeOperateTime != null" >
+        #{nodeOperateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="nodeDesc != null" >
-        #{nodeDesc,jdbcType=VARCHAR},
+      <if test="nodeOperateResult != null" >
+        #{nodeOperateResult,jdbcType=INTEGER},
+      </if>
+      <if test="nodeOperateDesc != null" >
+        #{nodeOperateDesc,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -179,14 +187,17 @@
       <if test="record.nodeOrder != null" >
         node_order = #{record.nodeOrder,jdbcType=INTEGER},
       </if>
-      <if test="record.nodeStatus != null" >
-        node_status = #{record.nodeStatus,jdbcType=INTEGER},
+      <if test="record.nodeOperateStatus != null" >
+        node_operate_status = #{record.nodeOperateStatus,jdbcType=INTEGER},
       </if>
-      <if test="record.nodeResult != null" >
-        node_result = #{record.nodeResult,jdbcType=INTEGER},
+      <if test="record.nodeOperateTime != null" >
+        node_operate_time = #{record.nodeOperateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.nodeDesc != null" >
-        node_desc = #{record.nodeDesc,jdbcType=VARCHAR},
+      <if test="record.nodeOperateResult != null" >
+        node_operate_result = #{record.nodeOperateResult,jdbcType=INTEGER},
+      </if>
+      <if test="record.nodeOperateDesc != null" >
+        node_operate_desc = #{record.nodeOperateDesc,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -199,9 +210,10 @@
       work_order_id = #{record.workOrderId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       node_order = #{record.nodeOrder,jdbcType=INTEGER},
-      node_status = #{record.nodeStatus,jdbcType=INTEGER},
-      node_result = #{record.nodeResult,jdbcType=INTEGER},
-      node_desc = #{record.nodeDesc,jdbcType=VARCHAR}
+      node_operate_status = #{record.nodeOperateStatus,jdbcType=INTEGER},
+      node_operate_time = #{record.nodeOperateTime,jdbcType=TIMESTAMP},
+      node_operate_result = #{record.nodeOperateResult,jdbcType=INTEGER},
+      node_operate_desc = #{record.nodeOperateDesc,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -218,14 +230,17 @@
       <if test="nodeOrder != null" >
         node_order = #{nodeOrder,jdbcType=INTEGER},
       </if>
-      <if test="nodeStatus != null" >
-        node_status = #{nodeStatus,jdbcType=INTEGER},
+      <if test="nodeOperateStatus != null" >
+        node_operate_status = #{nodeOperateStatus,jdbcType=INTEGER},
       </if>
-      <if test="nodeResult != null" >
-        node_result = #{nodeResult,jdbcType=INTEGER},
+      <if test="nodeOperateTime != null" >
+        node_operate_time = #{nodeOperateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="nodeDesc != null" >
-        node_desc = #{nodeDesc,jdbcType=VARCHAR},
+      <if test="nodeOperateResult != null" >
+        node_operate_result = #{nodeOperateResult,jdbcType=INTEGER},
+      </if>
+      <if test="nodeOperateDesc != null" >
+        node_operate_desc = #{nodeOperateDesc,jdbcType=VARCHAR},
       </if>
     </set>
     where node_id = #{nodeId,jdbcType=INTEGER}
@@ -235,9 +250,10 @@
     set work_order_id = #{workOrderId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
       node_order = #{nodeOrder,jdbcType=INTEGER},
-      node_status = #{nodeStatus,jdbcType=INTEGER},
-      node_result = #{nodeResult,jdbcType=INTEGER},
-      node_desc = #{nodeDesc,jdbcType=VARCHAR}
+      node_operate_status = #{nodeOperateStatus,jdbcType=INTEGER},
+      node_operate_time = #{nodeOperateTime,jdbcType=TIMESTAMP},
+      node_operate_result = #{nodeOperateResult,jdbcType=INTEGER},
+      node_operate_desc = #{nodeOperateDesc,jdbcType=VARCHAR}
     where node_id = #{nodeId,jdbcType=INTEGER}
   </update>
 </mapper>

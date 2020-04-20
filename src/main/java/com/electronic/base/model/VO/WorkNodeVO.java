@@ -2,6 +2,8 @@ package com.electronic.base.model.VO;
 
 import com.electronic.dao.mapper.bo.WorkOrder;
 
+import java.util.Date;
+
 public class WorkNodeVO {
 
     private Integer nodeId;
@@ -12,13 +14,21 @@ public class WorkNodeVO {
 
     private Integer nodeOrder;
 
-    private Integer nodeStatus;
+    private Integer nodeOperateStatus;
+
+    private Date nodeOperateTime;
+
+    private Integer nodeOperateResult;
+
+    private String nodeOperateDesc;
 
     private WorkOrder workOrder;
 
     private Integer pageNum = 1;
 
     private Integer pageSize =10;
+
+    private String userName;
 
     public WorkOrder getWorkOrder() {
         return workOrder;
@@ -76,11 +86,43 @@ public class WorkNodeVO {
         this.nodeOrder = nodeOrder;
     }
 
-    public Integer getNodeStatus() {
-        return nodeStatus;
+    public Integer getNodeOperateStatus() {
+        return nodeOperateStatus;
     }
 
-    public void setNodeStatus(Integer nodeStatus) {
-        this.nodeStatus = nodeStatus;
+    public void setNodeOperateStatus(Integer nodeOperateStatus) {
+        this.nodeOperateStatus = nodeOperateStatus;
+    }
+
+    public Date getNodeOperateTime() {
+        return nodeOperateTime;
+    }
+
+    public void setNodeOperateTime(Date nodeOperateTime) {
+        this.nodeOperateTime = nodeOperateTime;
+    }
+
+    public Integer getNodeOperateResult() {
+        return nodeOperateResult;
+    }
+
+    public void setNodeOperateResult(Integer nodeOperateResult) {
+        this.nodeOperateResult = nodeOperateResult;
+    }
+
+    public String getNodeOperateDesc() {
+        return nodeOperateDesc;
+    }
+
+    public void setNodeOperateDesc(String nodeOperateDesc) {
+        this.nodeOperateDesc = nodeOperateDesc;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

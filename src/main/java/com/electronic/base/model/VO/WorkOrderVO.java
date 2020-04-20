@@ -1,5 +1,8 @@
 package com.electronic.base.model.VO;
 
+import com.electronic.dao.mapper.bo.SysDept;
+import com.electronic.dao.mapper.bo.WorkNode;
+
 import java.util.Date;
 
 public class WorkOrderVO {
@@ -23,16 +26,38 @@ public class WorkOrderVO {
     private Date operateTime;
 
     private Integer workOrderStatus;
+
     private String workOrderStatusDesc;
 
     private String workInfo;
 
-    private String nodeList;
+    private String workNodeList;
+
+    private WorkNode workNode;
+
+    private SysDept sysDept;
 
     private String docList;
 
     private Integer pageNum = 1;
-    private Integer pageSize =10;
+
+    private Integer pageSize = 10;
+
+    public SysDept getSysDept() {
+        return sysDept;
+    }
+
+    public void setSysDept(SysDept sysDept) {
+        this.sysDept = sysDept;
+    }
+
+    public WorkNode getWorkNode() {
+        return workNode;
+    }
+
+    public void setWorkNode(WorkNode workNode) {
+        this.workNode = workNode;
+    }
 
     public Integer getPageNum() {
         return pageNum;
@@ -58,12 +83,12 @@ public class WorkOrderVO {
         this.workOrderStatusDesc = workOrderStatusDesc;
     }
 
-    public String getNodeList() {
-        return nodeList;
+    public String getWorkNodeList() {
+        return workNodeList;
     }
 
-    public void setNodeList(String nodeList) {
-        this.nodeList = nodeList;
+    public void setWorkNodeList(String workNodeList) {
+        this.workNodeList = workNodeList;
     }
 
     public String getDocList() {
@@ -83,7 +108,6 @@ public class WorkOrderVO {
     public void setWorkOrderDesc(String workOrderDesc) {
         this.workOrderDesc = workOrderDesc;
     }
-
 
 
     public Integer getWorkOrderId() {

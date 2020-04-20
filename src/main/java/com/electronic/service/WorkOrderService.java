@@ -15,4 +15,9 @@ public interface WorkOrderService {
 
     public BaseResponse<PageResult<WorkOrderVO>> queryWorkOrder(WorkOrderVO workOrderVO) throws Exception;
 
+
+    public BaseResponse<WorkOrderVO> queryWorkOrderDetail(WorkOrderVO workOrderVO) throws Exception;
+
+    public BaseResponse approveWorkOrder(WorkOrderVO workOrderVO) throws Exception;
+
 }

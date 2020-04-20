@@ -52,5 +52,19 @@ public class WorkOrderController {
         BaseResponse<PageResult<WorkNodeVO>> pageResultBaseResponse = nodeService.queryWorkNode(nodeVO);
         return pageResultBaseResponse;
     }
+    /*查看工单详情？*/
+    @RequestMapping("/queryWorkOrderDetail")
+    public BaseResponse queryWorkOrderDetail(@RequestBody WorkOrderVO workOrderVO) throws Exception {
+        BaseResponse<WorkOrderVO> workOrderVOBaseResponse = workOrderService.queryWorkOrderDetail(workOrderVO);
+        return workOrderVOBaseResponse;
+    }
+
+
+    /*审批工单？*/
+    @RequestMapping("/approveWorkOrder")
+    public BaseResponse approveWorkOrder(@RequestBody WorkOrderVO workOrderVO) throws Exception {
+        BaseResponse workOrderVOBaseResponse = workOrderService.approveWorkOrder(workOrderVO);
+        return workOrderVOBaseResponse;
+    }
 
 }

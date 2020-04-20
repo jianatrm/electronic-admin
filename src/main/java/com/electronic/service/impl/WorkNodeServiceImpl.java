@@ -87,7 +87,7 @@ public class WorkNodeServiceImpl implements WorkNodeService {
         WorkNodeExample WorkNodeExample = new WorkNodeExample();
         WorkNodeExample.Criteria criteria = WorkNodeExample.createCriteria();
         criteria.andUserIdEqualTo(nodeVO.getUserId());
-        criteria.andNodeStatusEqualTo(nodeVO.getNodeStatus());
+        criteria.andNodeOperateStatusEqualTo(nodeVO.getNodeOperateStatus());
         WorkNodeExample.setOrderByClause(" node_id desc");
         PageHelper.startPage(nodeVO.getPageNum(),nodeVO.getPageSize());
         List<WorkNode> WorkNodes = nodeMapper.selectByExample(WorkNodeExample);
