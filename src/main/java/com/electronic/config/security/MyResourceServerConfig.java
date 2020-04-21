@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.electronic.config.security;
 
@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 
 /**
  * 资源服务器配置
- * 
+ *
  * @author zhailiang
  *
  */
@@ -27,22 +27,22 @@ public class MyResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Autowired
 	private FormAuthenticationConfig formAuthenticationConfig;
-	
+
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		
+
 		formAuthenticationConfig.configure(http);
-		
+
 		http
 				.logout()
 				.logoutSuccessHandler(logoutSuccessHandler)
 				.deleteCookies("JSESSIONID").and()
 				.authorizeRequests()
-				.antMatchers(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,"/file/uploadFile","/file/downloadFile/*"
+				.antMatchers(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,"/file/*"
 				).permitAll().anyRequest().authenticated().and()
 				.csrf().disable();
-		
+
 
 	}
-	
+
 }
