@@ -101,25 +101,25 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.electronic.dao.mapper.bo.DeptElectronicDoc" >
-    <selectKey resultType="java.lang.Integer" keyProperty="docId" order="AFTER" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into dept_electronic_doc (id, dept_id, operate_id, 
+    insert into dept_electronic_doc (dept_id, doc_id, operate_id, 
       operate_time, status)
-    values (#{id,jdbcType=INTEGER}, #{deptId,jdbcType=INTEGER}, #{operateId,jdbcType=INTEGER}, 
+    values (#{deptId,jdbcType=INTEGER}, #{docId,jdbcType=INTEGER}, #{operateId,jdbcType=INTEGER}, 
       #{operateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.DeptElectronicDoc" >
-    <selectKey resultType="java.lang.Integer" keyProperty="docId" order="AFTER" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into dept_electronic_doc
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="deptId != null" >
         dept_id,
+      </if>
+      <if test="docId != null" >
+        doc_id,
       </if>
       <if test="operateId != null" >
         operate_id,
@@ -132,11 +132,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="deptId != null" >
         #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="docId != null" >
+        #{docId,jdbcType=INTEGER},
       </if>
       <if test="operateId != null" >
         #{operateId,jdbcType=INTEGER},
