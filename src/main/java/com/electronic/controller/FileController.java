@@ -40,7 +40,7 @@ public class FileController {
                 .path(fileName)
                 .toUriString();
 
-        baseResponse.setResult(new UploadFileResponse(fileName.split("&&")[0],fileDownloadUri,"",0));
+        baseResponse.setResult(new UploadFileResponse(fileName.split("&&")[1],fileDownloadUri,"",0));
         return baseResponse;
     }
 

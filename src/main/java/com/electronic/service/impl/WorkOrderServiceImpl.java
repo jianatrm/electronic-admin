@@ -3,6 +3,7 @@ package com.electronic.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.PageResult;
+import com.electronic.base.model.SessionUser;
 import com.electronic.base.model.VO.WorkNodeVO;
 import com.electronic.base.model.VO.WorkOrderVO;
 import com.electronic.contants.BusinessConstants;
@@ -12,6 +13,7 @@ import com.electronic.contants.WorkOrderConstants;
 import com.electronic.dao.mapper.bo.*;
 import com.electronic.dao.mapper.interfaces.*;
 import com.electronic.service.WorkOrderService;
+import com.electronic.utils.SessionUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.collections4.CollectionUtils;
@@ -157,6 +159,7 @@ public class WorkOrderServiceImpl implements WorkOrderService {
 
     @Override
     public BaseResponse approveWorkOrder(WorkOrderVO workOrderVO) throws Exception {
+        SessionUser sessionUser = SessionUtils.getSessionUser();
         BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS, BusinessConstants.BUSI_SUCCESS_CODE, BusinessConstants.BUSI_SUCCESS_MESSAGE);
 
         WorkOrder workOrder = workOrderMapper.selectByPrimaryKey(workOrderVO.getWorkOrderId());
@@ -169,11 +172,11 @@ public class WorkOrderServiceImpl implements WorkOrderService {
         }
 
         workOrder.setOperateTime(new Date());
-        workOrderMapper.updateByPrimaryKeySelective(workOrder);
 
 
 
 
+        //更新节点状态
         workNode.setNodeOperateStatus(NodeConstants.OPERATED);
         workNode.setNodeOperateResult(node.getNodeOperateResult());
         workNode.setNodeOperateDesc(node.getNodeOperateDesc());
@@ -193,22 +196,30 @@ public class WorkOrderServiceImpl implements WorkOrderService {
                 workNode1.setNodeOperateStatus(NodeConstants.TO_OPERATE);
                 nodeMapper.updateByPrimaryKeySelective(workNode1);
             }
-        }else if (workNode.getNodeOrder() == nodeCount&&WorkOrderConstants.APPROVE_SUCCESS.equals(node.getNodeOperateResult())){
+        }
+        else if (workNode.getNodeOrder() == nodeCount&&WorkOrderConstants.APPROVE_SUCCESS.equals(node.getNodeOperateResult())){
+            workOrder.setWorkOrderStatus(WorkOrderConstants.APPROVE_SUCCESS);
             SysDept sysDept = workOrderVO.getSysDept();
             if (!StringUtils.isBlank(workOrder.getWorkInfo())&&!"null".equals(workOrder.getWorkInfo())){
                 List<ElectronicDoc> electronicDocs = JSONObject.parseArray(workOrder.getWorkInfo(), ElectronicDoc.class);
                 for (int i = 0; i <electronicDocs.size() ; i++) {
                     ElectronicDoc electronicDoc = electronicDocs.get(i);
+                    electronicDoc.setStatus(String.valueOf(UserConstants.VALID_STATUS));
+                    electronicDoc.setOperateId(Integer.parseInt(workOrder.getOrganizer()));
                     electronicDocMapper.insertSelective(electronicDoc);
                     DeptElectronicDoc deptElectronicDoc = new DeptElectronicDoc();
                     deptElectronicDoc.setDeptId(sysDept.getDeptId());
-                    deptElectronicDoc.setDocId(electronicDoc.getDocId());
+                    deptElectronicDoc.setDocId(2);
+                    deptElectronicDoc.setOperateId(Integer.parseInt(workOrder.getOrganizer()));
                     deptElectronicDoc.setOperateTime(new Date());
                     deptElectronicDoc.setStatus(UserConstants.VALID_STATUS);
                     deptElectronicDocMapper.insertSelective(deptElectronicDoc);
                 }
             }
+        }else {
+            workOrder.setWorkOrderStatus(WorkOrderConstants.APPROVE_FIALE);
         }
+        workOrderMapper.updateByPrimaryKeySelective(workOrder);
         return baseResponse;
     }
 }

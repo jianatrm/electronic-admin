@@ -4,6 +4,7 @@ import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.PageResult;
 import com.electronic.base.model.SessionUser;
 import com.electronic.base.model.VO.DeptElectronicDocVO;
+import com.electronic.base.model.VO.SDeptElectronicDocVO;
 import com.electronic.dao.mapper.interfaces.DeptElectronicDocMapper;
 import com.electronic.service.DeptElectronicDocService;
 import com.electronic.utils.SessionUtils;
@@ -20,10 +21,10 @@ public class DeptElectronicDocController {
     private DeptElectronicDocService deptElectronicDocService;
 
     @RequestMapping("/queryDeptElectronicDoc")
-    public BaseResponse queryDeptElectronicDoc(@RequestBody DeptElectronicDocVO deptElectronicDocVO) throws Exception {
+    public BaseResponse queryDeptElectronicDoc(@RequestBody SDeptElectronicDocVO deptElectronicDocVO) throws Exception {
         SessionUser sessionUser = SessionUtils.getSessionUser();
         deptElectronicDocVO.setDeptId(sessionUser.getDeptId());
-        BaseResponse<PageResult<DeptElectronicDocVO>> pageResultBaseResponse = deptElectronicDocService.queryDeptElectronicDoc(deptElectronicDocVO);
+        BaseResponse<PageResult<SDeptElectronicDocVO>> pageResultBaseResponse = deptElectronicDocService.queryDeptElectronicDoc(deptElectronicDocVO);
         return pageResultBaseResponse;
     }
 }

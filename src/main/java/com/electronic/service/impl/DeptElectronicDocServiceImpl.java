@@ -3,12 +3,13 @@ package com.electronic.service.impl;
 import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.PageResult;
 import com.electronic.base.model.VO.DeptElectronicDocVO;
+import com.electronic.base.model.VO.SDeptElectronicDocVO;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.dao.mapper.bo.DeptElectronicDoc;
 import com.electronic.dao.mapper.bo.DeptElectronicDocExample;
-import com.electronic.dao.mapper.bo.ElectronicDoc;
 import com.electronic.dao.mapper.interfaces.DeptElectronicDocMapper;
-import com.electronic.dao.smapper.bo.SUserElectronicDoc;
+import com.electronic.dao.smapper.bo.SDeptElectronicDoc;
+import com.electronic.dao.smapper.interfaces.SDeptElectronicDocMapper;
 import com.electronic.service.DeptElectronicDocService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -27,6 +28,11 @@ public class DeptElectronicDocServiceImpl implements DeptElectronicDocService {
 
     @Autowired
     private DeptElectronicDocMapper deptElectronicDocMapper;
+
+    @Autowired
+    private SDeptElectronicDocMapper sDeptElectronicDocMapper;
+
+
     @Override
     public DeptElectronicDoc selectDeptElectronicDoc(DeptElectronicDocVO deptElectronicDocVO) throws Exception {
         DeptElectronicDocExample deptElectronicDocExample = new DeptElectronicDocExample();
@@ -47,26 +53,24 @@ public class DeptElectronicDocServiceImpl implements DeptElectronicDocService {
     }
 
     @Override
-    public BaseResponse<PageResult<DeptElectronicDocVO>> queryDeptElectronicDoc(DeptElectronicDocVO deptElectronicDocVO) throws Exception {
+    public BaseResponse<PageResult<SDeptElectronicDocVO>> queryDeptElectronicDoc(SDeptElectronicDocVO sDeptElectronicDocVO) throws Exception {
         BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
-        PageResult<DeptElectronicDocVO> pageResult = new PageResult<>();
+        PageResult<SDeptElectronicDocVO> pageResult = new PageResult<>();
+        SDeptElectronicDoc sDeptElectronicDoc = new SDeptElectronicDoc();
+        BeanUtils.copyProperties(sDeptElectronicDoc,sDeptElectronicDocVO);
 
-        DeptElectronicDocExample deptElectronicDocExample = new DeptElectronicDocExample();
-        DeptElectronicDocExample.Criteria criteria = deptElectronicDocExample.createCriteria();
-        criteria.andDeptIdEqualTo(deptElectronicDocVO.getDeptId());
-        PageHelper.startPage(deptElectronicDocVO.getPageNum(),deptElectronicDocVO.getPageSize());
-        List<DeptElectronicDoc> deptElectronicDocs = deptElectronicDocMapper.selectByExample(deptElectronicDocExample);
+        PageHelper.startPage(sDeptElectronicDocVO.getPageNum(),sDeptElectronicDocVO.getPageSize());
+        List<SDeptElectronicDoc> deptElectronicDocs = sDeptElectronicDocMapper.selectByDeptId(sDeptElectronicDoc);
         PageInfo pageInfo = new PageInfo(deptElectronicDocs);
 
 
-        List<DeptElectronicDocVO> deptElectronicDocVOList = new ArrayList<>();
+        List<SDeptElectronicDocVO> deptElectronicDocVOList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(deptElectronicDocs)){
             for (int i = 0; i <deptElectronicDocs.size() ; i++) {
-                DeptElectronicDocVO docVO = new DeptElectronicDocVO();
-                BeanUtils.copyProperties(deptElectronicDocs.get(i),docVO);
+                SDeptElectronicDocVO docVO = new SDeptElectronicDocVO();
+                BeanUtils.copyProperties(docVO,deptElectronicDocs.get(i));
                 deptElectronicDocVOList.add(docVO);
             }
-
         }
         pageResult.setResult(deptElectronicDocVOList);
         pageResult.setPageCount(pageInfo.getPages());

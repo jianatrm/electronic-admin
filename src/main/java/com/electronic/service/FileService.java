@@ -50,7 +50,7 @@ public class FileService {
                 throw new FileException("Sorry! Filename contains invalid path sequence " + fileName);
             }
             String yyyyMMddHHmmss = DateFormatUtils.format(new Date(), "yyyyMMddHHmmss");
-            fileName = fileName+"&&"+yyyyMMddHHmmss;
+            fileName = yyyyMMddHHmmss+"&&"+fileName;
             // Copy file to the target location (Replacing existing file with the same name)
             Path targetLocation = this.fileStorageLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);

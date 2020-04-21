@@ -22,7 +22,7 @@ public class WorkNodeVO {
 
     private String nodeOperateDesc;
 
-    private WorkOrder workOrder;
+    private WorkOrderVO workOrderVO;
 
     private Integer pageNum = 1;
 
@@ -30,12 +30,12 @@ public class WorkNodeVO {
 
     private String userName;
 
-    public WorkOrder getWorkOrder() {
-        return workOrder;
+    public WorkOrderVO getWorkOrderVO() {
+        return workOrderVO;
     }
 
-    public void setWorkOrder(WorkOrder workOrder) {
-        this.workOrder = workOrder;
+    public void setWorkOrderVO(WorkOrderVO workOrderVO) {
+        this.workOrderVO = workOrderVO;
     }
 
     public Integer getPageNum() {

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.electronic.config.security;
 
@@ -51,7 +51,7 @@ public class MyAuthorizationServerConfig extends AuthorizationServerConfigurerAd
         clients.inMemory()//配置内存中，也可以是数据库
                 .withClient("jiana")//clientid
                 .secret("jiana-secret")
-                .accessTokenValiditySeconds(3600)//token有效时间  秒
+                .accessTokenValiditySeconds(36000)//token有效时间  秒
                 .authorizedGrantTypes("refresh_token", "password", "authorization_code")//token模式
                 .scopes("all");//限制允许的权限配置
 

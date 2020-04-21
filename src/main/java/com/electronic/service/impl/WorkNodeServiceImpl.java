@@ -3,7 +3,9 @@ package com.electronic.service.impl;
 import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.PageResult;
 import com.electronic.base.model.VO.WorkNodeVO;
+import com.electronic.base.model.VO.WorkOrderVO;
 import com.electronic.contants.BusinessConstants;
+import com.electronic.contants.WorkOrderConstants;
 import com.electronic.dao.mapper.bo.WorkNode;
 import com.electronic.dao.mapper.bo.WorkNodeExample;
 import com.electronic.dao.mapper.bo.WorkOrder;
@@ -96,7 +98,10 @@ public class WorkNodeServiceImpl implements WorkNodeService {
             WorkNodeVO nodeVO1 = new WorkNodeVO();
             BeanUtils.copyProperties(node,nodeVO1);
             WorkOrder workOrder = workOrderMapper.selectByPrimaryKey(nodeVO1.getWorkOrderId());
-            nodeVO1.setWorkOrder(workOrder);
+            WorkOrderVO work = new WorkOrderVO();
+            BeanUtils.copyProperties(workOrder, work);
+            work.setWorkOrderStatusDesc(WorkOrderConstants.getStatus(workOrder.getWorkOrderStatus()));
+            nodeVO1.setWorkOrderVO(work);
             list.add(nodeVO1);
         }
         PageInfo pageInfo = new PageInfo(WorkNodes);

@@ -68,6 +68,7 @@ public class WorkOrderController {
     /*审批工单？*/
     @RequestMapping("/approveWorkOrder")
     public BaseResponse approveWorkOrder(@RequestBody WorkOrderVO workOrderVO) throws Exception {
+
         BaseResponse workOrderVOBaseResponse = workOrderService.approveWorkOrder(workOrderVO);
         return workOrderVOBaseResponse;
     }
