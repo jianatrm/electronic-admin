@@ -6,9 +6,10 @@ import com.electronic.dao.mapper.bo.SysUser;
 import com.electronic.dao.mapper.interfaces.SysRoleUserMapper;
 import com.electronic.service.SysUserRolesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class SysUserRolesServiceImpl implements SysUserRolesService {
     @Autowired
     private SysRoleUserMapper sysRoleUserMapper;
