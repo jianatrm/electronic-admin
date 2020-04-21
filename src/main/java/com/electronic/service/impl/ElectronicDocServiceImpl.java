@@ -1,5 +1,6 @@
 package com.electronic.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.PageResult;
 import com.electronic.base.model.VO.ElectronicDocRequest;
@@ -15,6 +16,7 @@ import com.electronic.service.ElectronicDocService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,25 +38,33 @@ public class ElectronicDocServiceImpl implements ElectronicDocService {
     SUserElectronicDocMapper sUserElectronicDocMapper;
 
     @Override
-    public ElectronicDoc selectElectronicDoc(ElectronicDoc Dept) throws Exception {
+    public ElectronicDoc selectElectronicDoc(ElectronicDoc electronicDoc) throws Exception {
         ElectronicDocExample ElectronicDocExample = new ElectronicDocExample();
         ElectronicDocExample.Criteria criteria = ElectronicDocExample.createCriteria();
-//        if (!StringUtils.isBlank(Dept.getDeptName())){
-//            criteria.andDeptNameEqualTo(Dept.getDeptName());
-//        }
+        if (electronicDoc.getOperateId()>0){
+            criteria.andOperateIdEqualTo(electronicDoc.getOperateId());
+        }
         List<ElectronicDoc> ElectronicDocs = docMapper.selectByExample(ElectronicDocExample);
         return CollectionUtils.isEmpty(ElectronicDocs)? null:ElectronicDocs.get(0);
     }
 
     @Override
-    public BaseResponse addElectronicDoc( List<ElectronicDoc> docList) throws Exception {
+    public BaseResponse addElectronicDoc(ElectronicDocRequest docRequest) throws Exception {
         BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
-        for (ElectronicDoc doc:docList){
+
+        String docList = docRequest.getElectronicDocList();
+        if (StringUtils.isEmpty(docList)){
+            return new BaseResponse(BusinessConstants.BUSI_FAILURE,BusinessConstants.BUSI_FAILURE_CODE,BusinessConstants.BUSI_FAILURE_MESSAGE);
+        }
+        List<ElectronicDoc> docs = JSONObject.parseArray(docList, ElectronicDoc.class);
+        for (ElectronicDoc doc:docs){
+            doc.setOperateId(docRequest.getOperateId());
             doc.setOperateTime(new Date());
             docMapper.insertSelective(doc);
             UserElectronicDoc userElectronicDoc = new UserElectronicDoc();
             userElectronicDoc.setDocId(doc.getDocId());
-            userElectronicDoc.setUserId(1);
+            userElectronicDoc.setUserId(docRequest.getOperateId());
+            userElectronicDoc.setOperateId(docRequest.getOperateId());
             userElectronicDoc.setOperateTime(new Date());
             userElectronicDocMapper.insert(userElectronicDoc);
         }
@@ -72,12 +82,8 @@ public class ElectronicDocServiceImpl implements ElectronicDocService {
     public BaseResponse<PageResult<SUserElectronicDoc>> queryElectronicDoc(ElectronicDocRequest docRequest) throws Exception {
         BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
         PageResult<SUserElectronicDoc> pageResult = new PageResult<>();
-//        if (!StringUtils.isEmpty(docRequest.getElectronicDocName())){
-//            criteria.andElectronicDocNameLike("%"+docRequest.getElectronicDocName()+"%");
-//        }
-//        criteria.andStatusEqualTo(String.valueOf(UserConstants.VALID_STATUS));
         PageHelper.startPage(docRequest.getPageNum(),docRequest.getPageSize());
-        List<SUserElectronicDoc> sUserElectronicDocs = sUserElectronicDocMapper.selectByUserId(1);
+        List<SUserElectronicDoc> sUserElectronicDocs = sUserElectronicDocMapper.selectByUserId(docRequest.getOperateId());
 
         PageInfo pageInfo = new PageInfo(sUserElectronicDocs);
         pageResult.setResult(sUserElectronicDocs);

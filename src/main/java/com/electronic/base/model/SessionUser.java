@@ -18,15 +18,18 @@ public class SessionUser extends User {
 
     private final String userSex;
 
+    private final Integer deptId;
 
 
 
-    public SessionUser(Integer userId,String userPhone,String userEmail,String userSex,String username, String password, Collection<? extends GrantedAuthority> authorities) {
+
+    public SessionUser(Integer userId,String userPhone,String userEmail,String userSex,Integer deptId,String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
         this.userId = userId;
         this.userPhone = userPhone;
         this.userEmail = userEmail;
         this.userSex = userSex;
+        this.deptId = deptId;
 
     }
 
@@ -49,4 +52,11 @@ public class SessionUser extends User {
         return userSex;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public Integer getDeptId() {
+        return deptId;
+    }
 }

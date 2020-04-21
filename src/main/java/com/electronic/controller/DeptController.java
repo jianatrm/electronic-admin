@@ -2,10 +2,12 @@ package com.electronic.controller;
 
 import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.PageResult;
+import com.electronic.base.model.SessionUser;
 import com.electronic.base.model.VO.DeptRequest;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.dao.mapper.bo.SysDept;
 import com.electronic.service.SysDeptService;
+import com.electronic.utils.SessionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -41,7 +43,8 @@ public class DeptController {
         BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_FAILURE,BusinessConstants.BUSI_FAILURE_CODE,BusinessConstants.BUSI_FAILURE_MESSAGE);
         SysDept sysDept = new SysDept();
         BeanUtils.copyProperties(DeptRequest,sysDept);
-
+        SessionUser sessionUser = SessionUtils.getSessionUser();
+        sysDept.setOperator(String.valueOf(sessionUser.getUserId()));
         Integer integer = sysDeptService.addSysDept(sysDept);
         if (integer>0){
             baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
@@ -59,6 +62,8 @@ public class DeptController {
         BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_FAILURE,BusinessConstants.BUSI_FAILURE_CODE,BusinessConstants.BUSI_FAILURE_MESSAGE);
         SysDept sysDept = new SysDept();
         BeanUtils.copyProperties(DeptRequest,sysDept);
+        SessionUser sessionUser = SessionUtils.getSessionUser();
+        sysDept.setOperator(String.valueOf(sessionUser.getUserId()));
         Integer integer = sysDeptService.updateSysDept(sysDept);
         if (integer>0){
             baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);

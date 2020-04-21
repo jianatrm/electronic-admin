@@ -48,7 +48,7 @@ public class MyUserDetailService implements UserDetailsService {
 //                .password(sysUser.getPassword())
 //                .authorities("ROLE_ADMIN")
 //                .build();
-        return new SessionUser(sysUser.getUserId(),sysUser.getUserPhone(),sysUser.getUserEmail(),sysUser.getSex(),sysUser.getUserName(),sysUser.getPassword(), getAuthority(sysUser));
+        return new SessionUser(sysUser.getUserId(),sysUser.getUserPhone(),sysUser.getUserEmail(),sysUser.getSex(),sysUser.getDeptId(),sysUser.getUserName(),sysUser.getPassword(), getAuthority(sysUser));
 
 
     }

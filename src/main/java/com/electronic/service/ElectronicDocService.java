@@ -12,7 +12,7 @@ public interface ElectronicDocService {
 
     public ElectronicDoc selectElectronicDoc(ElectronicDoc doc) throws Exception;
 
-    public BaseResponse addElectronicDoc( List<ElectronicDoc> docList) throws Exception;
+    public BaseResponse addElectronicDoc( ElectronicDocRequest docRequest) throws Exception;
 
     public Integer updateElectronicDoc(ElectronicDoc doc) throws Exception;
 

@@ -3,11 +3,13 @@ package com.electronic.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.PageResult;
+import com.electronic.base.model.SessionUser;
 import com.electronic.base.model.VO.ElectronicDocRequest;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.dao.mapper.bo.ElectronicDoc;
 import com.electronic.dao.smapper.bo.SUserElectronicDoc;
 import com.electronic.service.ElectronicDocService;
+import com.electronic.utils.SessionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +37,8 @@ public class ElectronicDocController {
     */
     @RequestMapping("/queryElectronicDoc")
     public BaseResponse queryElectronicDoc(@RequestBody ElectronicDocRequest docRequest, Authentication authentication) throws Exception {
-//        SessionUser sessionUser = SessionUtils.getSessionUser();
+        SessionUser sessionUser = SessionUtils.getSessionUser();
+        docRequest.setOperateId(sessionUser.getUserId());
         BaseResponse<PageResult<SUserElectronicDoc>> baseResponse = ElectronicDocService.queryElectronicDoc(docRequest);
         return baseResponse;
     }
@@ -49,8 +52,9 @@ public class ElectronicDocController {
         if (StringUtils.isEmpty(docList)){
             return new BaseResponse(BusinessConstants.BUSI_FAILURE,BusinessConstants.BUSI_FAILURE_CODE,BusinessConstants.BUSI_FAILURE_MESSAGE);
         }
-        List<ElectronicDoc> docs = JSONObject.parseArray(docList, ElectronicDoc.class);
-        BaseResponse baseResponse = ElectronicDocService.addElectronicDoc(docs);
+        SessionUser sessionUser = SessionUtils.getSessionUser();
+        docRequest.setOperateId(sessionUser.getUserId());
+        BaseResponse baseResponse = ElectronicDocService.addElectronicDoc(docRequest);
         return baseResponse;
     }
 
@@ -64,6 +68,8 @@ public class ElectronicDocController {
         BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_FAILURE,BusinessConstants.BUSI_FAILURE_CODE,BusinessConstants.BUSI_FAILURE_MESSAGE);
         ElectronicDoc ElectronicDoc = new ElectronicDoc();
         BeanUtils.copyProperties(ElectronicDocRequest,ElectronicDoc);
+        SessionUser sessionUser = SessionUtils.getSessionUser();
+        ElectronicDoc.setOperateId(sessionUser.getUserId());
         Integer integer = ElectronicDocService.updateElectronicDoc(ElectronicDoc);
         if (integer>0){
             baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
