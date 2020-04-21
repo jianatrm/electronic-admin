@@ -39,9 +39,9 @@ public class SessionUtils {
             Collection authorities = JSONObject.parseObject(parseObject.get("authorities").toString(), Collection.class);
             List<SimpleGrantedAuthority> list = new ArrayList<SimpleGrantedAuthority>();
             String userId = String.valueOf(parseObject.get("userId"));
-            String userPhone = String.valueOf(parseObject.get("userPhone").toString());
-            String userEmail = String.valueOf(parseObject.get("userEmail").toString());
-            String userSex = String.valueOf(parseObject.get("userSex").toString());
+            String userPhone = String.valueOf(parseObject.get("userPhone"));
+            String userEmail = String.valueOf(parseObject.get("userEmail"));
+            String userSex = String.valueOf(parseObject.get("userSex"));
             String deptId = String.valueOf(parseObject.get("deptId"));
             String username = String.valueOf(parseObject.get("username"));
             sessionUser = new SessionUser(Integer.parseInt(userId),userPhone,userEmail, userSex, Integer.parseInt(deptId),username,"null",list );
