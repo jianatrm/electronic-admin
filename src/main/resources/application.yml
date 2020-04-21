@@ -23,7 +23,10 @@ spring:
     # maxPoolPreparedStatementPerConnectionSize: 20
     # useGlobalDataSourceStat: true
     # connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
-
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
 #  activiti:
 #    history-level: full
 #    db-history-used: true
@@ -33,6 +36,8 @@ server:
   port: 8001
   servlet:
     context-path: /electronic
+
+
 
 mybatis:
   # 指定全局配置文件位置E:\electronic-work\electronic-admin\src\main\resources\mybatis\mybatis-config.xml
