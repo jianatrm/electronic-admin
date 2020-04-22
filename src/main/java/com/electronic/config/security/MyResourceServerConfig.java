@@ -39,6 +39,7 @@ public class MyResourceServerConfig extends ResourceServerConfigurerAdapter {
 				.deleteCookies("JSESSIONID").and()
 				.authorizeRequests()
 				.antMatchers("/file/*","/dist/**"
+				.antMatchers(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,"/file/*","/pdf/**"
 				).permitAll().anyRequest().authenticated().and()
 				.csrf().disable();
 

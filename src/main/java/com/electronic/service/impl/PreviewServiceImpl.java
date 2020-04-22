@@ -1,4 +1,3 @@
-/*
 
 package com.electronic.service.impl;
 
@@ -25,8 +24,10 @@ public class PreviewServiceImpl implements PreviewService {
   public static  final Logger LOGGER = LoggerFactory.getLogger(PreviewServiceImpl.class);
 
 
-  @Value("${jodconverter.store.path}")
+ /* @Value("${jodconverter.store.path}")
   private String storePath;
+*/
+  private String storePath ="D:/java";
 
   @Autowired
   private DocumentConverter documentConverter;
@@ -70,11 +71,10 @@ public class PreviewServiceImpl implements PreviewService {
     return fileConvertResultDTO;
   }
 
-  */
 /**
    * 获取想要转换的格式类型
-   * @return
-   *//*
+   * @return*/
+
 
   private String getTargetFileExt(String originFileExt){
      if(FileConstants.fileType2Htmls.contains(originFileExt)){
@@ -90,4 +90,4 @@ public class PreviewServiceImpl implements PreviewService {
       targetDir.mkdirs();
     }
   }
-}*/
+}

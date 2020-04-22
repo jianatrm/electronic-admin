@@ -1,4 +1,3 @@
-/*
 package com.electronic.utils;
 
 import java.io.File;
@@ -29,11 +28,10 @@ public class FileUtil extends FileUtils {
 
 
 
+/*
+*
+   * 获取含扩展名的文件名（不包含path路径）*/
 
-  */
-/**
-   * 获取含扩展名的文件名（不包含path路径）
-   *//*
 
   public static String getFileName(String fileName) {
 
@@ -51,11 +49,10 @@ public class FileUtil extends FileUtils {
     }
     return StringUtils.trimToEmpty(name);
   }
+/*
+*
+   * 获取没有扩展名的文件名*/
 
-  */
-/**
-   * 获取没有扩展名的文件名
-   *//*
 
   public static String getWithoutExtension(String fileName) {
 
@@ -65,10 +62,9 @@ public class FileUtil extends FileUtils {
     return StringUtils.trimToEmpty(ext);
   }
 
-  */
 /**
-   * 获取扩展名
-   *//*
+   * 获取扩展名*/
+
 
   public static String getExtension(String fileName) {
 
@@ -81,10 +77,11 @@ public class FileUtil extends FileUtils {
   }
 
 
-  */
-/**
+/*
+*
    * 获取扩展名
-   *//*
+*/
+
 
   public static String getExtension(InputStream inputStream) {
 
@@ -100,40 +97,38 @@ public class FileUtil extends FileUtils {
     return null;
   }
 
-  */
 /**
-   * 判断是否同为扩展名
-   *//*
+   * 判断是否同为扩展名*/
+
 
   public static boolean isExtension(String fileName, String ext) {
 
     return StringUtils.equalsIgnoreCase(getExtension(fileName), ext);
   }
 
-  */
 /**
-   * 判断是否存在扩展名
-   *//*
+   * 判断是否存在扩展名*/
+
 
   public static boolean hasExtension(String fileName) {
 
     return !isExtension(fileName, StringUtils.EMPTY);
   }
 
-  */
 /**
-   * 得到正确的扩展名
-   *//*
+   * 得到正确的扩展名*/
+
 
   public static String trimExtension(String ext) {
 
     return getExtension(DOT + ext);
   }
 
-  */
-/**
+/*
+*
    * 向path中填充扩展名(如果没有或不同的话)
-   *//*
+
+*/
 
   public static String fillExtension(String fileName, String ext) {
 
@@ -148,20 +143,22 @@ public class FileUtil extends FileUtils {
     return fileName;
   }
 
-  */
-/**
+/*
+*
    * 判断是否是文件PATH
-   *//*
+
+*/
 
   public static boolean isFile(String fileName) {
 
     return hasExtension(fileName);
   }
+/*
 
-  */
-/**
+*
    * 判断是否是文件夹PATH
-   *//*
+
+*/
 
   public static boolean isFolder(String fileName) {
 
@@ -173,11 +170,12 @@ public class FileUtil extends FileUtils {
     return StringUtils.replace(StringUtils.trimToEmpty(path), SLASH_ONE,
         SLASH_TWO);
   }
+/*
 
-  */
-/**
+*
    * 链接PATH前处理
-   *//*
+*/
+
 
   public static String trimLeftPath(String path) {
 
@@ -191,11 +189,12 @@ public class FileUtil extends FileUtils {
     }
     return path;
   }
+/*
 
-  */
-/**
+*
    * 链接PATH后处理
-   *//*
+
+*/
 
   public static String trimRightPath(String path) {
 
@@ -210,10 +209,11 @@ public class FileUtil extends FileUtils {
     return path + SLASH_TWO;
   }
 
-  */
-/**
+/*
+*
    * 链接PATH前后处理，得到准确的链接PATH
-   *//*
+*/
+
 
   public static String trimPath(String path) {
 
@@ -224,10 +224,9 @@ public class FileUtil extends FileUtils {
     return path;
   }
 
-  */
 /**
-   * 通过数组完整链接PATH
-   *//*
+   * 通过数组完整链接PATH*/
+
 
   public static String bulidFullPath(String... paths) {
 
@@ -268,13 +267,14 @@ public class FileUtil extends FileUtils {
 
 
 
-  */
-/**
+/*
+*
    * 获取路径下的所有文件/文件夹
    *
    * @param directoryPath 需要遍历的文件夹路径
    * @param isAddDirectory 是否将子文件夹的路径也添加到list集合中
-   *//*
+*/
+
 
   public static List<String> getAllFile(String directoryPath, boolean isAddDirectory) {
 
@@ -300,4 +300,3 @@ public class FileUtil extends FileUtils {
 
 
 }
-*/
