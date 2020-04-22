@@ -1,7 +1,8 @@
-/*
 package com.electronic.controller;
 
+import com.electronic.dto.FileConvertResultDTO;
 import com.electronic.service.FileService;
+import com.electronic.service.PreviewService;
 import com.electronic.utils.FileUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.jodconverter.DocumentConverter;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URLConnection;
 
 @RestController
@@ -34,13 +36,16 @@ public class PDFController {
     @Autowired
     private FileService fileService;
 
-    @Value("${jodconverter.store.path}")
-    private String storePath;
+    //@Value("${jodconverter.store.path}")
+    private String storePath ="C:/Program Files/LibreOffice";
 
+
+    @Autowired
+    PreviewService previewService;
 
     @GetMapping("documentConverterToPdf/{fileName:.+}")
     public ResponseEntity<byte[]> documentConverterToPdf(@PathVariable String fileName, HttpServletResponse response) throws IOException {
-        if (StringUtils.isBlank(fileName)) {
+        /*if (StringUtils.isBlank(fileName)) {
             LOGGER.warn("fileName is blank");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -74,9 +79,12 @@ public class PDFController {
             return new ResponseEntity<>(bytes, HttpStatus.OK);
         } catch (IOException e) {
             LOGGER.error("readFile error:" + e.getMessage(), e);
-        }
+        }*/
+
+        org.springframework.core.io.Resource resource = fileService.loadFileAsResource(fileName);
+        InputStream inputStream = resource.getInputStream();
+        FileConvertResultDTO fileConvertResultDTO = previewService.convertInputStream2pdf(inputStream, fileName, "docx");
         return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
     }
 
 }
-*/

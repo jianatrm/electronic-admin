@@ -118,7 +118,7 @@
 
 
         <!-- office预览相关-->
-        <!--<dependency>
+        <dependency>
             <groupId>org.jodconverter</groupId>
             <artifactId>jodconverter-core</artifactId>
             <version>${jodconverter.version}</version>
@@ -144,7 +144,7 @@
             <version>${libreoffice.version}</version>
         </dependency>
 
-        &lt;!&ndash; 文件内容检测提取相关&ndash;&gt;
+        <!-- 文件内容检测提取相关-->
         <dependency>
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-core</artifactId>
@@ -154,7 +154,7 @@
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-parsers</artifactId>
             <version>${tika.version}</version>
-        </dependency>-->
+        </dependency>
 
 
     </dependencies>
@@ -173,11 +173,11 @@
 
 
 
-    <!--<profiles>
+    <profiles>
         <profile>
             <id>win</id>
             <properties>
-                <office.home>C:/Program Files/LibreOffice</office.home>
+                <office.home>C:\Program Files\LibreOffice</office.home>
                 <store.path>C:/data/preview</store.path>
             </properties>
             <activation>
@@ -194,7 +194,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
         </profile>
-    </profiles>-->
+    </profiles>
 
 
     <build>
