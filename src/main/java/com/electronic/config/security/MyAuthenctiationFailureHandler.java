@@ -43,7 +43,7 @@ public class MyAuthenctiationFailureHandler extends SimpleUrlAuthenticationFailu
 		logger.info("登录失败");
 
 		response.setContentType("application/json;charset=UTF-8");
-		BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_FAILURE,BusinessConstants.BUSI_FAILURE_CODE,BusinessConstants.BUSI_FAILURE_MESSAGE);
+		BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_FAILURE,BusinessConstants.BUSI_FAILURE_CODE,exception.getMessage());
 		response.getWriter().write(JSON.toJSONString(baseResponse));
 		
 	}
