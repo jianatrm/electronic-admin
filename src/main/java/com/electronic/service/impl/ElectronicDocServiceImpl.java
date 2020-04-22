@@ -82,13 +82,13 @@ public class ElectronicDocServiceImpl implements ElectronicDocService {
     public BaseResponse<PageResult<SUserElectronicDoc>> queryElectronicDoc(ElectronicDocRequest docRequest) throws Exception {
         BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
         PageResult<SUserElectronicDoc> pageResult = new PageResult<>();
-        PageHelper.startPage(docRequest.getPageNum(),docRequest.getPageSize());
-        List<SUserElectronicDoc> sUserElectronicDocs = sUserElectronicDocMapper.selectByUserId(docRequest.getOperateId());
-
+        Integer startSize = (docRequest.getPageNum()-1)*docRequest.getPageSize();
+        List<SUserElectronicDoc> sUserElectronicDocs = sUserElectronicDocMapper.selectByUserId(docRequest.getOperateId(),docRequest.getDocName(),startSize,docRequest.getPageSize());
+        Integer selectCountByUserId = sUserElectronicDocMapper.selectCountByUserId(docRequest.getOperateId(), docRequest.getDocName());
         PageInfo pageInfo = new PageInfo(sUserElectronicDocs);
         pageResult.setResult(sUserElectronicDocs);
-        pageResult.setPageCount(pageInfo.getPages());
-        pageResult.setCount(pageInfo.getSize());
+        pageResult.setPageCount(selectCountByUserId%docRequest.getPageSize()==0?selectCountByUserId/docRequest.getPageSize():(selectCountByUserId/docRequest.getPageSize())+1);
+        pageResult.setCount(selectCountByUserId);
         baseResponse.setResult(pageResult);
         return baseResponse;
     }

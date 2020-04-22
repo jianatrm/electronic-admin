@@ -1,5 +1,6 @@
 package com.electronic.controller;
 
+import com.electronic.contants.FileConstants;
 import com.electronic.dto.FileConvertResultDTO;
 import com.electronic.service.FileService;
 import com.electronic.service.PreviewService;
@@ -24,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLConnection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/pdf")
@@ -50,13 +52,18 @@ public class PDFController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         String fileExt = FileUtil.getExtension(fileName);
-        if (StringUtils.isBlank(fileExt)) {
-            fileName = fileName + FileUtil.PDF;
+        //先从以前的仓库中查找
+        String tempFilename  = FileUtil.getWithoutExtension(fileName);
+        if (FileConstants.fileType2Htmls.contains(fileExt)){
+            //判断是否为表格   表格会以html的格式展示
+            tempFilename = tempFilename + "."+FileUtil.HTML;
+        }else {
+            tempFilename = tempFilename +"."+ FileUtil.PDF;
         }
-        String filePath = storePath + FileUtil.SLASH_ONE + fileName;
+
+        String filePath = storePath + FileUtil.SLASH_ONE + tempFilename;
         File file = new File(filePath);
-
-
+        //不存在从新生成
         if (!file.exists()) {
             LOGGER.warn("fileName:{} is not found", fileName);
             org.springframework.core.io.Resource resource = fileService.loadFileAsResource(fileName);

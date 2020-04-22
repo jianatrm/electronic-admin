@@ -65,6 +65,9 @@ public class PreviewServiceImpl implements PreviewService {
     } catch (OfficeException e) {
       LOGGER.error("convertInputStream2pdf error : " + e.getMessage(),e);
       fileConvertResultDTO.setStatus("fail");
+    }catch (Exception e){
+      LOGGER.error("convertInputStream2pdf error : " + e.getMessage(),e);
+      fileConvertResultDTO.setStatus("fail");
     }
     return fileConvertResultDTO;
   }

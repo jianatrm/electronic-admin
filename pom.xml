@@ -172,12 +172,12 @@
     </dependencyManagement>
 
 
-
+<!--
     <profiles>
         <profile>
             <id>win</id>
             <properties>
-                <office.home>C:\Program Files\LibreOffice</office.home>
+                <office.home>C:/Program Files/LibreOffice</office.home>
                 <store.path>C:/data/preview</store.path>
             </properties>
             <activation>
@@ -194,7 +194,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
-    </profiles>
+    </profiles>-->
 
 
     <build>
