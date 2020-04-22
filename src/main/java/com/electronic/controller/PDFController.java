@@ -36,20 +36,19 @@ public class PDFController {
     @Autowired
     private FileService fileService;
 
-    //@Value("${jodconverter.store.path}")
-    private String storePath ="C:/Program Files/LibreOffice";
-
+    @Value("${jodconverter.store.path}")
+    private String storePath;
 
     @Autowired
-    PreviewService previewService;
+    private PreviewService previewService;
+
 
     @GetMapping("documentConverterToPdf/{fileName:.+}")
     public ResponseEntity<byte[]> documentConverterToPdf(@PathVariable String fileName, HttpServletResponse response) throws IOException {
-        /*if (StringUtils.isBlank(fileName)) {
+        if (StringUtils.isBlank(fileName)) {
             LOGGER.warn("fileName is blank");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
         String fileExt = FileUtil.getExtension(fileName);
         if (StringUtils.isBlank(fileExt)) {
             fileName = fileName + FileUtil.PDF;
@@ -60,7 +59,12 @@ public class PDFController {
 
         if (!file.exists()) {
             LOGGER.warn("fileName:{} is not found", fileName);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            org.springframework.core.io.Resource resource = fileService.loadFileAsResource(fileName);
+            InputStream stream = resource.getInputStream();
+            FileConvertResultDTO convertResultDTO = previewService.convertInputStream2pdf(stream, fileName, fileExt);
+            String targetFileName = convertResultDTO.getTargetFileName();
+            String targetfilePath = storePath + FileUtil.SLASH_ONE + targetFileName;
+            file = new File(targetfilePath);
         }
 
         try {
@@ -79,7 +83,7 @@ public class PDFController {
             return new ResponseEntity<>(bytes, HttpStatus.OK);
         } catch (IOException e) {
             LOGGER.error("readFile error:" + e.getMessage(), e);
-        }*/
+        }
 
         org.springframework.core.io.Resource resource = fileService.loadFileAsResource(fileName);
         InputStream inputStream = resource.getInputStream();

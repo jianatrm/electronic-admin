@@ -24,10 +24,8 @@ public class PreviewServiceImpl implements PreviewService {
   public static  final Logger LOGGER = LoggerFactory.getLogger(PreviewServiceImpl.class);
 
 
- /* @Value("${jodconverter.store.path}")
+  @Value("${jodconverter.store.path}")
   private String storePath;
-*/
-  private String storePath ="D:/java";
 
   @Autowired
   private DocumentConverter documentConverter;

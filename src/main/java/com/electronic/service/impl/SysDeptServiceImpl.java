@@ -26,27 +26,29 @@ public class SysDeptServiceImpl implements SysDeptService {
     SysDeptMapper sysDeptMapper;
 
     @Override
-    public SysDept selectSysDept(SysDept Dept) throws Exception {
+    public SysDept selectSysDept(SysDept dept) throws Exception {
         SysDeptExample sysDeptExample = new SysDeptExample();
         SysDeptExample.Criteria criteria = sysDeptExample.createCriteria();
-        if (!StringUtils.isBlank(Dept.getDeptName())){
-            criteria.andDeptNameEqualTo(Dept.getDeptName());
+        if (!StringUtils.isBlank(dept.getDeptName())){
+            criteria.andDeptNameEqualTo(dept.getDeptName());
         }
         List<SysDept> sysDepts = sysDeptMapper.selectByExample(sysDeptExample);
         return CollectionUtils.isEmpty(sysDepts)? null:sysDepts.get(0);
     }
 
     @Override
-    public Integer addSysDept(SysDept Dept) throws Exception {
-        Dept.setOperateTime(new Date());
-        int insertSelective = sysDeptMapper.insertSelective(Dept);
+    public Integer addSysDept(SysDept dept) throws Exception {
+        dept.setOperateTime(new Date());
+        dept.setLevel("0");
+        dept.setStatus(String.valueOf(UserConstants.VALID_STATUS));
+        int insertSelective = sysDeptMapper.insertSelective(dept);
         return insertSelective;
     }
 
     @Override
-    public Integer updateSysDept(SysDept Dept) throws Exception {
-        Dept.setOperateTime(new Date());
-        int updateByPrimaryKeySelective = sysDeptMapper.updateByPrimaryKeySelective(Dept);
+    public Integer updateSysDept(SysDept dept) throws Exception {
+        dept.setOperateTime(new Date());
+        int updateByPrimaryKeySelective = sysDeptMapper.updateByPrimaryKeySelective(dept);
         return updateByPrimaryKeySelective;
     }
 
