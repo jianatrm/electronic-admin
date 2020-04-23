@@ -9,6 +9,10 @@ public class ElectronicDoc {
 
     private String docUrl;
 
+    private String docType;
+
+    private String docRandomName;
+
     private String status;
 
     private String remark;
@@ -39,6 +43,22 @@ public class ElectronicDoc {
 
     public void setDocUrl(String docUrl) {
         this.docUrl = docUrl == null ? null : docUrl.trim();
+    }
+
+    public String getDocType() {
+        return docType;
+    }
+
+    public void setDocType(String docType) {
+        this.docType = docType == null ? null : docType.trim();
+    }
+
+    public String getDocRandomName() {
+        return docRandomName;
+    }
+
+    public void setDocRandomName(String docRandomName) {
+        this.docRandomName = docRandomName == null ? null : docRandomName.trim();
     }
 
     public String getStatus() {

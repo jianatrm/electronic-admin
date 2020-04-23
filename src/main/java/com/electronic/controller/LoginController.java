@@ -2,30 +2,34 @@ package com.electronic.controller;
 
 import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.SessionUser;
-import com.electronic.contants.BusinessConstants;
+import com.electronic.service.StatisticsService;
 import com.electronic.utils.SessionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import javax.servlet.http.HttpServletRequest;
 
-import java.io.UnsupportedEncodingException;
-
-@Controller
-@RequestMapping("user")
+@RestController
+@RequestMapping("/user")
 public class LoginController {
 
+    @Autowired
+    private StatisticsService statisticsService;
+
     @RequestMapping("/userInfo")
-    @ResponseBody
-    public BaseResponse userInfo() throws UnsupportedEncodingException {
+    public BaseResponse userInfo() throws Exception {
         SessionUser sessionUser = SessionUtils.getSessionUser();
-        BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
-        baseResponse.setResult(sessionUser);
+        BaseResponse baseResponse = statisticsService.userInfo(sessionUser);
         return baseResponse;
 
     }
+    @RequestMapping("/selectCountByMonth")
+    public BaseResponse deptMonthDoc(HttpServletRequest request) throws Exception {
+        String year = request.getParameter("year");
+        BaseResponse baseResponse = statisticsService.selectCountByMonth(year);
+        return baseResponse;
 
+    }
 
 
 

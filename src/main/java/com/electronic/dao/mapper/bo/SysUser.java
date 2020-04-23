@@ -13,6 +13,10 @@ public class SysUser {
 
     private String password;
 
+    private String nickName;
+
+    private String staffName;
+
     private String sex;
 
     private Integer deptId;
@@ -28,6 +32,8 @@ public class SysUser {
     private Date operateTime;
 
     private String operateIp;
+
+    private byte[] userAvatar;
 
     public Integer getUserId() {
         return userId;
@@ -67,6 +73,22 @@ public class SysUser {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName == null ? null : nickName.trim();
+    }
+
+    public String getStaffName() {
+        return staffName;
+    }
+
+    public void setStaffName(String staffName) {
+        this.staffName = staffName == null ? null : staffName.trim();
     }
 
     public String getSex() {
@@ -131,5 +153,13 @@ public class SysUser {
 
     public void setOperateIp(String operateIp) {
         this.operateIp = operateIp == null ? null : operateIp.trim();
+    }
+
+    public byte[] getUserAvatar() {
+        return userAvatar;
+    }
+
+    public void setUserAvatar(byte[] userAvatar) {
+        this.userAvatar = userAvatar;
     }
 }

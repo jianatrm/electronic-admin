@@ -19,6 +19,26 @@ public class SDeptElectronicDoc {
 
     private Date operateTime;
 
+    private Integer count;
+
+    private String months;
+
+    public String getMonths() {
+        return months;
+    }
+
+    public void setMonths(String months) {
+        this.months = months;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
     public Integer getDeptId() {
         return deptId;
     }

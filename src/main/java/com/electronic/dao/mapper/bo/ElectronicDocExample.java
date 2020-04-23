@@ -305,6 +305,146 @@ public class ElectronicDocExample {
             return (Criteria) this;
         }
 
+        public Criteria andDocTypeIsNull() {
+            addCriterion("doc_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocTypeIsNotNull() {
+            addCriterion("doc_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocTypeEqualTo(String value) {
+            addCriterion("doc_type =", value, "docType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocTypeNotEqualTo(String value) {
+            addCriterion("doc_type <>", value, "docType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocTypeGreaterThan(String value) {
+            addCriterion("doc_type >", value, "docType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("doc_type >=", value, "docType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocTypeLessThan(String value) {
+            addCriterion("doc_type <", value, "docType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocTypeLessThanOrEqualTo(String value) {
+            addCriterion("doc_type <=", value, "docType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocTypeLike(String value) {
+            addCriterion("doc_type like", value, "docType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocTypeNotLike(String value) {
+            addCriterion("doc_type not like", value, "docType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocTypeIn(List<String> values) {
+            addCriterion("doc_type in", values, "docType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocTypeNotIn(List<String> values) {
+            addCriterion("doc_type not in", values, "docType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocTypeBetween(String value1, String value2) {
+            addCriterion("doc_type between", value1, value2, "docType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocTypeNotBetween(String value1, String value2) {
+            addCriterion("doc_type not between", value1, value2, "docType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocRandomNameIsNull() {
+            addCriterion("doc_random_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocRandomNameIsNotNull() {
+            addCriterion("doc_random_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocRandomNameEqualTo(String value) {
+            addCriterion("doc_random_name =", value, "docRandomName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocRandomNameNotEqualTo(String value) {
+            addCriterion("doc_random_name <>", value, "docRandomName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocRandomNameGreaterThan(String value) {
+            addCriterion("doc_random_name >", value, "docRandomName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocRandomNameGreaterThanOrEqualTo(String value) {
+            addCriterion("doc_random_name >=", value, "docRandomName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocRandomNameLessThan(String value) {
+            addCriterion("doc_random_name <", value, "docRandomName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocRandomNameLessThanOrEqualTo(String value) {
+            addCriterion("doc_random_name <=", value, "docRandomName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocRandomNameLike(String value) {
+            addCriterion("doc_random_name like", value, "docRandomName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocRandomNameNotLike(String value) {
+            addCriterion("doc_random_name not like", value, "docRandomName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocRandomNameIn(List<String> values) {
+            addCriterion("doc_random_name in", values, "docRandomName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocRandomNameNotIn(List<String> values) {
+            addCriterion("doc_random_name not in", values, "docRandomName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocRandomNameBetween(String value1, String value2) {
+            addCriterion("doc_random_name between", value1, value2, "docRandomName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDocRandomNameNotBetween(String value1, String value2) {
+            addCriterion("doc_random_name not between", value1, value2, "docRandomName");
+            return (Criteria) this;
+        }
+
         public Criteria andStatusIsNull() {
             addCriterion("status is null");
             return (Criteria) this;

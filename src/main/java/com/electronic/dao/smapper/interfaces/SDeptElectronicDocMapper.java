@@ -7,4 +7,6 @@ import java.util.List;
 public interface SDeptElectronicDocMapper {
 
     List<SDeptElectronicDoc> selectByDeptId(SDeptElectronicDoc sDeptElectronicDoc);
+
+    Integer selectCountByDeptId(SDeptElectronicDoc sDeptElectronicDoc);
 }

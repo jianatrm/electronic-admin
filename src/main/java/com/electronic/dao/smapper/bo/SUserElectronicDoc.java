@@ -12,6 +12,10 @@ public class SUserElectronicDoc  {
 
     private String docUrl;
 
+    private String docType;
+
+    private String docRandomName;
+
     private String status;
 
     private String remark;
@@ -19,6 +23,32 @@ public class SUserElectronicDoc  {
     private Integer operateId;
 
     private Date operateTime;
+
+    private Integer count;
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public String getDocRandomName() {
+        return docRandomName;
+    }
+
+    public void setDocRandomName(String docRandomName) {
+        this.docRandomName = docRandomName;
+    }
+
+    public String getDocType() {
+        return docType;
+    }
+
+    public void setDocType(String docType) {
+        this.docType = docType;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
 
     public Integer getUserId() {
         return userId;

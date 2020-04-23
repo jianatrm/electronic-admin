@@ -13,7 +13,6 @@ import com.electronic.dao.mapper.interfaces.UserElectronicDocMapper;
 import com.electronic.dao.smapper.bo.SUserElectronicDoc;
 import com.electronic.dao.smapper.interfaces.SUserElectronicDocMapper;
 import com.electronic.service.ElectronicDocService;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

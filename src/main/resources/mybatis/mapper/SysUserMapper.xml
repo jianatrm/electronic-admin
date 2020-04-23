@@ -7,6 +7,8 @@
     <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
     <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="staff_name" property="staffName" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="dept_id" property="deptId" jdbcType="INTEGER" />
     <result column="level" property="level" jdbcType="VARCHAR" />
@@ -15,6 +17,9 @@
     <result column="operator" property="operator" jdbcType="VARCHAR" />
     <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
     <result column="operate_ip" property="operateIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.electronic.dao.mapper.bo.SysUser" extends="BaseResultMap" >
+    <result column="user_avatar" property="userAvatar" jdbcType="LONGVARBINARY" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -75,9 +80,28 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    user_id, user_name, user_phone, user_email, password, sex, dept_id, level, status, 
-    remark, operator, operate_time, operate_ip
+    user_id, user_name, user_phone, user_email, password, nick_name, staff_name, sex, 
+    dept_id, level, status, remark, operator, operate_time, operate_ip
   </sql>
+  <sql id="Blob_Column_List" >
+    user_avatar
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.electronic.dao.mapper.bo.SysUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.electronic.dao.mapper.bo.SysUserExample" >
     select
     <if test="distinct" >
@@ -92,9 +116,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from sys_user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
@@ -113,14 +139,16 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into sys_user (user_name, user_phone, user_email, 
-      password, sex, dept_id, 
-      level, status, remark, 
-      operator, operate_time, operate_ip
+      password, nick_name, staff_name, 
+      sex, dept_id, level, 
+      status, remark, operator, 
+      operate_time, operate_ip, user_avatar
       )
     values (#{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{deptId,jdbcType=INTEGER}, 
-      #{level,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
-      #{operator,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR}
+      #{password,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{staffName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{deptId,jdbcType=INTEGER}, #{level,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
+      #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR}, #{userAvatar,jdbcType=LONGVARBINARY}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.SysUser" >
@@ -140,6 +168,12 @@
       </if>
       <if test="password != null" >
         password,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="staffName != null" >
+        staff_name,
       </if>
       <if test="sex != null" >
         sex,
@@ -165,6 +199,9 @@
       <if test="operateIp != null" >
         operate_ip,
       </if>
+      <if test="userAvatar != null" >
+        user_avatar,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userName != null" >
@@ -178,6 +215,12 @@
       </if>
       <if test="password != null" >
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffName != null" >
+        #{staffName,jdbcType=VARCHAR},
       </if>
       <if test="sex != null" >
         #{sex,jdbcType=VARCHAR},
@@ -202,6 +245,9 @@
       </if>
       <if test="operateIp != null" >
         #{operateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userAvatar != null" >
+        #{userAvatar,jdbcType=LONGVARBINARY},
       </if>
     </trim>
   </insert>
@@ -229,6 +275,12 @@
       <if test="record.password != null" >
         password = #{record.password,jdbcType=VARCHAR},
       </if>
+      <if test="record.nickName != null" >
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffName != null" >
+        staff_name = #{record.staffName,jdbcType=VARCHAR},
+      </if>
       <if test="record.sex != null" >
         sex = #{record.sex,jdbcType=VARCHAR},
       </if>
@@ -253,7 +305,32 @@
       <if test="record.operateIp != null" >
         operate_ip = #{record.operateIp,jdbcType=VARCHAR},
       </if>
+      <if test="record.userAvatar != null" >
+        user_avatar = #{record.userAvatar,jdbcType=LONGVARBINARY},
+      </if>
     </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update sys_user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      user_email = #{record.userEmail,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      staff_name = #{record.staffName,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      dept_id = #{record.deptId,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{record.operateIp,jdbcType=VARCHAR},
+      user_avatar = #{record.userAvatar,jdbcType=LONGVARBINARY}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -265,6 +342,8 @@
       user_phone = #{record.userPhone,jdbcType=VARCHAR},
       user_email = #{record.userEmail,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      staff_name = #{record.staffName,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=VARCHAR},
       dept_id = #{record.deptId,jdbcType=INTEGER},
       level = #{record.level,jdbcType=VARCHAR},
@@ -292,6 +371,12 @@
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="staffName != null" >
+        staff_name = #{staffName,jdbcType=VARCHAR},
+      </if>
       <if test="sex != null" >
         sex = #{sex,jdbcType=VARCHAR},
       </if>
@@ -316,7 +401,29 @@
       <if test="operateIp != null" >
         operate_ip = #{operateIp,jdbcType=VARCHAR},
       </if>
+      <if test="userAvatar != null" >
+        user_avatar = #{userAvatar,jdbcType=LONGVARBINARY},
+      </if>
     </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.electronic.dao.mapper.bo.SysUser" >
+    update sys_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      staff_name = #{staffName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      dept_id = #{deptId,jdbcType=INTEGER},
+      level = #{level,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{operateIp,jdbcType=VARCHAR},
+      user_avatar = #{userAvatar,jdbcType=LONGVARBINARY}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.electronic.dao.mapper.bo.SysUser" >
@@ -325,6 +432,8 @@
       user_phone = #{userPhone,jdbcType=VARCHAR},
       user_email = #{userEmail,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      staff_name = #{staffName,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       dept_id = #{deptId,jdbcType=INTEGER},
       level = #{level,jdbcType=VARCHAR},

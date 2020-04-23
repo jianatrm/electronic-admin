@@ -2,10 +2,12 @@ package com.electronic.controller;
 
 import com.electronic.base.model.BaseResponse;
 import com.electronic.base.model.PageResult;
+import com.electronic.base.model.SessionUser;
 import com.electronic.base.model.VO.UserRequest;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.dao.mapper.bo.SysUser;
 import com.electronic.service.SysUserService;
+import com.electronic.utils.SessionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -13,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.UnsupportedEncodingException;
 
 @RestController
 @RequestMapping("/user")
@@ -23,6 +27,7 @@ public class UserController {
 
     @Autowired
     private SysUserService sysUserService;
+
 
 
 

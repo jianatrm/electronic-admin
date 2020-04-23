@@ -6,8 +6,6 @@ import com.electronic.base.model.VO.ElectronicDocRequest;
 import com.electronic.dao.mapper.bo.ElectronicDoc;
 import com.electronic.dao.smapper.bo.SUserElectronicDoc;
 
-import java.util.List;
-
 public interface ElectronicDocService {
 
     public ElectronicDoc selectElectronicDoc(ElectronicDoc doc) throws Exception;

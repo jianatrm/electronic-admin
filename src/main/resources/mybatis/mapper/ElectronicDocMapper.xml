@@ -5,6 +5,8 @@
     <id column="doc_id" property="docId" jdbcType="INTEGER" />
     <result column="doc_name" property="docName" jdbcType="VARCHAR" />
     <result column="doc_url" property="docUrl" jdbcType="VARCHAR" />
+    <result column="doc_type" property="docType" jdbcType="VARCHAR" />
+    <result column="doc_random_name" property="docRandomName" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="operate_id" property="operateId" jdbcType="INTEGER" />
@@ -69,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    doc_id, doc_name, doc_url, status, remark, operate_id, operate_time
+    doc_id, doc_name, doc_url, doc_type, doc_random_name, status, remark, operate_id, 
+    operate_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.electronic.dao.mapper.bo.ElectronicDocExample" >
     select
@@ -105,12 +108,12 @@
     <selectKey resultType="java.lang.Integer" keyProperty="docId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into electronic_doc (doc_name, doc_url, status, 
-      remark, operate_id, operate_time
-      )
-    values (#{docName,jdbcType=VARCHAR}, #{docUrl,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{operateId,jdbcType=INTEGER}, #{operateTime,jdbcType=TIMESTAMP}
-      )
+    insert into electronic_doc (doc_name, doc_url, doc_type, 
+      doc_random_name, status, remark, 
+      operate_id, operate_time)
+    values (#{docName,jdbcType=VARCHAR}, #{docUrl,jdbcType=VARCHAR}, #{docType,jdbcType=VARCHAR}, 
+      #{docRandomName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{operateId,jdbcType=INTEGER}, #{operateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.ElectronicDoc" >
     <selectKey resultType="java.lang.Integer" keyProperty="docId" order="AFTER" >
@@ -123,6 +126,12 @@
       </if>
       <if test="docUrl != null" >
         doc_url,
+      </if>
+      <if test="docType != null" >
+        doc_type,
+      </if>
+      <if test="docRandomName != null" >
+        doc_random_name,
       </if>
       <if test="status != null" >
         status,
@@ -143,6 +152,12 @@
       </if>
       <if test="docUrl != null" >
         #{docUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="docType != null" >
+        #{docType,jdbcType=VARCHAR},
+      </if>
+      <if test="docRandomName != null" >
+        #{docRandomName,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
         #{status,jdbcType=VARCHAR},
@@ -176,6 +191,12 @@
       <if test="record.docUrl != null" >
         doc_url = #{record.docUrl,jdbcType=VARCHAR},
       </if>
+      <if test="record.docType != null" >
+        doc_type = #{record.docType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.docRandomName != null" >
+        doc_random_name = #{record.docRandomName,jdbcType=VARCHAR},
+      </if>
       <if test="record.status != null" >
         status = #{record.status,jdbcType=VARCHAR},
       </if>
@@ -198,6 +219,8 @@
     set doc_id = #{record.docId,jdbcType=INTEGER},
       doc_name = #{record.docName,jdbcType=VARCHAR},
       doc_url = #{record.docUrl,jdbcType=VARCHAR},
+      doc_type = #{record.docType,jdbcType=VARCHAR},
+      doc_random_name = #{record.docRandomName,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
       operate_id = #{record.operateId,jdbcType=INTEGER},
@@ -214,6 +237,12 @@
       </if>
       <if test="docUrl != null" >
         doc_url = #{docUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="docType != null" >
+        doc_type = #{docType,jdbcType=VARCHAR},
+      </if>
+      <if test="docRandomName != null" >
+        doc_random_name = #{docRandomName,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=VARCHAR},
@@ -234,6 +263,8 @@
     update electronic_doc
     set doc_name = #{docName,jdbcType=VARCHAR},
       doc_url = #{docUrl,jdbcType=VARCHAR},
+      doc_type = #{docType,jdbcType=VARCHAR},
+      doc_random_name = #{docRandomName,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       operate_id = #{operateId,jdbcType=INTEGER},
