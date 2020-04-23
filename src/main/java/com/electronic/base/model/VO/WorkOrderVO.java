@@ -25,7 +25,7 @@ public class WorkOrderVO {
 
     private Date operateTime;
 
-    private Integer workOrderStatus;
+    private Integer workOrderStatus =0;
 
     private String workOrderStatusDesc;
 
