@@ -20,6 +20,7 @@
         <jodconverter.version>4.2.2</jodconverter.version>
         <tika.version>1.22</tika.version>
         <libreoffice.version>6.3.2</libreoffice.version>
+        <skipTests>true</skipTests>
     </properties>
 
     <dependencies>
