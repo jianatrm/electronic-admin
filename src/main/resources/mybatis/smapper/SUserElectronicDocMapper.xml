@@ -25,10 +25,14 @@
             and t3.doc_name LIKE "%"#{docName}"%"
         </if>
         <if test="startTime != null">
+            <![CDATA[
             and t3.operate_time >= #{startTime}
+            ]]>
         </if>
         <if test="endTime != null">
+            <![CDATA[
             and t3.operate_time <= #{endTime}
+            ]]>
         </if>
         order by t3.operate_time desc
         <if test="startSize != null">
@@ -48,10 +52,14 @@
             and t3.doc_name LIKE "%"#{docName}"%"
         </if>
         <if test="startTime != null">
+            <![CDATA[
             and t3.operate_time >= #{startTime}
+            ]]>
         </if>
         <if test="endTime != null">
+            <![CDATA[
             and t3.operate_time <= #{endTime}
+            ]]>
         </if>
     </select>
 

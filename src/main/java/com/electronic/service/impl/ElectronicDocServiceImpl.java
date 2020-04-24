@@ -82,8 +82,8 @@ public class ElectronicDocServiceImpl implements ElectronicDocService {
         BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
         PageResult<SUserElectronicDoc> pageResult = new PageResult<>();
         Integer startSize = (docRequest.getPageNum()-1)*docRequest.getPageSize();
-        List<SUserElectronicDoc> sUserElectronicDocs = sUserElectronicDocMapper.selectByUserId(docRequest.getOperateId(),docRequest.getDocName(),startSize,docRequest.getPageSize());
-        Integer selectCountByUserId = sUserElectronicDocMapper.selectCountByUserId(docRequest.getOperateId(), docRequest.getDocName());
+        List<SUserElectronicDoc> sUserElectronicDocs = sUserElectronicDocMapper.selectByUserId(docRequest.getOperateId(),docRequest.getDocName(),null,null,startSize,docRequest.getPageSize());
+        Integer selectCountByUserId = sUserElectronicDocMapper.selectCountByUserId(docRequest.getOperateId(), docRequest.getDocName(),null,null);
         PageInfo pageInfo = new PageInfo(sUserElectronicDocs);
         pageResult.setResult(sUserElectronicDocs);
         pageResult.setPageCount(selectCountByUserId%docRequest.getPageSize()==0?selectCountByUserId/docRequest.getPageSize():(selectCountByUserId/docRequest.getPageSize())+1);
