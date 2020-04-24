@@ -1,4 +1,4 @@
-package com.electronic.base.model;
+package com.electronic.base;
 
 public class FileException extends RuntimeException{
     public FileException(String message) {

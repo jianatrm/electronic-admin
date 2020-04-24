@@ -1,7 +1,9 @@
 package com.electronic.service.impl;
 
-import com.electronic.base.model.BaseResponse;
-import com.electronic.base.model.SessionUser;
+import com.electronic.base.BaseResponse;
+import com.electronic.base.PageResult;
+import com.electronic.base.SessionUser;
+import com.electronic.base.VO.SUserElectronicDocRequest;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.dao.mapper.bo.*;
 import com.electronic.dao.mapper.interfaces.*;
@@ -12,7 +14,7 @@ import com.electronic.dao.smapper.interfaces.SDeptElectronicDocMapper;
 import com.electronic.dao.smapper.interfaces.SDeptMonthDocMapper;
 import com.electronic.dao.smapper.interfaces.SUserElectronicDocMapper;
 import com.electronic.service.StatisticsService;
-import com.electronic.utils.SessionUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,14 +87,7 @@ public class StatisticsServiceImpl implements StatisticsService {
         deptElectronicDocExampleCriteria.andDeptIdEqualTo(deptId);
         //部门文档数量
         int deptCount = deptElectronicDocMapper.countByExample(deptElectronicDocExample);
-        /*SDeptElectronicDoc sDeptElectronicDoc = new SDeptElectronicDoc();
 
-        Integer companyCount = sDeptElectronicDocMapper.selectCountByDeptId(sDeptElectronicDoc);
-
-        sDeptElectronicDoc.setDeptId(deptId);
-
-        Integer deptCount = sDeptElectronicDocMapper.selectCountByDeptId(sDeptElectronicDoc);
-*/
         //用户文档分类
         List<SUserElectronicDoc> sUserElectronicDocs = sUserElectronicDocMapper.selectDocTypeCountByUserId(userId);
 
@@ -122,6 +117,48 @@ public class StatisticsServiceImpl implements StatisticsService {
 
         List<SDeptMonthDoc> sDeptMonthDocs = sDeptMonthDocMapper.selectCountByMonth(year);
         baseResponse.setResult(sDeptMonthDocs);
+        return baseResponse;
+    }
+
+    @Override
+    public BaseResponse queryUserDoc(SUserElectronicDocRequest sUserElectronicDocRequest) throws Exception {
+        BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
+
+        PageResult<SUserElectronicDoc> pageResult = new PageResult<>();
+
+        Integer userId = sUserElectronicDocRequest.getUserId();
+        String docName = sUserElectronicDocRequest.getDocName();
+        String startTime = sUserElectronicDocRequest.getStartTime();
+        String endTime = sUserElectronicDocRequest.getEndTime();
+        Integer pageSize = sUserElectronicDocRequest.getPageSize();
+        Integer startSize = (sUserElectronicDocRequest.getPageNum()-1)* pageSize;
+
+        List<SUserElectronicDoc> sUserElectronicDocs = sUserElectronicDocMapper.selectByUserId(userId, docName, startTime, endTime, startSize, pageSize);
+        Integer integer = sUserElectronicDocMapper.selectCountByUserId(userId, docName, startTime, endTime);
+        pageResult.setResult(sUserElectronicDocs);
+        pageResult.setCount(integer);
+        baseResponse.setResult(pageResult);
+        return baseResponse;
+    }
+
+    @Override
+    public BaseResponse queryDeptDoc(SUserElectronicDocRequest sUserElectronicDocRequest) throws Exception {
+        BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
+
+        PageResult<SDeptElectronicDoc> pageResult = new PageResult<>();
+
+        Integer pageSize = sUserElectronicDocRequest.getPageSize();
+        Integer startSize = (sUserElectronicDocRequest.getPageNum()-1)* pageSize;
+
+        SDeptElectronicDoc sDeptElectronicDoc = new SDeptElectronicDoc();
+        BeanUtils.copyProperties(sUserElectronicDocRequest,sDeptElectronicDoc);
+        sDeptElectronicDoc.setPageSize(pageSize);
+        sDeptElectronicDoc.setStartSize(startSize);
+        Integer integer = sDeptElectronicDocMapper.selectCountByDeptId(sDeptElectronicDoc);
+        List<SDeptElectronicDoc> sDeptElectronicDocs = sDeptElectronicDocMapper.selectByDeptId(sDeptElectronicDoc);
+        pageResult.setResult(sDeptElectronicDocs);
+        pageResult.setCount(integer);
+        baseResponse.setResult(pageResult);
         return baseResponse;
     }
 }

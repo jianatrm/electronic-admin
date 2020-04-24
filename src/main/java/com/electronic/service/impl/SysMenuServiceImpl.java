@@ -1,6 +1,6 @@
 package com.electronic.service.impl;
 
-import com.electronic.base.model.BaseResponse;
+import com.electronic.base.BaseResponse;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.dao.smapper.bo.SysMenuRoles;
 import com.electronic.dao.smapper.interfaces.SysMenuMapper;

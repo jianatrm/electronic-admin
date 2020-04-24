@@ -1,7 +1,7 @@
 package com.electronic.controller;
 
-import com.electronic.base.model.BaseResponse;
-import com.electronic.base.model.UploadFileResponse;
+import com.electronic.base.BaseResponse;
+import com.electronic.base.UploadFileResponse;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.service.FileService;
 import org.slf4j.Logger;

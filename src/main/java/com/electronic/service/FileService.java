@@ -1,9 +1,8 @@
 package com.electronic.service;
 
-import com.electronic.base.model.FileException;
+import com.electronic.base.FileException;
 import com.electronic.properties.FileProperties;
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;

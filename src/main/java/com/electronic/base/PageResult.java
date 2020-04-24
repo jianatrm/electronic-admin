@@ -1,4 +1,4 @@
-package com.electronic.base.model;
+package com.electronic.base;
 
 import java.io.Serializable;
 import java.util.List;

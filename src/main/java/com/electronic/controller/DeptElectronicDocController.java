@@ -1,9 +1,9 @@
 package com.electronic.controller;
 
-import com.electronic.base.model.BaseResponse;
-import com.electronic.base.model.PageResult;
-import com.electronic.base.model.SessionUser;
-import com.electronic.base.model.VO.SDeptElectronicDocVO;
+import com.electronic.base.BaseResponse;
+import com.electronic.base.PageResult;
+import com.electronic.base.SessionUser;
+import com.electronic.base.VO.SDeptElectronicDocVO;
 import com.electronic.service.DeptElectronicDocService;
 import com.electronic.utils.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;

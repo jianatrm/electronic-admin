@@ -23,6 +23,46 @@ public class SDeptElectronicDoc {
 
     private String months;
 
+    private String startTime;
+
+    private String endTime;
+
+    private Integer startSize;
+
+    private Integer pageSize;
+
+    public Integer getStartSize() {
+        return startSize;
+    }
+
+    public void setStartSize(Integer startSize) {
+        this.startSize = startSize;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
     public String getMonths() {
         return months;
     }

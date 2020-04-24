@@ -1,8 +1,8 @@
 package com.electronic.service;
 
-import com.electronic.base.model.BaseResponse;
-import com.electronic.base.model.PageResult;
-import com.electronic.base.model.VO.DeptRequest;
+import com.electronic.base.BaseResponse;
+import com.electronic.base.PageResult;
+import com.electronic.base.VO.DeptRequest;
 import com.electronic.dao.mapper.bo.SysDept;
 
 public interface SysDeptService {

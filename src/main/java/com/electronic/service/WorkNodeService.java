@@ -1,8 +1,8 @@
 package com.electronic.service;
 
-import com.electronic.base.model.BaseResponse;
-import com.electronic.base.model.PageResult;
-import com.electronic.base.model.VO.WorkNodeVO;
+import com.electronic.base.BaseResponse;
+import com.electronic.base.PageResult;
+import com.electronic.base.VO.WorkNodeVO;
 import com.electronic.dao.mapper.bo.WorkNode;
 
 public interface WorkNodeService {

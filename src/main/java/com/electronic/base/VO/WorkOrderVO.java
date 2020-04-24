@@ -1,4 +1,4 @@
-package com.electronic.base.model.VO;
+package com.electronic.base.VO;
 
 import com.electronic.dao.mapper.bo.SysDept;
 import com.electronic.dao.mapper.bo.WorkNode;

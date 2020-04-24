@@ -1,7 +1,7 @@
 package com.electronic.controller;
 
-import com.electronic.base.model.BaseResponse;
-import com.electronic.base.model.SessionUser;
+import com.electronic.base.BaseResponse;
+import com.electronic.base.SessionUser;
 import com.electronic.service.StatisticsService;
 import com.electronic.utils.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;

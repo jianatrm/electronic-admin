@@ -1,9 +1,9 @@
 package com.electronic.service;
 
-import com.electronic.base.model.BaseResponse;
-import com.electronic.base.model.PageResult;
-import com.electronic.base.model.VO.DeptElectronicDocVO;
-import com.electronic.base.model.VO.SDeptElectronicDocVO;
+import com.electronic.base.BaseResponse;
+import com.electronic.base.PageResult;
+import com.electronic.base.VO.DeptElectronicDocVO;
+import com.electronic.base.VO.SDeptElectronicDocVO;
 import com.electronic.dao.mapper.bo.DeptElectronicDoc;
 
 public interface DeptElectronicDocService {

@@ -1,9 +1,9 @@
 package com.electronic.service.impl;
 
-import com.electronic.base.model.BaseResponse;
-import com.electronic.base.model.PageResult;
-import com.electronic.base.model.VO.WorkNodeVO;
-import com.electronic.base.model.VO.WorkOrderVO;
+import com.electronic.base.BaseResponse;
+import com.electronic.base.PageResult;
+import com.electronic.base.VO.WorkNodeVO;
+import com.electronic.base.VO.WorkOrderVO;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.contants.WorkOrderConstants;
 import com.electronic.dao.mapper.bo.WorkNode;

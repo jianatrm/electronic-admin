@@ -1,4 +1,4 @@
-package com.electronic.base.model;
+package com.electronic.base;
 
 import java.io.Serializable;
 
@@ -24,6 +24,10 @@ public class BaseResponse<T> implements Serializable{
      * 业务数据
      */
     private T result=null;
+
+    public BaseResponse() {
+
+    }
 
     public boolean isSuccess() {
         return success;

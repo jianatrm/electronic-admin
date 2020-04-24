@@ -1,6 +1,6 @@
 package com.electronic.config.security;
 
-import com.electronic.base.model.SessionUser;
+import com.electronic.base.SessionUser;
 import com.electronic.dao.mapper.bo.SysUser;
 import com.electronic.service.SysUserService;
 import com.electronic.service.UserAndRoleService;

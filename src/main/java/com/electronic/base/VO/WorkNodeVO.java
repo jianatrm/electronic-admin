@@ -1,6 +1,4 @@
-package com.electronic.base.model.VO;
-
-import com.electronic.dao.mapper.bo.WorkOrder;
+package com.electronic.base.VO;
 
 import java.util.Date;
 

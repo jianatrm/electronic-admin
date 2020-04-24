@@ -1,10 +1,10 @@
 package com.electronic.controller;
 
-import com.electronic.base.model.BaseResponse;
-import com.electronic.base.model.PageResult;
-import com.electronic.base.model.SessionUser;
-import com.electronic.base.model.VO.WorkNodeVO;
-import com.electronic.base.model.VO.WorkOrderVO;
+import com.electronic.base.BaseResponse;
+import com.electronic.base.PageResult;
+import com.electronic.base.SessionUser;
+import com.electronic.base.VO.WorkNodeVO;
+import com.electronic.base.VO.WorkOrderVO;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.service.WorkNodeService;
 import com.electronic.service.WorkOrderService;

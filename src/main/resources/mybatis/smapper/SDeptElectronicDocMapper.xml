@@ -15,14 +15,23 @@
 
 
     <select id="selectByDeptId" resultMap="BaseResultMap" parameterType="com.electronic.dao.smapper.bo.SDeptElectronicDoc">
-         SELECT t1.dept_id,t2.* FROM dept_electronic_doc t1 left JOIN electronic_doc t2 ON t1.doc_id = t2.doc_id where 1=1
+        SELECT * FROM (SELECT t1.dept_id,t2.* FROM dept_electronic_doc t1 left JOIN electronic_doc t2 ON t1.doc_id = t2.doc_id where 1=1) t3
         <if test="deptId != null" >
-           and t1.dept_id = #{deptId,jdbcType=INTEGER}
+           and t3.dept_id = #{deptId,jdbcType=INTEGER}
         </if>
         <if test="docName != null" >
-            and t2.doc_name LIKE "%"#{docName}"%"
+            and t3.doc_name LIKE "%"#{docName}"%"
         </if>
-         ORDER BY t1.operate_time DESC
+        <if test="startTime != null">
+            and t3.operate_time >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            and t3.operate_time <= #{endTime}
+        </if>
+        order by t3.operate_time desc
+        <if test="startSize != null">
+            limit #{startSize} , #{pageSize}
+        </if>
     </select>
 
     <select id="selectCountByDeptId" resultType="java.lang.Integer" parameterType="com.electronic.dao.smapper.bo.SDeptElectronicDoc">
@@ -32,6 +41,12 @@
         </if>
         <if test="docName != null" >
             and t3.doc_name LIKE "%"#{docName}"%"
+        </if>
+        <if test="startTime != null">
+            and t3.operate_time >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            and t3.operate_time <= #{endTime}
         </if>
         ORDER BY t3.operate_time DESC
     </select>

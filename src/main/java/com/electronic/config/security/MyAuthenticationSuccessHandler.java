@@ -4,7 +4,7 @@
 package com.electronic.config.security;
 
 import com.alibaba.fastjson.JSON;
-import com.electronic.base.model.BaseResponse;
+import com.electronic.base.BaseResponse;
 import com.electronic.contants.BusinessConstants;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.collections.MapUtils;

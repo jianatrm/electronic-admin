@@ -1,10 +1,10 @@
 package com.electronic.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.electronic.base.model.BaseResponse;
-import com.electronic.base.model.PageResult;
-import com.electronic.base.model.VO.RolesRequest;
-import com.electronic.base.model.response.RolesResponse;
+import com.electronic.base.BaseResponse;
+import com.electronic.base.PageResult;
+import com.electronic.base.VO.RolesRequest;
+import com.electronic.base.response.RolesResponse;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.contants.UserConstants;
 import com.electronic.dao.mapper.bo.SysRole;
