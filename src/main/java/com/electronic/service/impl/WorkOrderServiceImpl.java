@@ -82,6 +82,7 @@ public class WorkOrderServiceImpl implements WorkOrderService {
             }else {
                 node.setNodeOperateStatus(NodeConstants.NO_OPERATE);
             }
+            node.setNodeOperateTime(new Date());
             node.setWorkOrderId(workOrder.getWorkOrderId());
             nodeMapper.insert(node);
         }
@@ -146,6 +147,7 @@ public class WorkOrderServiceImpl implements WorkOrderService {
             Integer userId = workNodes.get(i).getUserId();
             SysUser sysUser = sysUserMapper.selectByPrimaryKey(userId);
             workNodeVO.setUserName(sysUser.getUserName());
+
             workNodeVOList.add(workNodeVO);
         }
         criteria.andNodeOrderEqualTo(Integer.parseInt(workOrder.getCurrentNode()));
@@ -153,6 +155,10 @@ public class WorkOrderServiceImpl implements WorkOrderService {
         if (!CollectionUtils.isEmpty(currentWorkNode)){
             WorkNode workNode = currentWorkNode.get(0);
             orderVO.setWorkNode(workNode);
+            orderVO.setWorkOrderStatusDesc(WorkOrderConstants.getStatus(orderVO.getWorkOrderStatus()));
+            String organizer = orderVO.getOrganizer();
+            SysUser sysUser = sysUserMapper.selectByPrimaryKey(Integer.parseInt(organizer));
+            orderVO.setUserName(sysUser.getUserName());
         }
         orderVO.setWorkNodeList(JSONObject.toJSONString(workNodeVOList));
         baseResponse.setResult(orderVO);

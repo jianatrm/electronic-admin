@@ -6,9 +6,11 @@ import com.electronic.base.VO.WorkNodeVO;
 import com.electronic.base.VO.WorkOrderVO;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.contants.WorkOrderConstants;
+import com.electronic.dao.mapper.bo.SysUser;
 import com.electronic.dao.mapper.bo.WorkNode;
 import com.electronic.dao.mapper.bo.WorkNodeExample;
 import com.electronic.dao.mapper.bo.WorkOrder;
+import com.electronic.dao.mapper.interfaces.SysUserMapper;
 import com.electronic.dao.mapper.interfaces.WorkNodeMapper;
 import com.electronic.dao.mapper.interfaces.WorkOrderMapper;
 import com.electronic.service.WorkNodeService;
@@ -34,6 +36,10 @@ public class WorkNodeServiceImpl implements WorkNodeService {
 
     @Autowired
     private WorkOrderMapper workOrderMapper;
+
+    @Autowired
+    private SysUserMapper sysUserMapper;
+
 
     @Override
     public WorkNode selectWorkNode(WorkNodeVO WorkNodeVO) throws Exception {
@@ -102,6 +108,9 @@ public class WorkNodeServiceImpl implements WorkNodeService {
             BeanUtils.copyProperties(workOrder, work);
             work.setWorkOrderStatusDesc(WorkOrderConstants.getStatus(workOrder.getWorkOrderStatus()));
             nodeVO1.setWorkOrderVO(work);
+            String organizer = workOrder.getOrganizer();
+            SysUser sysUser = sysUserMapper.selectByPrimaryKey(Integer.parseInt(organizer));
+            nodeVO1.setUserName(sysUser.getUserName());
             list.add(nodeVO1);
         }
         PageInfo pageInfo = new PageInfo(WorkNodes);

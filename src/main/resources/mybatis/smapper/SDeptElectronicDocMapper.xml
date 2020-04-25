@@ -16,16 +16,16 @@
 
     <select id="selectByDeptId" resultMap="BaseResultMap" parameterType="com.electronic.dao.smapper.bo.SDeptElectronicDoc">
         SELECT * FROM (SELECT t1.dept_id,t2.* FROM dept_electronic_doc t1 left JOIN electronic_doc t2 ON t1.doc_id = t2.doc_id ) t3 where 1=1
-        <if test="deptId != null" >
+        <if test="deptId != null and deptId !=''" >
            and t3.dept_id = #{deptId,jdbcType=INTEGER}
         </if>
-        <if test="docName != null" >
+        <if test="docName != null and docName !=''" >
             and t3.doc_name LIKE "%"#{docName}"%"
         </if>
-        <if test="startTime != null">
+        <if test="startTime != null and startTime !=''">
             and t3.operate_time <![CDATA[ >= ]]> #{startTime}
         </if>
-        <if test="endTime != null">
+        <if test="endTime != null and endTime !=''">
             and t3.operate_time <![CDATA[ <= ]]> #{endTime}
         </if>
         order by t3.operate_time desc
@@ -36,17 +36,17 @@
 
     <select id="selectCountByDeptId" resultType="java.lang.Integer" parameterType="com.electronic.dao.smapper.bo.SDeptElectronicDoc">
         select count(*) from (SELECT t1.dept_id,t2.* FROM dept_electronic_doc t1 left JOIN electronic_doc t2 ON t1.doc_id = t2.doc_id) t3 where 1=1
-        <if test="deptId != null" >
+        <if test="deptId != null and deptId !=''" >
             and t3.dept_id = #{deptId,jdbcType=INTEGER}
         </if>
-        <if test="docName != null" >
+        <if test="docName != null and docName !=''" >
             and t3.doc_name LIKE "%"#{docName}"%"
         </if>
 
-        <if test="startTime != null">
+        <if test="startTime != null and startTime !=''">
             and t3.operate_time <![CDATA[ >= ]]> #{startTime}
         </if>
-        <if test="endTime != null">
+        <if test="endTime != null and endTime !=''">
             and t3.operate_time  <![CDATA[ <= ]]> #{endTime}
 
         </if>

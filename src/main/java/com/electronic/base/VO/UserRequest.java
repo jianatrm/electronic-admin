@@ -15,6 +15,12 @@ public class UserRequest {
 
     private String password;
 
+    private String nickName;
+
+    private String userAvatar;
+
+    private String staffName;
+
     private String sex;
 
     private Integer deptId;
@@ -38,6 +44,30 @@ public class UserRequest {
 
     public SysDept getSysDept() {
         return sysDept;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getUserAvatar() {
+        return userAvatar;
+    }
+
+    public void setUserAvatar(String userAvatar) {
+        this.userAvatar = userAvatar;
+    }
+
+    public String getStaffName() {
+        return staffName;
+    }
+
+    public void setStaffName(String staffName) {
+        this.staffName = staffName;
     }
 
     public void setSysDept(SysDept sysDept) {

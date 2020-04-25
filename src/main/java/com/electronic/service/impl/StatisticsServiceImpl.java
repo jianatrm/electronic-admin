@@ -14,6 +14,7 @@ import com.electronic.dao.smapper.interfaces.SDeptElectronicDocMapper;
 import com.electronic.dao.smapper.interfaces.SDeptMonthDocMapper;
 import com.electronic.dao.smapper.interfaces.SUserElectronicDocMapper;
 import com.electronic.service.StatisticsService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -138,6 +139,13 @@ public class StatisticsServiceImpl implements StatisticsService {
 
         List<SUserElectronicDoc> sUserElectronicDocs = sUserElectronicDocMapper.selectByUserId(userId, docName, startTime, endTime, startSize, pageSize);
         Integer integer = sUserElectronicDocMapper.selectCountByUserId(userId, docName, startTime, endTime);
+        if (!CollectionUtils.isEmpty(sUserElectronicDocs)){
+            for (int i = 0; i <sUserElectronicDocs.size() ; i++) {
+                Integer userId1 = sUserElectronicDocs.get(i).getUserId();
+                SysUser sysUser = sysUserMapper.selectByPrimaryKey(userId1);
+                sUserElectronicDocs.get(i).setUserName(sysUser==null?"":sysUser.getUserName());
+            }
+        }
         pageResult.setResult(sUserElectronicDocs);
         pageResult.setCount(integer);
         baseResponse.setResult(pageResult);
@@ -159,6 +167,14 @@ public class StatisticsServiceImpl implements StatisticsService {
         sDeptElectronicDoc.setStartSize(startSize);
         Integer integer = sDeptElectronicDocMapper.selectCountByDeptId(sDeptElectronicDoc);
         List<SDeptElectronicDoc> sDeptElectronicDocs = sDeptElectronicDocMapper.selectByDeptId(sDeptElectronicDoc);
+        if (!CollectionUtils.isEmpty(sDeptElectronicDocs)){
+            for (int i = 0; i <sDeptElectronicDocs.size() ; i++) {
+                Integer deptId1 = sDeptElectronicDocs.get(i).getDeptId();
+                SysDept sysDept = sysDeptMapper.selectByPrimaryKey(deptId1);
+                sDeptElectronicDocs.get(i).setDeptName(sysDept==null?"":sysDept.getDeptName());
+            }
+        }
+
         pageResult.setResult(sDeptElectronicDocs);
         pageResult.setCount(integer);
         baseResponse.setResult(pageResult);

@@ -29,6 +29,7 @@ public class StatisticsController {
             baseResponse = statisticsService.queryUserDoc(sUserElectronicDocRequest);
             LOGGER.info("统计查询，查询员工文档结果，{}", JSONObject.toJSONString(baseResponse));
         } catch (Exception e) {
+            e.printStackTrace();
             LOGGER.info("统计查询，查询员工文档结果失败，{}", e.getMessage());
             baseResponse.setSuccess(false);
             baseResponse.setResultCode(BusinessConstants.BUSI_FAILURE_CODE);
@@ -45,6 +46,7 @@ public class StatisticsController {
             baseResponse = statisticsService.queryDeptDoc(sUserElectronicDocRequest);
             LOGGER.info("统计查询，查询部门文档结果，{}", JSONObject.toJSONString(baseResponse));
         } catch (Exception e) {
+            e.printStackTrace();
             LOGGER.info("统计查询，查询部门文档结果失败，{}", e.getMessage());
             baseResponse.setSuccess(false);
             baseResponse.setResultCode(BusinessConstants.BUSI_FAILURE_CODE);

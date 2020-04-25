@@ -5,6 +5,8 @@ import java.util.Date;
 public class SDeptElectronicDoc {
     private Integer deptId;
 
+    private String deptName;
+
     private Integer docId;
 
     private String docName;
@@ -30,6 +32,14 @@ public class SDeptElectronicDoc {
     private Integer startSize;
 
     private Integer pageSize;
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
 
     public Integer getStartSize() {
         return startSize;

@@ -3,6 +3,7 @@
 <mapper namespace="com.electronic.dao.smapper.interfaces.SUserElectronicDocMapper">
     <resultMap id="BaseResultMap" type="com.electronic.dao.smapper.bo.SUserElectronicDoc">
         <id column="doc_id" property="docId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
         <result column="doc_name" property="docName" jdbcType="VARCHAR" />
         <result column="doc_url" property="docUrl" jdbcType="VARCHAR" />
         <result column="doc_type" property="docType" jdbcType="VARCHAR" />
@@ -18,20 +19,20 @@
     <select id="selectByUserId" resultMap="BaseResultMap">
         select * from ( select t1.user_id,t2.* from user_electronic_doc t1 left join electronic_doc t2
         on t1.doc_id = t2.doc_id) t3 where 1=1
-        <if test="userId != null">
+        <if test="userId != null  and userId !=''">
             and t3.user_id = #{userId,jdbcType=INTEGER}
         </if>
-        <if test="docName != null">
+        <if test="docName != null  and docName !=''">
             and t3.doc_name LIKE "%"#{docName}"%"
         </if>
-        <if test="startTime != null">
+        <if test="startTime != null  and startTime !=''">
             and t3.operate_time <![CDATA[ >= ]]> #{startTime}
         </if>
-        <if test="endTime != null">
+        <if test="endTime != null  and endTime !=''">
             and t3.operate_time  <![CDATA[ <= ]]> #{endTime}
         </if>
         order by t3.operate_time desc
-        <if test="startSize != null">
+        <if test="startSize != null  ">
             limit #{startSize} , #{pageSize}
         </if>
 
@@ -41,16 +42,16 @@
     <select id="selectCountByUserId" resultType="java.lang.Integer">
         select count(*) from ( select t1.user_id,t2.* from user_electronic_doc t1 left join electronic_doc t2
         on t1.doc_id = t2.doc_id ) t3 where 1=1
-        <if test="userId != null">
+        <if test="userId != null and userId !=''" >
             and t3.user_id = #{userId,jdbcType=INTEGER}
         </if>
-        <if test="docName != null">
+        <if test="docName != null and docName !=''">
             and t3.doc_name LIKE "%"#{docName}"%"
         </if>
-        <if test="startTime != null">
+        <if test="startTime != null and startTime !=''">
             and t3.operate_time <![CDATA[ >= ]]> #{startTime}
         </if>
-        <if test="endTime != null">
+        <if test="endTime != null and endTime !=''">
             and t3.operate_time  <![CDATA[ <= ]]> #{endTime}
         </if>
     </select>
