@@ -1,5 +1,7 @@
 package com.electronic.base.VO;
 
+import com.electronic.dao.mapper.bo.SysDept;
+
 import java.util.Date;
 
 public class UserRequest {
@@ -31,6 +33,16 @@ public class UserRequest {
 
     private Integer pageNum = 1;
     private Integer pageSize =10;
+
+    private SysDept sysDept;
+
+    public SysDept getSysDept() {
+        return sysDept;
+    }
+
+    public void setSysDept(SysDept sysDept) {
+        this.sysDept = sysDept;
+    }
 
     public Integer getPageNum() {
         return pageNum;

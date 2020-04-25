@@ -5,6 +5,7 @@ import com.electronic.base.BaseResponse;
 import com.electronic.base.PageResult;
 import com.electronic.base.VO.ElectronicDocRequest;
 import com.electronic.contants.BusinessConstants;
+import com.electronic.contants.UserConstants;
 import com.electronic.dao.mapper.bo.ElectronicDoc;
 import com.electronic.dao.mapper.bo.ElectronicDocExample;
 import com.electronic.dao.mapper.bo.UserElectronicDoc;
@@ -59,12 +60,14 @@ public class ElectronicDocServiceImpl implements ElectronicDocService {
         for (ElectronicDoc doc:docs){
             doc.setOperateId(docRequest.getOperateId());
             doc.setOperateTime(new Date());
+            doc.setStatus(UserConstants.S_VALID_STATUS);
             docMapper.insertSelective(doc);
             UserElectronicDoc userElectronicDoc = new UserElectronicDoc();
             userElectronicDoc.setDocId(doc.getDocId());
             userElectronicDoc.setUserId(docRequest.getOperateId());
             userElectronicDoc.setOperateId(docRequest.getOperateId());
             userElectronicDoc.setOperateTime(new Date());
+            userElectronicDoc.setStatus(UserConstants.VALID_STATUS);
             userElectronicDocMapper.insert(userElectronicDoc);
         }
         return baseResponse;

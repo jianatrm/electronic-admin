@@ -8,6 +8,7 @@ public class ElectronicDocRequest {
     private Integer docId;
 
     private String docName;
+    private String docType;
 
     private String status;
 
@@ -22,6 +23,14 @@ public class ElectronicDocRequest {
     private Integer pageNum = 1;
 
     private Integer pageSize =10;
+
+    public String getDocType() {
+        return docType;
+    }
+
+    public void setDocType(String docType) {
+        this.docType = docType;
+    }
 
     public String getStatus() {
         return status;

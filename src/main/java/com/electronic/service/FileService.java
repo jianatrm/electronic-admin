@@ -17,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
+import java.util.UUID;
 
 @Service
 public class FileService {
@@ -48,8 +49,9 @@ public class FileService {
             if(fileName.contains("..")) {
                 throw new FileException("Sorry! Filename contains invalid path sequence " + fileName);
             }
-            String yyyyMMddHHmmss = DateFormatUtils.format(new Date(), "yyyyMMddHHmmss");
-            fileName = yyyyMMddHHmmss+"&&"+fileName;
+            String uuid = UUID.randomUUID().toString();
+            uuid = uuid.replace("-", "");
+            fileName = uuid+"&&"+fileName;
             // Copy file to the target location (Replacing existing file with the same name)
             Path targetLocation = this.fileStorageLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);

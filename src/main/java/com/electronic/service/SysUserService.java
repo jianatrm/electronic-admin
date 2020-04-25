@@ -13,6 +13,6 @@ public interface SysUserService {
 
     public Integer updateSysUser(SysUser user) throws Exception;
 
-    public BaseResponse<PageResult<SysUser>> queryuser(UserRequest userRequest) throws Exception;
+    public BaseResponse<PageResult<UserRequest>> queryuser(UserRequest userRequest) throws Exception;
 
 }

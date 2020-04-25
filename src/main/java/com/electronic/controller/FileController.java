@@ -4,6 +4,7 @@ import com.electronic.base.BaseResponse;
 import com.electronic.base.UploadFileResponse;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.service.FileService;
+import com.electronic.utils.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +35,13 @@ public class FileController {
     public BaseResponse uploadFile(@RequestParam("file") MultipartFile file){
         BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
         String fileName = fileService.storeFile(file);
-
+        String extension = FileUtil.getExtension(fileName);
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/file/downloadFile/")
                 .path(fileName)
                 .toUriString();
 
-        baseResponse.setResult(new UploadFileResponse(fileName.split("&&")[1],fileDownloadUri,"",0));
+        baseResponse.setResult(new UploadFileResponse(fileName,fileDownloadUri,extension,0));
         return baseResponse;
     }
 

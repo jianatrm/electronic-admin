@@ -32,7 +32,7 @@ public class UserController {
      */
     @RequestMapping("queryuser")
     public BaseResponse queryuser(@RequestBody UserRequest userRequest) throws Exception {
-        BaseResponse<PageResult<SysUser>> baseResponse = sysUserService.queryuser(userRequest);
+        BaseResponse<PageResult<UserRequest>> baseResponse = sysUserService.queryuser(userRequest);
         return baseResponse;
     }
 

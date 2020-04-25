@@ -33,7 +33,7 @@ spring:
 #    database-schema-update: true
     #database-schema: activiti
 server:
-  port: 80
+  port: 8001
   servlet:
     context-path: /electronic
 
