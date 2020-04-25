@@ -67,6 +67,11 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public Integer updateSysUser(SysUser user) throws Exception {
+        String password = user.getPassword();
+        if (!StringUtils.isBlank(password)){
+            password = passwordEncoder.encode(password);
+        }
+        user.setPassword(password);
         user.setOperateTime(new Date());
         int updateByPrimaryKeySelective = sysUserMapper.updateByPrimaryKeySelective(user);
         return updateByPrimaryKeySelective;

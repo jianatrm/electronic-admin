@@ -95,7 +95,10 @@ public class StatisticsServiceImpl implements StatisticsService {
         Map<String,Object> map = new HashMap<>();
         map.put("userName",sysUser.getUserName());
         map.put("userAvatar",sysUser.getUserAvatar());
-        map.put("staffName",sysUser.getStaffName());
+        map.put("userEmail",sysUser.getUserEmail());
+        map.put("userPhone",sysUser.getUserPhone());
+        map.put("nickName",sysUser.getNickName());
+        map.put("userId",sysUser.getUserId());
         if (null != sysDept) {
             map.put("deptName", sysDept.getDeptName());
         }

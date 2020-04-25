@@ -2,10 +2,12 @@ package com.electronic.controller;
 
 import com.electronic.base.BaseResponse;
 import com.electronic.base.PageResult;
+import com.electronic.base.SessionUser;
 import com.electronic.base.VO.UserRequest;
 import com.electronic.contants.BusinessConstants;
 import com.electronic.dao.mapper.bo.SysUser;
 import com.electronic.service.SysUserService;
+import com.electronic.utils.SessionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -44,7 +46,8 @@ public class UserController {
         BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_FAILURE,BusinessConstants.BUSI_FAILURE_CODE,BusinessConstants.BUSI_FAILURE_MESSAGE);
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(userRequest,sysUser);
-
+        SessionUser sessionUser = SessionUtils.getSessionUser();
+        sysUser.setOperator(String.valueOf(sessionUser.getUserId()));
         Integer integer = sysUserService.addSysUser(sysUser);
         if (integer>0){
             baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
@@ -62,6 +65,8 @@ public class UserController {
         BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_FAILURE,BusinessConstants.BUSI_FAILURE_CODE,BusinessConstants.BUSI_FAILURE_MESSAGE);
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(userRequest,sysUser);
+        SessionUser sessionUser = SessionUtils.getSessionUser();
+        sysUser.setOperator(String.valueOf(sessionUser.getUserId()));
         Integer integer = sysUserService.updateSysUser(sysUser);
         if (integer>0){
             baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
