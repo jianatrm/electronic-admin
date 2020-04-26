@@ -7,10 +7,13 @@
     </resultMap>
 
 
-    <select id="selectCountByMonth" resultMap="BaseResultMap">
-        select  month(operate_time) as months ,count(1) as count from dept_electronic_doc
+    <select id="selectCountByMonth" resultMap="BaseResultMap" parameterType="java.lang.String">
+        /*select  month(operate_time) as months ,count(1) as count from dept_electronic_doc
         where year(operate_time) = #{year}
-        group by month (operate_time)
+        group by month (operate_time)*/
+        select date_format( operate_time, "%Y-%m-%d" )  as months, count( * ) as count from dept_electronic_doc
+        where date_format( operate_time, "%Y-%m" ) = #{year,jdbcType=VARCHAR}
+        group by date_format( operate_time , "%Y-%m-%d" )
   </select>
 
 
