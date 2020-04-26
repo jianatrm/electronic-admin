@@ -211,7 +211,9 @@ public class WorkOrderServiceImpl implements WorkOrderService {
             if (!StringUtils.isBlank(workOrder.getWorkInfo())&&!"null".equals(workOrder.getWorkInfo())){
                 List<ElectronicDoc> electronicDocs = JSONObject.parseArray(workOrder.getWorkInfo(), ElectronicDoc.class);
                 for (int i = 0; i <electronicDocs.size() ; i++) {
-                    ElectronicDoc electronicDoc = electronicDocs.get(i);
+                    ElectronicDoc eDoc = electronicDocs.get(i);
+                    ElectronicDoc electronicDoc = new ElectronicDoc();
+                    BeanUtils.copyProperties(eDoc,electronicDoc);
                     electronicDoc.setStatus(String.valueOf(UserConstants.VALID_STATUS));
                     electronicDoc.setOperateId(Integer.parseInt(workOrder.getOrganizer()));
                     electronicDocMapper.insertSelective(electronicDoc);

@@ -86,7 +86,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from dept_electronic_doc
     where id = #{id,jdbcType=INTEGER}
@@ -102,27 +102,27 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.electronic.dao.mapper.bo.DeptElectronicDoc" >
-    <selectKey resultType="java.lang.Integer" keyProperty="docId" order="AFTER" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into dept_electronic_doc (id, dept_id, work_order_id, 
-      operate_id, operate_time, status
-      )
-    values (#{id,jdbcType=INTEGER}, #{deptId,jdbcType=INTEGER}, #{workOrderId,jdbcType=INTEGER}, 
-      #{operateId,jdbcType=INTEGER}, #{operateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
-      )
+    insert into dept_electronic_doc (dept_id, doc_id, work_order_id,
+    operate_id, operate_time, status
+    )
+    values (#{deptId,jdbcType=INTEGER}, #{docId,jdbcType=INTEGER}, #{workOrderId,jdbcType=INTEGER},
+    #{operateId,jdbcType=INTEGER}, #{operateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
+    )
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.DeptElectronicDoc" >
-    <selectKey resultType="java.lang.Integer" keyProperty="docId" order="AFTER" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into dept_electronic_doc
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="deptId != null" >
         dept_id,
+      </if>
+      <if test="docId != null" >
+        doc_id,
       </if>
       <if test="workOrderId != null" >
         work_order_id,
@@ -138,11 +138,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="deptId != null" >
         #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="docId != null" >
+        #{docId,jdbcType=INTEGER},
       </if>
       <if test="workOrderId != null" >
         #{workOrderId,jdbcType=INTEGER},
@@ -196,12 +196,12 @@
   <update id="updateByExample" parameterType="map" >
     update dept_electronic_doc
     set id = #{record.id,jdbcType=INTEGER},
-      dept_id = #{record.deptId,jdbcType=INTEGER},
-      doc_id = #{record.docId,jdbcType=INTEGER},
-      work_order_id = #{record.workOrderId,jdbcType=INTEGER},
-      operate_id = #{record.operateId,jdbcType=INTEGER},
-      operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
-      status = #{record.status,jdbcType=INTEGER}
+    dept_id = #{record.deptId,jdbcType=INTEGER},
+    doc_id = #{record.docId,jdbcType=INTEGER},
+    work_order_id = #{record.workOrderId,jdbcType=INTEGER},
+    operate_id = #{record.operateId,jdbcType=INTEGER},
+    operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
+    status = #{record.status,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
