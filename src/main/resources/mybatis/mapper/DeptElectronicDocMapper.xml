@@ -5,6 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="dept_id" property="deptId" jdbcType="INTEGER" />
     <result column="doc_id" property="docId" jdbcType="INTEGER" />
+    <result column="work_order_id" property="workOrderId" jdbcType="INTEGER" />
     <result column="operate_id" property="operateId" jdbcType="INTEGER" />
     <result column="operate_time" property="operateTime" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="INTEGER" />
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, dept_id, doc_id, operate_id, operate_time, status
+    id, dept_id, doc_id, work_order_id, operate_id, operate_time, status
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.electronic.dao.mapper.bo.DeptElectronicDocExample" >
     select
@@ -101,25 +102,30 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.electronic.dao.mapper.bo.DeptElectronicDoc" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+    <selectKey resultType="java.lang.Integer" keyProperty="docId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into dept_electronic_doc (dept_id, doc_id, operate_id, 
-      operate_time, status)
-    values (#{deptId,jdbcType=INTEGER}, #{docId,jdbcType=INTEGER}, #{operateId,jdbcType=INTEGER}, 
-      #{operateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
+    insert into dept_electronic_doc (id, dept_id, work_order_id, 
+      operate_id, operate_time, status
+      )
+    values (#{id,jdbcType=INTEGER}, #{deptId,jdbcType=INTEGER}, #{workOrderId,jdbcType=INTEGER}, 
+      #{operateId,jdbcType=INTEGER}, #{operateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.electronic.dao.mapper.bo.DeptElectronicDoc" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+    <selectKey resultType="java.lang.Integer" keyProperty="docId" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into dept_electronic_doc
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
       <if test="deptId != null" >
         dept_id,
       </if>
-      <if test="docId != null" >
-        doc_id,
+      <if test="workOrderId != null" >
+        work_order_id,
       </if>
       <if test="operateId != null" >
         operate_id,
@@ -132,11 +138,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="deptId != null" >
         #{deptId,jdbcType=INTEGER},
       </if>
-      <if test="docId != null" >
-        #{docId,jdbcType=INTEGER},
+      <if test="workOrderId != null" >
+        #{workOrderId,jdbcType=INTEGER},
       </if>
       <if test="operateId != null" >
         #{operateId,jdbcType=INTEGER},
@@ -167,6 +176,9 @@
       <if test="record.docId != null" >
         doc_id = #{record.docId,jdbcType=INTEGER},
       </if>
+      <if test="record.workOrderId != null" >
+        work_order_id = #{record.workOrderId,jdbcType=INTEGER},
+      </if>
       <if test="record.operateId != null" >
         operate_id = #{record.operateId,jdbcType=INTEGER},
       </if>
@@ -186,6 +198,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       dept_id = #{record.deptId,jdbcType=INTEGER},
       doc_id = #{record.docId,jdbcType=INTEGER},
+      work_order_id = #{record.workOrderId,jdbcType=INTEGER},
       operate_id = #{record.operateId,jdbcType=INTEGER},
       operate_time = #{record.operateTime,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=INTEGER}
@@ -201,6 +214,9 @@
       </if>
       <if test="docId != null" >
         doc_id = #{docId,jdbcType=INTEGER},
+      </if>
+      <if test="workOrderId != null" >
+        work_order_id = #{workOrderId,jdbcType=INTEGER},
       </if>
       <if test="operateId != null" >
         operate_id = #{operateId,jdbcType=INTEGER},
@@ -218,6 +234,7 @@
     update dept_electronic_doc
     set dept_id = #{deptId,jdbcType=INTEGER},
       doc_id = #{docId,jdbcType=INTEGER},
+      work_order_id = #{workOrderId,jdbcType=INTEGER},
       operate_id = #{operateId,jdbcType=INTEGER},
       operate_time = #{operateTime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER}

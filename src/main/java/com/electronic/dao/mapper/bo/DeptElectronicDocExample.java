@@ -285,6 +285,66 @@ public class DeptElectronicDocExample {
             return (Criteria) this;
         }
 
+        public Criteria andWorkOrderIdIsNull() {
+            addCriterion("work_order_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderIdIsNotNull() {
+            addCriterion("work_order_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderIdEqualTo(Integer value) {
+            addCriterion("work_order_id =", value, "workOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderIdNotEqualTo(Integer value) {
+            addCriterion("work_order_id <>", value, "workOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderIdGreaterThan(Integer value) {
+            addCriterion("work_order_id >", value, "workOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("work_order_id >=", value, "workOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderIdLessThan(Integer value) {
+            addCriterion("work_order_id <", value, "workOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderIdLessThanOrEqualTo(Integer value) {
+            addCriterion("work_order_id <=", value, "workOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderIdIn(List<Integer> values) {
+            addCriterion("work_order_id in", values, "workOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderIdNotIn(List<Integer> values) {
+            addCriterion("work_order_id not in", values, "workOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderIdBetween(Integer value1, Integer value2) {
+            addCriterion("work_order_id between", value1, value2, "workOrderId");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkOrderIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("work_order_id not between", value1, value2, "workOrderId");
+            return (Criteria) this;
+        }
+
         public Criteria andOperateIdIsNull() {
             addCriterion("operate_id is null");
             return (Criteria) this;

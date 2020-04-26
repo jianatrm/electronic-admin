@@ -9,6 +9,8 @@ public class DeptElectronicDoc {
 
     private Integer docId;
 
+    private Integer workOrderId;
+
     private Integer operateId;
 
     private Date operateTime;
@@ -37,6 +39,14 @@ public class DeptElectronicDoc {
 
     public void setDocId(Integer docId) {
         this.docId = docId;
+    }
+
+    public Integer getWorkOrderId() {
+        return workOrderId;
+    }
+
+    public void setWorkOrderId(Integer workOrderId) {
+        this.workOrderId = workOrderId;
     }
 
     public Integer getOperateId() {

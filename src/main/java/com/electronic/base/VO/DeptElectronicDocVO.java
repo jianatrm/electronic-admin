@@ -12,6 +12,8 @@ public class DeptElectronicDocVO {
 
     private Integer docId;
 
+    private Integer workOrderId;
+
     private Integer operateId;
 
     private Date operateTime;
@@ -23,6 +25,22 @@ public class DeptElectronicDocVO {
     private Integer pageSize =10;
 
     private ElectronicDoc electronicDoc;
+
+    public Integer getWorkOrderId() {
+        return workOrderId;
+    }
+
+    public void setWorkOrderId(Integer workOrderId) {
+        this.workOrderId = workOrderId;
+    }
+
+    public ElectronicDoc getElectronicDoc() {
+        return electronicDoc;
+    }
+
+    public void setElectronicDoc(ElectronicDoc electronicDoc) {
+        this.electronicDoc = electronicDoc;
+    }
 
     public Integer getPageNum() {
         return pageNum;

@@ -216,8 +216,9 @@ public class WorkOrderServiceImpl implements WorkOrderService {
                     electronicDoc.setOperateId(Integer.parseInt(workOrder.getOrganizer()));
                     electronicDocMapper.insertSelective(electronicDoc);
                     DeptElectronicDoc deptElectronicDoc = new DeptElectronicDoc();
+                    deptElectronicDoc.setWorkOrderId(workOrderVO.getWorkOrderId());
                     deptElectronicDoc.setDeptId(sysDept.getDeptId());
-                    deptElectronicDoc.setDocId(2);
+                    deptElectronicDoc.setDocId(electronicDoc.getDocId());
                     deptElectronicDoc.setOperateId(Integer.parseInt(workOrder.getOrganizer()));
                     deptElectronicDoc.setOperateTime(new Date());
                     deptElectronicDoc.setStatus(UserConstants.VALID_STATUS);
