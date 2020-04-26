@@ -84,4 +84,19 @@ public class UserController {
         }
         return baseResponse;
     }
+
+
+   /* 重置密码*/
+
+    @RequestMapping("restPassword")
+    public BaseResponse restPassword(@RequestBody UserRequest userRequest) throws Exception {
+        BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_FAILURE,BusinessConstants.BUSI_FAILURE_CODE,BusinessConstants.BUSI_FAILURE_MESSAGE);
+        Integer userId = userRequest.getUserId();
+
+        if (userId == 0){
+           baseResponse.setResultMessage("userId 不能为空");
+           return baseResponse;
+        }
+        return sysUserService.restPassword(userId);
+    }
 }

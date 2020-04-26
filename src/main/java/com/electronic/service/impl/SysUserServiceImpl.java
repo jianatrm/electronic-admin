@@ -107,4 +107,27 @@ public class SysUserServiceImpl implements SysUserService {
         baseResponse.setResult(pageResult);
         return baseResponse;
     }
+
+    @Override
+    public BaseResponse restPassword(Integer userId) throws Exception {
+        BaseResponse baseResponse = new BaseResponse(BusinessConstants.BUSI_SUCCESS,BusinessConstants.BUSI_SUCCESS_CODE,BusinessConstants.BUSI_SUCCESS_MESSAGE);
+        SysUser sysUser = sysUserMapper.selectByPrimaryKey(userId);
+        if (sysUser == null){
+            baseResponse.setSuccess(false);
+            baseResponse.setResult(BusinessConstants.BUSI_FAILURE_CODE);
+            baseResponse.setResultMessage("操作员工信息不存在");
+            return baseResponse;
+        }
+        String encode = passwordEncoder.encode("123456");
+        sysUser.setPassword(encode);
+        int i = sysUserMapper.updateByPrimaryKeySelective(sysUser);
+        if (i > 0) {
+            return  baseResponse;
+        }else {
+            baseResponse.setSuccess(false);
+            baseResponse.setResult(BusinessConstants.BUSI_FAILURE_CODE);
+            baseResponse.setResultMessage("重置失败");
+            return baseResponse;
+        }
+    }
 }

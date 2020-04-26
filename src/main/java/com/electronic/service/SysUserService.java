@@ -15,4 +15,7 @@ public interface SysUserService {
 
     public BaseResponse<PageResult<UserRequest>> queryuser(UserRequest userRequest) throws Exception;
 
+    public BaseResponse restPassword(Integer userId) throws Exception;
+
+
 }
