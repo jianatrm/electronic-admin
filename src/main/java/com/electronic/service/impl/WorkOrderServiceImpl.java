@@ -207,7 +207,7 @@ public class WorkOrderServiceImpl implements WorkOrderService {
         }
         else if (workNode.getNodeOrder() == nodeCount&&WorkOrderConstants.APPROVE_SUCCESS.equals(node.getNodeOperateResult())){
             workOrder.setWorkOrderStatus(WorkOrderConstants.APPROVE_SUCCESS);
-            SysDept sysDept = workOrderVO.getSysDept();
+            List<SysDept> sysDepts = JSONObject.parseArray(workOrderVO.getSysDeptList(), SysDept.class);
             if (!StringUtils.isBlank(workOrder.getWorkInfo())&&!"null".equals(workOrder.getWorkInfo())){
                 List<ElectronicDoc> electronicDocs = JSONObject.parseArray(workOrder.getWorkInfo(), ElectronicDoc.class);
                 for (int i = 0; i <electronicDocs.size() ; i++) {
@@ -217,14 +217,16 @@ public class WorkOrderServiceImpl implements WorkOrderService {
                     electronicDoc.setStatus(String.valueOf(UserConstants.VALID_STATUS));
                     electronicDoc.setOperateId(Integer.parseInt(workOrder.getOrganizer()));
                     electronicDocMapper.insertSelective(electronicDoc);
-                    DeptElectronicDoc deptElectronicDoc = new DeptElectronicDoc();
-                    deptElectronicDoc.setWorkOrderId(workOrderVO.getWorkOrderId());
-                    deptElectronicDoc.setDeptId(sysDept.getDeptId());
-                    deptElectronicDoc.setDocId(electronicDoc.getDocId());
-                    deptElectronicDoc.setOperateId(Integer.parseInt(workOrder.getOrganizer()));
-                    deptElectronicDoc.setOperateTime(new Date());
-                    deptElectronicDoc.setStatus(UserConstants.VALID_STATUS);
-                    deptElectronicDocMapper.insertSelective(deptElectronicDoc);
+                    for (int j = 0; j <sysDepts.size() ; j++) {
+                        DeptElectronicDoc deptElectronicDoc = new DeptElectronicDoc();
+                        deptElectronicDoc.setWorkOrderId(workOrderVO.getWorkOrderId());
+                        deptElectronicDoc.setDeptId(sysDepts.get(i).getDeptId());
+                        deptElectronicDoc.setDocId(electronicDoc.getDocId());
+                        deptElectronicDoc.setOperateId(Integer.parseInt(workOrder.getOrganizer()));
+                        deptElectronicDoc.setOperateTime(new Date());
+                        deptElectronicDoc.setStatus(UserConstants.VALID_STATUS);
+                        deptElectronicDocMapper.insertSelective(deptElectronicDoc);
+                    }
                 }
             }
         }else {

@@ -45,6 +45,15 @@ public class WorkOrderVO {
 
     private String userName;
 
+    private String sysDeptList;
+
+    public String getSysDeptList() {
+        return sysDeptList;
+    }
+
+    public void setSysDeptList(String sysDeptList) {
+        this.sysDeptList = sysDeptList;
+    }
 
     public String getUserName() {
         return userName;
