@@ -11,6 +11,10 @@ public class SDeptElectronicDocVO {
 
     private String docUrl;
 
+    private String docType;
+
+    private String docRandomName;
+
     private String status;
 
     private String remark;
@@ -22,6 +26,42 @@ public class SDeptElectronicDocVO {
     private Integer pageNum = 1;
 
     private Integer pageSize =10;
+
+    private Integer count;
+
+    private String months;
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public String getMonths() {
+        return months;
+    }
+
+    public void setMonths(String months) {
+        this.months = months;
+    }
+
+    public String getDocType() {
+        return docType;
+    }
+
+    public void setDocType(String docType) {
+        this.docType = docType;
+    }
+
+    public String getDocRandomName() {
+        return docRandomName;
+    }
+
+    public void setDocRandomName(String docRandomName) {
+        this.docRandomName = docRandomName;
+    }
 
     public Integer getPageNum() {
         return pageNum;
