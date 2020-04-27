@@ -13,6 +13,8 @@ public class SDeptElectronicDoc {
 
     private String docUrl;
 
+    private String docType;
+
     private String status;
 
     private String remark;
@@ -33,9 +35,19 @@ public class SDeptElectronicDoc {
 
     private Integer pageSize;
 
+    public String getDocType() {
+        return docType;
+    }
+
+    public void setDocType(String docType) {
+        this.docType = docType;
+    }
+
     public String getDeptName() {
         return deptName;
     }
+
+
 
     public void setDeptName(String deptName) {
         this.deptName = deptName;

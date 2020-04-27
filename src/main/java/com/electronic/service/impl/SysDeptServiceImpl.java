@@ -39,7 +39,7 @@ public class SysDeptServiceImpl implements SysDeptService {
     @Override
     public Integer addSysDept(SysDept dept) throws Exception {
         dept.setOperateTime(new Date());
-        dept.setLevel("0");
+        dept.setLevel("2");
         dept.setStatus(String.valueOf(UserConstants.VALID_STATUS));
         int insertSelective = sysDeptMapper.insertSelective(dept);
         return insertSelective;
@@ -61,6 +61,7 @@ public class SysDeptServiceImpl implements SysDeptService {
         if (!StringUtils.isEmpty(DeptRequest.getDeptName())){
             criteria.andDeptNameLike("%"+DeptRequest.getDeptName()+"%");
         }
+        criteria.andLevelEqualTo("2");
         criteria.andStatusEqualTo(String.valueOf(UserConstants.VALID_STATUS));
         sysDeptExample.setOrderByClause("operate_time desc");
         PageHelper.startPage(DeptRequest.getPageNum(),DeptRequest.getPageSize());
