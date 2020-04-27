@@ -216,11 +216,12 @@ public class WorkOrderServiceImpl implements WorkOrderService {
                     BeanUtils.copyProperties(eDoc,electronicDoc);
                     electronicDoc.setStatus(String.valueOf(UserConstants.VALID_STATUS));
                     electronicDoc.setOperateId(Integer.parseInt(workOrder.getOrganizer()));
+                    electronicDoc.setOperateTime(new Date());
                     electronicDocMapper.insertSelective(electronicDoc);
                     for (int j = 0; j <sysDepts.size() ; j++) {
                         DeptElectronicDoc deptElectronicDoc = new DeptElectronicDoc();
                         deptElectronicDoc.setWorkOrderId(workOrderVO.getWorkOrderId());
-                        deptElectronicDoc.setDeptId(sysDepts.get(i).getDeptId());
+                        deptElectronicDoc.setDeptId(sysDepts.get(j).getDeptId());
                         deptElectronicDoc.setDocId(electronicDoc.getDocId());
                         deptElectronicDoc.setOperateId(Integer.parseInt(workOrder.getOrganizer()));
                         deptElectronicDoc.setOperateTime(new Date());

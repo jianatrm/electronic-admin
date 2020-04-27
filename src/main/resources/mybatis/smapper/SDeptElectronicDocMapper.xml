@@ -4,6 +4,7 @@
 <resultMap id="BaseResultMap" type="com.electronic.dao.smapper.bo.SDeptElectronicDoc">
     <id column="doc_id" property="docId" jdbcType="INTEGER" />
     <result column="dept_id" property="deptId" jdbcType="INTEGER" />
+    <result column="work_order_id" property="workOrderId" jdbcType="INTEGER" />
     <result column="doc_name" property="docName" jdbcType="VARCHAR" />
     <result column="doc_url" property="docUrl" jdbcType="VARCHAR" />
     <result column="doc_type" property="docType" jdbcType="VARCHAR" />
@@ -17,7 +18,7 @@
 
 
     <select id="selectByDeptId" resultMap="BaseResultMap" parameterType="com.electronic.dao.smapper.bo.SDeptElectronicDoc">
-        SELECT * FROM (SELECT t1.dept_id,t2.* FROM dept_electronic_doc t1 left JOIN electronic_doc t2 ON t1.doc_id = t2.doc_id ) t3 where 1=1
+        SELECT * FROM (SELECT t1.dept_id,t1.work_order_id,t2.* FROM dept_electronic_doc t1 left JOIN electronic_doc t2 ON t1.doc_id = t2.doc_id ) t3 where 1=1
         <if test="deptId != null and deptId !=''" >
            and t3.dept_id = #{deptId,jdbcType=INTEGER}
         </if>

@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class SDeptElectronicDoc {
     private Integer deptId;
+    private Integer workOrderId;
 
     private String deptName;
 
@@ -36,6 +37,14 @@ public class SDeptElectronicDoc {
     private Integer startSize;
 
     private Integer pageSize;
+
+    public Integer getWorkOrderId() {
+        return workOrderId;
+    }
+
+    public void setWorkOrderId(Integer workOrderId) {
+        this.workOrderId = workOrderId;
+    }
 
     public String getDocRandomName() {
         return docRandomName;
