@@ -15,6 +15,8 @@ public class SDeptElectronicDoc {
 
     private String docType;
 
+    private String docRandomName;
+
     private String status;
 
     private String remark;
@@ -34,6 +36,14 @@ public class SDeptElectronicDoc {
     private Integer startSize;
 
     private Integer pageSize;
+
+    public String getDocRandomName() {
+        return docRandomName;
+    }
+
+    public void setDocRandomName(String docRandomName) {
+        this.docRandomName = docRandomName;
+    }
 
     public String getDocType() {
         return docType;

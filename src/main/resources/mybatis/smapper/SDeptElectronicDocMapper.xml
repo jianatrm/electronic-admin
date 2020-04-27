@@ -6,6 +6,8 @@
     <result column="dept_id" property="deptId" jdbcType="INTEGER" />
     <result column="doc_name" property="docName" jdbcType="VARCHAR" />
     <result column="doc_url" property="docUrl" jdbcType="VARCHAR" />
+    <result column="doc_type" property="docType" jdbcType="VARCHAR" />
+    <result column="doc_random_name" property="docRandomName" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="operate_id" property="operateId" jdbcType="INTEGER" />
