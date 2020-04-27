@@ -25,6 +25,17 @@ public class DeptRequest {
     private Integer pageNum = 1;
     private Integer pageSize =10;
 
+    private String status;
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Integer getPageNum() {
         return pageNum;
     }
